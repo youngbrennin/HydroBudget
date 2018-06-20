@@ -1,0 +1,90 @@
+body {
+	background-color:gainsboro;
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: 100% 100%;
+    text-align: center;
+}
+
+.Title{
+	font-size: 75px;
+	color: black;
+	font-weight: bold;
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+#startPage {
+	height: auto;
+	padding-bottom: 50px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+}
+
+#startButton{
+	margin-top: 5%;
+	height: 75px;
+	width: 200px;
+	font-size: 35px;
+  	background-color:whitesmoke;
+	border-style: double;
+	border-color: black;
+	border-radius: 8px;
+}
+
+#formPage{
+    height: auto;
+	padding-bottom: 50px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#submitForm {
+    margin-top: 5%;
+	height: 75px;
+	width: 200px;
+	font-size: 35px;
+  	background-color:whitesmoke;
+	border-style: double;
+	border-color: black;
+	border-radius: 8px;
+}
+
+#resultsPage {
+    height: auto;
+	padding-bottom: 50px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#resultsButton {
+    margin-top: 5%;
+	height: 75px;
+	width: 200px;
+	font-size: 35px;
+  	background-color:whitesmoke;
+	border-style: double;
+	border-color: black;
+	border-radius: 8px;
+}
+
+#savingsPage {
+    height: auto;
+	padding-bottom: 50px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#nextButton {
+    margin-top: 5%;
+	height: 75px;
+	width: 200px;
+	font-size: 35px;
+  	background-color:whitesmoke;
+	border-style: double;
+	border-color: black;
+	border-radius: 8px;
+}
+
+#suggestionPage {
+    height: auto;
+	padding-bottom: 50px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
