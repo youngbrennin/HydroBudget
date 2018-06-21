@@ -53,47 +53,51 @@ $(document).ready(function () {
         chart.draw(data, options);
     }
     // Other Functinos
-
+    function displayMainPage(userID){
+        
+    }
     //variables
     var userID;
+
+    
     //Pages Array
-    var webPages = [
-        // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
-        /* page 1 */newPage('how much do you make?',
+    var introWebPages = [
+        // newIntroPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
+        /* page 1 */newIntroPage('how much do you make?',
             '<form> <input type="number"> <button>Submit</button> </form>'),
-        /* page 2 */newPage('Hello Header', 'And TO World'),
-        /* page 3 */newPage('Hello Header', 'And TO World'),
-        /* page 4 */newPage('Hello Header', 'And TO World'),
-        /* page etc. */newPage('Hello Header', 'And TO World'),
-        newPage('Hello Header', 'And TO World')
+        /* page 2 */newIntroPage('Hello Header', 'And TO World'),
+        /* page 3 */newIntroPage('Hello Header', 'And TO World'),
+        /* page 4 */newIntroPage('Hello Header', 'And TO World'),
+        /* page etc. */newIntroPage('Hello Header', 'And TO World'),
+        newIntroPage('Hello Header', 'And TO World')
     ];
     var currentPage;
 
     //Pages
-    function newPage(header, content) {
+    function newIntroPage(header, content) {
         var ret_page = {
             header: header,
             content: content,
             toNext: function () {
-                var nextIndex = webPages.indexOf(this) + 1;
+                var nextIndex = introWebPages.indexOf(this) + 1;
                 //clear the page
                 $("#content").empty();
                 //display next page
-                webPages[nextIndex].display();
+                introWebPages[nextIndex].display();
             },
             toPrevious: function () {
-                var prevIndex = webPages.indexOf(this) - 1;
+                var prevIndex = introWebPages.indexOf(this) - 1;
                 $("#content").empty();
-                webPages[prevIndex].display();
+                introWebPages[prevIndex].display();
             },
             display: function () {
-                var thisIndex = webPages.indexOf(this);
+                var thisIndex = introWebPages.indexOf(this);
                 var prevExist, nextExist;
                 console.log("displaying page: ", thisIndex);
-                if ((webPages[thisIndex - 1])) {
+                if ((introWebPages[thisIndex - 1])) {
                     prevExist = true;
                 }
-                if ((webPages[thisIndex + 1])) {
+                if ((introWebPages[thisIndex + 1])) {
                     nextExist = true;
                 }
 
@@ -140,28 +144,40 @@ $(document).ready(function () {
         console.log('going to previous page');
         currentPage.toPrevious();
     }).on("click", '.calander-day', function () {
-        //show a list of things to do
+        //brings up a new bill to be added on a specific day
+        var new_bill = {
+        }
     });
 
+    $("personal-data-form").on("click", 'submit-personal-data', function(){
+        var name = $("name-data").val().trim();
+        var salary = $("salary-data").val().trim();
+        var timeFrame = $("salary-time-frame-data").val().trim();
+        //salary is required, timeFrame should be a dropdown menu
+        database.ref('user/' + userID)
+        // var name = $("name-data").val().trim();
+        // var name = $("name-data").val().trim();
+    });
     //on startup
     //check if this is the users first time
-    if (!localStorage.getItem('this-user-key')) {
+    if (localStorage.getItem('this-user-key')) {
         //assign user a new ID and save it to localStorage
-        userID = database.ref('users').push({
-            salary: '100'
-        }).key;
+        userID = database.ref('users').push().key;
         localStorage.setItem('this-user-key', userID);
         console.log(userID);
 
         //neat slide show
-        webPages[0].display();
+        introWebPages[0].display();
 
         //afterwards set first-time to false
         // localStorage.setItem('first-time', false);
     } else {
         //goto main page
-        console.log(localStorage.getItem('this-user-key'));
-        // webPages[4].display();
+        userID = localStorage.getItem('this-user-key');
+        console.log(userID);
+
+        // introWebPages[5].display();
+        displayMainPage(userID);
     }
 
 });
