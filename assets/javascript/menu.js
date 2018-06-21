@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var testnumber = numeral(1234);
+    // var testnumber = numeral(1234);
     // testnumber.multiply(15);
     // console.log(testnumber.format('00:00:00'));
     // console.log(testnumber.format('0o'));
@@ -19,10 +19,10 @@ $(document).ready(function () {
     var database = firebase.database();
 
     // Load the Visualization API and the corechart package.
-    google.charts.load('current', { 'packages': ['corechart'] });
+    // google.charts.load('current', { 'packages': ['corechart'] });
 
     // Set a callback to run when the Google Visualization API is loaded.
-    google.charts.setOnLoadCallback(drawChart);
+    // google.charts.setOnLoadCallback(drawChart);
 
     // Callback that creates and populates a data table,
     // instantiates the pie chart, passes in the data and
@@ -49,27 +49,102 @@ $(document).ready(function () {
         };
 
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
     }
 
-    $("#create-account").on("click", function(){
-        //open a div or some kind of thing to hold a form to create a new account
+    //variables
+
+    //Pages Array
+    var webPages = [
+        // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
+        /* page 1 */newPage('how much do you make?', '<input type="number> <input type="button" value="Submit">'),
+        /* page 2 */newPage('Hello Header', 'And TO World'),
+        /* page 3 */newPage('Hello Header', 'And TO World'),
+        /* page 4 */newPage('Hello Header', 'And TO World'),
+        /* page etc. */newPage('Hello Header', 'And TO World'),
+        newPage('Hello Header', 'And TO World')
+    ];
+    var currentPage;
+
+    //Pages
+    function newPage(header, content) {
+        var ret_page = {
+            header: header,
+            content: content,
+            toNext: function () {
+                var nextIndex = webPages.indexOf(this) + 1;
+                //clear the page
+                $("#content").empty();
+                //display next page
+                webPages[nextIndex].display();
+            },
+            toPrevious: function () {
+                var prevIndex = webPages.indexOf(this) - 1;
+                $("#content").empty();
+                webPages[prevIndex].display();
+            },
+            display: function () {
+                var thisIndex = webPages.indexOf(this);
+                var prevExist, nextExist;
+                console.log("displaying page: ", thisIndex);
+                if ((webPages[thisIndex - 1])) {
+                    prevExist = true;
+                }
+                if ((webPages[thisIndex + 1])) {
+                    nextExist = true;
+                }
+
+                var thisPage = $("#content").attr("style", 'text-align: center');
+                thisPage.append('<div>' + this.header + '</div>');
+                if (prevExist)
+                    thisPage.append('<button id="prev-page-button"><- Previous Page</button>');
+                thisPage.append(this.content);
+                if (nextExist)
+                    thisPage.append('<button id="next-page-button">Next Page -></button>');
+
+                currentPage = this;
+            }
+        }
+        return ret_page;
+    }
+
+    // $("#create-account").on("click", function(){
+    //     //open a div or some kind of thing to hold a form to create a new account
+    // });
+    // $("#sign-in").on("click", function(){
+    //     //gets data in the form and pushes it into firebase
+    //     var user_name = $("#account-name").val().trim();
+    //     var user_pass = $("#account-pass").val().trim();
+    //     //other data that we should store
+    //     // $("#account-???")
+    //     // $("#account-???")
+    //     database.ref().push({
+    //         user_name: user_name,
+    //         user_pass: user_pass,
+    //         // user_name: user_name,
+    //         // user_name: user_name,
+    //         // user_name: user_name,
+    //         // user_name: user_name,
+    //     });
+    // });
+    $("#content").on("click", '#next-page-button', function () {
+        console.log('going to next page');
+        currentPage.toNext();
+    }).on("click", '#prev-page-button', function () {
+        console.log('going to previous page');
+        currentPage.toPrevious();
     });
-    $("#sign-in").on("click", function(){
-        //gets data in the form and pushes it into firebase
-        var user_name = $("#account-name").val().trim();
-        var user_pass = $("#account-pass").val().trim();
-        //other data that we should store
-        // $("#account-???")
-        // $("#account-???")
-        database.ref().push({
-            user_name: user_name,
-            user_pass: user_pass,
-            // user_name: user_name,
-            // user_name: user_name,
-            // user_name: user_name,
-            // user_name: user_name,
-        });
-    });
+
+    //on startup
+    //check if this is the users first time
+    if (!localStorage.getItem('first-time')) {
+        //neat slide show
+        webPages[0].display();
+        //afterwards set first-time to false
+        // localStorage.setItem('first-time', false);
+    } else {
+        //goto main page
+        // webPages[4].display();
+    }
 });
