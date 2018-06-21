@@ -15,19 +15,68 @@ colors = {
 
 */
 
+
 body{
     font-family: "Roboto", sans-serif;
     padding: 0;
     margin: 0;
+    background: #b1b0b048;
 }
 
+.x {
+    -webkit-user-select: none;
+    -moz-user-select: none;     
+    -ms-user-select: none;      
+    user-select: none; 
+  }
+
 #logo{
-    margin-left: 650px;
+    margin-top: 3px;
+    margin-left: 42%;
     width: 60px;
-    height: 60px;
+    height: 55px;
 }
 
 #navBar{
     background: #4a4e4d;
-    color: 
+    border-bottom: solid 2px #0e9aa7;
+}
+
+#mainStarterBox{
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 70%;
+    height: 600px;
+    border: solid 2px #0e9aa7 ;
+    background: #4a4e4dce;
+    text-align: center;
+    font-size: 40px;
+}
+
+#startButton{
+        width: 500px;
+        height: 100px;
+        background: #fe8a71;
+        border: solid #818586 2px;
+        margin: 0 auto;
+        margin-top: 20px;
+        line-height: 90px;
+        transition: all 0.2s;
+        color: rgb(255, 255, 255);
+        transition: all 0.4s;
+}
+#startButton:hover{
+    background: #f6cd61;
+    border: solid 2px #ffffff;
+    color: #00323f;
+}
+
+#startButton:active{
+    background: #0e9aa7;
+    border: solid 2px #ffffff;
+    color: #00323f;
+}
+
+p{
+    padding: 0 40px 0 40px;
 }
