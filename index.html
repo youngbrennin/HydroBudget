@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test Logic</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+</head>
+
+<body>
+
+    <input type="number" id="number">
+    <button id="addNumber">Submit</button>
+
+
+
+
+
+
+
+
+    <script>
+
+        $("#addNumber").on("click", function () {
+            var numberInput = $("#number").val().trim();
+            // CALCULATING NUMBER BETWEEN 0-10
+            if (numberInput >= 0 && numberInput <= 9.99) {
+                var liquidCash = numeral(numberInput),
+                    value = 10;
+                var difference = liquidCash.difference(value)
+                console.log(difference);
+            }
+            // CALCULATING NUMBER BETWEEN 10.01-20
+            if (numberInput >= 10 && numberInput <= 19.99) {
+                var liquidCash = numeral(numberInput),
+                    value = 20;
+                var difference = liquidCash.difference(value)
+                console.log(difference);
+            }
+            // CALCULATING NUMBER BETWEEN 20-29.99
+            if (numberInput >= 20 && numberInput <= 29.99) {
+                var liquidCash = numeral(numberInput),
+                    value = 30;
+                var difference = liquidCash.difference(value)
+                console.log(difference);
+            }
+            // CALCULATING NUMBER BETWEEN 30-39.99
+            if (numberInput >= 30 && numberInput <= 39.99) {
+                var liquidCash = numeral(numberInput),
+                    value = 40;
+                var difference = liquidCash.difference(value)
+                console.log(difference);
+            }
+            // CALCULATING NUMBER BETWEEN 40-49.99
+            if (numberInput >= 40 && numberInput <= 49.99) {
+                var liquidCash = numeral(numberInput),
+                    value = 50;
+                var difference = liquidCash.difference(value)
+                console.log(difference);
+            }
+            // CALCULATING NUMBER BETWEEN 50-59.99
+            if (numberInput >= 50 && numberInput <= 59.99) {
+                var liquidCash = numeral(numberInput),
+                    value = 60;
+                var difference = liquidCash.difference(value)
+                console.log(difference);
+            }
+            // CALCULATING NUMBER BETWEEN 60-69.99
+            if (numberInput >= 60 && numberInput <= 69.99) {
+                var liquidCash = numeral(numberInput),
+                    value = 70;
+                var difference = liquidCash.difference(value)
+                console.log(difference);
+            }
+            // CALCULATING NUMBER BETWEEN 70-79.99
+            if (numberInput >= 70 && numberInput <= 79.99) {
+                var liquidCash = numeral(numberInput),
+                    value = 80;
+                var difference = liquidCash.difference(value)
+                console.log(difference);
+            }
+            // CALCULATING NUMBER BETWEEN 80-89.99
+            if (numberInput >= 80 && numberInput <= 89.99) {
+                var liquidCash = numeral(numberInput),
+                    value = 90;
+                var difference = liquidCash.difference(value)
+                console.log(difference);
+            }
+            // CALCULATING NUMBER BETWEEN 90-99.99
+            if (numberInput >= 90 && numberInput <= 99.99) {
+                var liquidCash = numeral(numberInput),
+                    value = 100;
+                var difference = liquidCash.difference(value)
+                console.log(difference);
+            }
+        });
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
