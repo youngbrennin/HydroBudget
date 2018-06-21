@@ -19,7 +19,7 @@ $(document).ready(function () {
     var database = firebase.database();
 
     // Load the Visualization API and the corechart package.
-    // google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.load('current', { 'packages': ['corechart'] });
 
     // Set a callback to run when the Google Visualization API is loaded.
     // google.charts.setOnLoadCallback(drawChart);
@@ -52,13 +52,15 @@ $(document).ready(function () {
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
     }
+    // Other Functinos
 
     //variables
-
+    var userID;
     //Pages Array
     var webPages = [
         // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
-        /* page 1 */newPage('how much do you make?', '<input type="number> <input type="button" value="Submit">'),
+        /* page 1 */newPage('how much do you make?',
+            '<form> <input type="number"> <button>Submit</button> </form>'),
         /* page 2 */newPage('Hello Header', 'And TO World'),
         /* page 3 */newPage('Hello Header', 'And TO World'),
         /* page 4 */newPage('Hello Header', 'And TO World'),
@@ -99,7 +101,9 @@ $(document).ready(function () {
                 thisPage.append('<div>' + this.header + '</div>');
                 if (prevExist)
                     thisPage.append('<button id="prev-page-button"><- Previous Page</button>');
+
                 thisPage.append(this.content);
+
                 if (nextExist)
                     thisPage.append('<button id="next-page-button">Next Page -></button>');
 
@@ -128,23 +132,36 @@ $(document).ready(function () {
     //         // user_name: user_name,
     //     });
     // });
+
     $("#content").on("click", '#next-page-button', function () {
         console.log('going to next page');
         currentPage.toNext();
     }).on("click", '#prev-page-button', function () {
         console.log('going to previous page');
         currentPage.toPrevious();
+    }).on("click", '.calander-day', function () {
+        //show a list of things to do
     });
 
     //on startup
     //check if this is the users first time
-    if (!localStorage.getItem('first-time')) {
+    if (!localStorage.getItem('this-user-key')) {
+        //assign user a new ID and save it to localStorage
+        userID = database.ref('users').push({
+            salary: '100'
+        }).key;
+        localStorage.setItem('this-user-key', userID);
+        console.log(userID);
+
         //neat slide show
         webPages[0].display();
+
         //afterwards set first-time to false
         // localStorage.setItem('first-time', false);
     } else {
         //goto main page
+        console.log(localStorage.getItem('this-user-key'));
         // webPages[4].display();
     }
+
 });
