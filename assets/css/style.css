@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+/*
+
+colors = {
+#4a4e4d - grey
+#0e9aa7 - dark blue
+#3da4ab - light blue
+#f6cd61 - mellow yellow
+#fe8a71 - rose gold
+
+}
+
+
+
+*/
+
+body{
+    font-family: "Roboto", sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+#logo{
+    margin-left: 650px;
+    width: 60px;
+    height: 60px;
+}
+
+#navBar{
+    background: #4a4e4d;
+    color: 
+}
