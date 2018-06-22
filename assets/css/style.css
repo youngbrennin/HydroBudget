@@ -61,7 +61,7 @@ body{
         border: solid #818586 2px;
         margin: 0 auto;
         margin-top: 20px;
-        line-height: 90px;
+        line-height: 100px;
         transition: all 0.2s;
         color: rgb(255, 255, 255);
         transition: all 0.4s;
@@ -109,15 +109,18 @@ p{
 
 
 #toolTipButton{
-    background: rgba(255, 255, 255, 0);
-    font-size: 30px;
+    color: white;
+    font-size: 40px;
     font-family: "Roboto", sans-serif;
+    border-bottom: solid 2px #f6cd61; 
 }
 
 
 
 .tooltip-content{
    position: top; 
-   margin: 0;
+   margin: 2px;
 }
+
+
 
