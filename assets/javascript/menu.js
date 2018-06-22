@@ -168,9 +168,9 @@ $(document).ready(function () {
         }
     }).on("click", '.submit-income', function () {
         var income = numeral(($("#userInput").val().trim()));
-        // updateSalary(income.value());
+        updateSalary(income.value());
         // console.log(accountInfo);
-        updateAccountInfo('1', income.value(), [1]);
+        // updateAccountInfo('1', income.value(), [1]);
         console.log(accountInfo);
 
     });
@@ -184,8 +184,8 @@ $(document).ready(function () {
     //     // var name = $("name-data").val().trim();
     //     // var name = $("name-data").val().trim();
     // });
-    //on startup
 
+    //on startup
     //check if this is the users first time
     if (!localStorage.getItem('this-user-key')) {
         //assign user a new ID and save it to localStorage
@@ -195,6 +195,7 @@ $(document).ready(function () {
             bills: 'N/A'
         }).key;
         localStorage.setItem('this-user-key', userID);
+        userRef = 'users/' + userID;
         console.log('created: ' + userID);
 
         //neat slide show
