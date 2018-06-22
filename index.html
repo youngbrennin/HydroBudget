@@ -5,49 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
-	<script type="text/javascript" src="assets/javascript/app.js"></script>
+	<!-- <script type="text/javascript" src="assets/javascript/app.js"></script> -->
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <title>OUR APP</title>
+
 </head>
 <body>
-<div id=startPage>
+<!--Page 1-->
+<!-- <div id=startPage>
     <h1>HELLO</h1>
     <h2>This is our app: It does stuff</h2>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti autem neque, sed illo officia ab obcaecati officiis tempora quae laudantium quod rem culpa, commodi maiores asperiores magni enim sequi earum!</p>
 
     <button id=startButton>START</button>
 
+</div> -->
+
+<!--Page 2-->
+<!-- <div id=formPage> -->
+ 
+    <!-- Button to open the modal login form -->
+    <!--Additional Login button option-->
+<!-- <button onclick="document.getElementById('id01').style.display='block'">Login</button> -->
+<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" id="startButton">Login</button>
+
+<!-- The Modal -->
+<div id="id01" class="modal">
+
+    <form class="modal-content animate" action="/action_page.php">
+      <div class="imgcontainer">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+  <!-- Modal Content -->
+      <!-- <img src="assets/drop.jpeg" alt="Avatar" class="avatar"> -->
+    </div>
+
+    <div class="container">
+      <label for="uname"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="uname" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+
+      <button type="submit">Login</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </form>
 </div>
+<script>
+        // Get the modal
+        var modal = document.getElementById('id01');
+        
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        </script>
 
-<div id=formPage>
-    <h3>There will probably be a form here.</h3>
-    
-    <button id=submitForm>SUBMIT</button>
+    <!-- <button id=submitForm>SUBMIT</button> -->
 
-</div>
-
-<div id=resultsPage>
+<!-- </div>
+<!--Page 3-->
+<!-- <div id=resultsPage>
     <h4>There will probably be some results here, based on what the user entered in the form and the math we will implement to round up.</h4>
 
     <button id=resultsButton>CONTINUE</button>
 
 </div>
-
-<div id=savingsPage>
+<!--Page 4-->
+<!-- <div id=savingsPage>
     <h5>It might be nice to have a page just to show total savings.</h5>
 
-    <button id=nextButton>NEXT</button>
+    <button id=nextButton>NEXT</button> -->
 
-</div>
-
-<div id=suggestionPage>
+<!-- </div> -->
+<!--Final Page-->
+<!-- <div id=suggestionPage>
     <h6>This is the part where we tell people what to do with their money.</h6>
-    <h7>We'll probably be including lots of bootstrap elements to make this look fancier than it actually is.</h7>
+    <h7>We'll probably be including lots of bootstrap elements to make this look fancier than it actually is.</h7> -->
 
 
 
-</div>
+<!-- </div> -->
 
 
 
