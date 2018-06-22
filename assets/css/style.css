@@ -46,7 +46,18 @@ body{
 #mainStarterBox{
     margin: 0 auto;
     margin-top: 20px;
-    padding-bottom: 200px;
+    width: 70%;
+    border: solid 2px #0e9aa7 ;
+    background: #4a4e4dce;
+    text-align: center;
+    font-size: 40px;
+    min-height: 520px;
+}
+
+#mainStarterBox2{
+    margin: 0 auto;
+    margin-top: 20px;
+    padding-bottom: 150px;
     width: 70%;
     border: solid 2px #0e9aa7 ;
     background: #4a4e4dce;
@@ -55,7 +66,7 @@ body{
 }
 
 #startButton{
-        width: 500px;
+        width: 45%;
         height: 100px;
         background: #fe8a71;
         border: solid #818586 2px;
@@ -86,7 +97,7 @@ p{
 #userInput[type=text] {
     margin-top: 10px;
     margin-bottom: 40px;
-    width: 600px;
+    width: 55%;
     height: 70PX;
     box-sizing: border-box;
     border: white solid 2px;
@@ -103,8 +114,8 @@ p{
 }
 
 #userInput[type=text]:focus {
-    width: 60%;
-    border: 4px solid #fe8a71;
+    width: 61%;
+    border: 4px solid #3da4ab;
 }
 
 
