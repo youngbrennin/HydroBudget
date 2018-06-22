@@ -15,19 +15,109 @@ colors = {
 
 */
 
+
 body{
     font-family: "Roboto", sans-serif;
     padding: 0;
     margin: 0;
+    background: #b1b0b048;
+    color: white;   
 }
 
+.x {
+    -webkit-user-select: none;
+    -moz-user-select: none;     
+    -ms-user-select: none;      
+    user-select: none; 
+  }
+
 #logo{
-    margin-left: 650px;
+    margin-top: 3px;
+    margin-left: 42%;
     width: 60px;
-    height: 60px;
+    height: 55px;
 }
 
 #navBar{
     background: #4a4e4d;
-    color: 
+    border-bottom: solid 2px #0e9aa7;
 }
+
+#mainStarterBox{
+    margin: 0 auto;
+    margin-top: 20px;
+    padding-bottom: 200px;
+    width: 70%;
+    border: solid 2px #0e9aa7 ;
+    background: #4a4e4dce;
+    text-align: center;
+    font-size: 40px;
+}
+
+#startButton{
+        width: 500px;
+        height: 100px;
+        background: #fe8a71;
+        border: solid #818586 2px;
+        margin: 0 auto;
+        margin-top: 20px;
+        line-height: 90px;
+        transition: all 0.2s;
+        color: rgb(255, 255, 255);
+        transition: all 0.4s;
+}
+#startButton:hover{
+    background: #f6cd61;
+    border: solid 2px #ffffff;
+    color: #00323f;
+}
+
+#startButton:active{
+    background: #0e9aa7;
+    border: solid 2px #ffffff;
+    color: #00323f;
+}
+
+p{
+    padding: 0 40px 0 40px;
+}
+
+
+#userInput[type=text] {
+    margin-top: 10px;
+    margin-bottom: 40px;
+    width: 600px;
+    height: 70PX;
+    box-sizing: border-box;
+    border: white solid 2px;
+    font-size: 30px;
+    background-color: #fcfcfc;
+    background-size: 20px;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    color: #064046;
+    outline:none; 
+}
+
+#userInput[type=text]:focus {
+    width: 60%;
+    border: 4px solid #fe8a71;
+}
+
+
+#toolTipButton{
+    background: rgba(255, 255, 255, 0);
+    font-size: 30px;
+    font-family: "Roboto", sans-serif;
+}
+
+
+
+.tooltip-content{
+   position: top; 
+   margin: 0;
+}
+
