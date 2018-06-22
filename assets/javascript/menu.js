@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    console.log(savingsRound(156.72));
+    console.log(savingsRound(23.47));
 
     // Initialize Firebase
     var config = {
@@ -47,13 +47,27 @@ $(document).ready(function () {
     //     var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
     //     chart.draw(data, options);
     // }
-    // Other Functinos
-    function displayMainPage(userID) {
+    // Other Functions
+    function updateAccountInfo(name, salary, bills) {
+        if (typeof bills === 'undefined'){
+            bill = accountInfo.bills;
+            console.log("bills unchanged", bill);
+        }
 
+        console.log(name, salary, bills);
+
+        database.ref(userRef).set({
+            name: name,
+            salary: salary,
+            bills: bills
+        });
+        
     }
 
+    
+
     function savingsRound(num) {
-        var newSave = Math.ceil((num * .1));
+        var newSave = Math.ceil((num * .15));
         var ret = Math.ceil(num) + newSave;
         //add newSave to total amount saved in the users data
         var bonusSaved = ret - num;
@@ -61,14 +75,22 @@ $(document).ready(function () {
         return ret;
     }
     //variables
-    var userID;
-
-
+    var userID, userRef;
+    var accountInfo = {
+    }
+    //
+    database.ref(userRef).on("child_changed", function(snap){
+        accountInfo = {
+            name: snap.val().name,
+            salary: snap.val().salary,
+            bills: snap.val().bills,
+        }
+    });
     //Pages Array
     var WebPages = [
         // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
         /* page 1 */newPage('<p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin!</p>', '<button id="startButton" class="x next-page-button">Get Started!</button>'),
-        /* page 2 */newPage("Let's get started!", '<p>What is your average <a id="toolTipButton" class="btn tooltipped" data-position="top" data-tooltip="I dont like to work!">net</a> income per month?</p><form><input id="userInput" type="text" placeholder="Type Here" value="" /></form><div id="startButton">Submit</div>'),
+        /* page 2 */newPage("Let's get started!", '<p>What is your average <a id="toolTipButton" class="btn tooltipped" data-position="top" data-tooltip="I dont like to work!">net</a> income per month?</p><form><input id="userInput" type="text" placeholder="Type Here" value="" /></form><div id="startButton" class="submit-income">Submit</div>'),
     ];
     var currentPage;
 
@@ -87,10 +109,12 @@ $(document).ready(function () {
             },
             display: function () {
                 currentPage = this;
-                $("#mainStarterBox").empty();
+                $("#mainStarterBox").empty().hide();
                 var thisIndex = WebPages.indexOf(this);
                 var prevExist, nextExist;
+
                 console.log("displaying page: ", thisIndex);
+
                 if ((WebPages[thisIndex - 1])) {
                     prevExist = true;
                 }
@@ -101,6 +125,7 @@ $(document).ready(function () {
                 var thisPage = $("#mainStarterBox");
                 thisPage.append('<div>' + this.header + '</div>');
                 thisPage.append(this.content);
+                thisPage.slideDown(800);//allows fast, slow, or an integer in ms
             }
         }
         return ret_page;
@@ -132,45 +157,45 @@ $(document).ready(function () {
     }).on("click", '.prev-page-button', function () {
         console.log('going to previous page');
         currentPage.toPrevious();
-    }).on("click", '.calander-day', function () {
+    }).on("click", '.new-bill', function () {
         //brings up a new bill to be added on a specific day
         var new_bill = {
         }
+    }).on("click", '.submit-income', function(){
+        var income = parseInt($("#userInput").val().trim());
+        updateAccountInfo('me', income, [1]);
+
     });
 
-    $("personal-data-form").on("click", 'submit-personal-data', function () {
-        var name = $("name-data").val().trim();
-        var salary = $("salary-data").val().trim();
-        var timeFrame = $("salary-time-frame-data").val().trim();
-        //salary is required, timeFrame should be a dropdown menu
-        database.ref('user/' + userID)
-        // var name = $("name-data").val().trim();
-        // var name = $("name-data").val().trim();
-    });
+    // $("personal-data-form").on("click", 'submit-personal-data', function () {
+    //     var name = $("name-data").val().trim();
+    //     var salary = $("salary-data").val().trim();
+    //     var timeFrame = $("salary-time-frame-data").val().trim();
+    //     //salary is required, timeFrame should be a dropdown menu
+    //     database.ref('user/' + userID)
+    //     // var name = $("name-data").val().trim();
+    //     // var name = $("name-data").val().trim();
+    // });
     //on startup
 
-    WebPages[0].display();
-
-
     //check if this is the users first time
-    // if (!localStorage.getItem('this-user-key')) {
-    //     //assign user a new ID and save it to localStorage
-    //     userID = database.ref('users').push().key;
-    //     localStorage.setItem('this-user-key', userID);
-    //     console.log(userID);
+    if (!localStorage.getItem('this-user-key')) {
+        //assign user a new ID and save it to localStorage
+        userID = database.ref('users').push().key;
+        localStorage.setItem('this-user-key', userID);
+        console.log(userID);
 
-    //     //neat slide show
-    //     WebPages[0].display();
+        //neat slide show
+        WebPages[0].display();
+    } 
+    else {
+        userID = localStorage.getItem('this-user-key');
+        userRef = 'users/' + userID;
+        console.log(userID);
 
-    //     //afterwards set first-time to false
-    //     // localStorage.setItem('first-time', false);
-    // } else {
-    //     //goto main page
-    //     userID = localStorage.getItem('this-user-key');
-    //     console.log(userID);
+        
 
-    //     // WebPages[5].display();
-    //     displayMainPage(userID);
-    // }
+        WebPages[1].display();
+    }
 
 });
