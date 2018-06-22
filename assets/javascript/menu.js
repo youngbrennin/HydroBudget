@@ -22,49 +22,50 @@ $(document).ready(function () {
     // Callback that creates and populates a data table,
     // instantiates the pie chart, passes in the data and
     // draws it.
-    // function drawChart() {
+    function drawChart() {
 
-    //     // Create the data table.
-    //     var data = new google.visualization.DataTable();
-    //     data.addColumn('string', 'Topping');
-    //     data.addColumn('number', 'Slices');
-    //     data.addRows([
-    //         ['Mushrooms', 3],
-    //         ['Onions', 1],
-    //         ['Olives', 1],
-    //         ['Zucchini', 1],
-    //         ['Pepperoni', 2]
-    //     ]);
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+            ['Mushrooms', 3],
+            ['Onions', 1],
+            ['Olives', 1],
+            ['Zucchini', 1],
+            ['Pepperoni', 2]
+        ]);
 
-    //     // Set chart options
-    //     var options = {
-    //         'title': 'How Much Pizza I Ate Last Night',
-    //         //  'width':400,
-    //         'height': 300
-    //     };
+        // Set chart options
+        var options = {
+            'title': 'How Much Pizza I Ate Last Night',
+            //  'width':400,
+            'height': 300
+        };
 
-    //     // Instantiate and draw our chart, passing in some options.
-    //     var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-    //     chart.draw(data, options);
-    // }
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
     // Other Functions
     function updateAccountInfo(name, salary, bills) {
-        if (typeof bills === 'undefined'){
-            bill = accountInfo.bills;
-            console.log("bills unchanged", bill);
-        }
-
         console.log(name, salary, bills);
-
         database.ref(userRef).set({
             name: name,
             salary: salary,
             bills: bills
         });
-        
+    }
+    function updateName(name) {
+        updateAccountInfo(name, accountInfo.salary, accountInfo.bills);
+    }
+    function updateSalary(salary) {
+        updateAccountInfo(accountInfo.name, salary, accountInfo.bills);
+    }
+    function updateBills(bills) {
+        updateAccountInfo(accountInfo.name, accountInfo.salary, bills);
     }
 
-    
 
     function savingsRound(num) {
         var newSave = Math.ceil((num * .15));
@@ -77,13 +78,17 @@ $(document).ready(function () {
     //variables
     var userID, userRef;
     var accountInfo = {
+        name: 'N/A',
+        salary: 'N/A',
+        bills: 'N/A'
     }
     //
-    database.ref(userRef).on("child_changed", function(snap){
+    database.ref('users').on("child_changed", function (snapshot) {
+        console.log('updating accountInfo on ' + userRef);
         accountInfo = {
-            name: snap.val().name,
-            salary: snap.val().salary,
-            bills: snap.val().bills,
+            name: snapshot.val().name,
+            salary: snapshot.val().salary,
+            bills: snapshot.val().bills,
         }
     });
     //Pages Array
@@ -161,9 +166,12 @@ $(document).ready(function () {
         //brings up a new bill to be added on a specific day
         var new_bill = {
         }
-    }).on("click", '.submit-income', function(){
-        var income = parseInt($("#userInput").val().trim());
-        updateAccountInfo('me', income, [1]);
+    }).on("click", '.submit-income', function () {
+        var income = numeral(($("#userInput").val().trim()));
+        // updateSalary(income.value());
+        // console.log(accountInfo);
+        updateAccountInfo('1', income.value(), [1]);
+        console.log(accountInfo);
 
     });
 
@@ -181,20 +189,21 @@ $(document).ready(function () {
     //check if this is the users first time
     if (!localStorage.getItem('this-user-key')) {
         //assign user a new ID and save it to localStorage
-        userID = database.ref('users').push().key;
+        userID = database.ref('users').push({
+            name: 'N/A',
+            salary: 'N/A',
+            bills: 'N/A'
+        }).key;
         localStorage.setItem('this-user-key', userID);
-        console.log(userID);
+        console.log('created: ' + userID);
 
         //neat slide show
         WebPages[0].display();
-    } 
+    }
     else {
         userID = localStorage.getItem('this-user-key');
         userRef = 'users/' + userID;
-        console.log(userID);
-
-        
-
+        console.log('loaded: ' + userID);
         WebPages[1].display();
     }
 
