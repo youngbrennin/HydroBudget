@@ -68,11 +68,7 @@ $(document).ready(function () {
     var introWebPages = [
         // newIntroPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
         /* page 1 */newIntroPage('<p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin!</p>', '<button id="startButton" class="x next-page-button">Get Started!</button>'),
-        /* page 2 */newIntroPage('Hello Header', 'And TO World'),
-        /* page 3 */newIntroPage('Hello Header', 'And TO World'),
-        /* page 4 */newIntroPage('Hello Header', 'And TO World'),
-        /* page etc. */newIntroPage('Hello Header', 'And TO World'),
-        newIntroPage('Hello Header', 'And TO World')
+        /* page 2 */newIntroPage("Let's get started!", '<p>What is your average <a id="toolTipButton" class="btn tooltipped" data-position="top" data-tooltip="I dont like to work!">net</a> income per month?</p><form><input id="userInput" type="text" placeholder="Type Here" value="" /></form><div id="startButton">Submit</div>'),
     ];
     var currentPage;
 
