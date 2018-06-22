@@ -65,36 +65,36 @@ $(document).ready(function () {
 
 
     //Pages Array
-    var introWebPages = [
-        // newIntroPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
-        /* page 1 */newIntroPage('<p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin!</p>', '<button id="startButton" class="x next-page-button">Get Started!</button>'),
-        /* page 2 */newIntroPage("Let's get started!", '<p>What is your average <a id="toolTipButton" class="btn tooltipped" data-position="top" data-tooltip="I dont like to work!">net</a> income per month?</p><form><input id="userInput" type="text" placeholder="Type Here" value="" /></form><div id="startButton">Submit</div>'),
+    var WebPages = [
+        // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
+        /* page 1 */newPage('<p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin!</p>', '<button id="startButton" class="x next-page-button">Get Started!</button>'),
+        /* page 2 */newPage("Let's get started!", '<p>What is your average <a id="toolTipButton" class="btn tooltipped" data-position="top" data-tooltip="I dont like to work!">net</a> income per month?</p><form><input id="userInput" type="text" placeholder="Type Here" value="" /></form><div id="startButton">Submit</div>'),
     ];
     var currentPage;
 
     //Pages
-    function newIntroPage(header, content) {
+    function newPage(header, content) {
         var ret_page = {
             header: header,
             content: content,
             toNext: function () {
-                var nextIndex = introWebPages.indexOf(this) + 1;
-                introWebPages[nextIndex].display();
+                var nextIndex = WebPages.indexOf(this) + 1;
+                WebPages[nextIndex].display();
             },
             toPrevious: function () {
-                var prevIndex = introWebPages.indexOf(this) - 1;
-                introWebPages[prevIndex].display();
+                var prevIndex = WebPages.indexOf(this) - 1;
+                WebPages[prevIndex].display();
             },
             display: function () {
                 currentPage = this;
                 $("#mainStarterBox").empty();
-                var thisIndex = introWebPages.indexOf(this);
+                var thisIndex = WebPages.indexOf(this);
                 var prevExist, nextExist;
                 console.log("displaying page: ", thisIndex);
-                if ((introWebPages[thisIndex - 1])) {
+                if ((WebPages[thisIndex - 1])) {
                     prevExist = true;
                 }
-                if ((introWebPages[thisIndex + 1])) {
+                if ((WebPages[thisIndex + 1])) {
                     nextExist = true;
                 }
 
@@ -149,7 +149,7 @@ $(document).ready(function () {
     });
     //on startup
 
-    introWebPages[0].display();
+    WebPages[0].display();
 
 
     //check if this is the users first time
@@ -160,7 +160,7 @@ $(document).ready(function () {
     //     console.log(userID);
 
     //     //neat slide show
-    //     introWebPages[0].display();
+    //     WebPages[0].display();
 
     //     //afterwards set first-time to false
     //     // localStorage.setItem('first-time', false);
@@ -169,7 +169,7 @@ $(document).ready(function () {
     //     userID = localStorage.getItem('this-user-key');
     //     console.log(userID);
 
-    //     // introWebPages[5].display();
+    //     // WebPages[5].display();
     //     displayMainPage(userID);
     // }
 
