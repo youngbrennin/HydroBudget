@@ -1,10 +1,5 @@
 $(document).ready(function () {
-    // var testnumber = numeral(1234);
-    // testnumber.multiply(15);
-    // console.log(testnumber.format('00:00:00'));
-    // console.log(testnumber.format('0o'));
-    // console.log(testnumber.format('($0.00 a)'));
-    // console.log(testnumber.format('$0,0.00'));
+    console.log(savingsRound(156.72));
 
     // Initialize Firebase
     var config = {
@@ -19,7 +14,7 @@ $(document).ready(function () {
     var database = firebase.database();
 
     // Load the Visualization API and the corechart package.
-    google.charts.load('current', { 'packages': ['corechart'] });
+    // google.charts.load('current', { 'packages': ['corechart'] });
 
     // Set a callback to run when the Google Visualization API is loaded.
     // google.charts.setOnLoadCallback(drawChart);
@@ -27,44 +22,52 @@ $(document).ready(function () {
     // Callback that creates and populates a data table,
     // instantiates the pie chart, passes in the data and
     // draws it.
-    function drawChart() {
+    // function drawChart() {
 
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-            ['Mushrooms', 3],
-            ['Onions', 1],
-            ['Olives', 1],
-            ['Zucchini', 1],
-            ['Pepperoni', 2]
-        ]);
+    //     // Create the data table.
+    //     var data = new google.visualization.DataTable();
+    //     data.addColumn('string', 'Topping');
+    //     data.addColumn('number', 'Slices');
+    //     data.addRows([
+    //         ['Mushrooms', 3],
+    //         ['Onions', 1],
+    //         ['Olives', 1],
+    //         ['Zucchini', 1],
+    //         ['Pepperoni', 2]
+    //     ]);
 
-        // Set chart options
-        var options = {
-            'title': 'How Much Pizza I Ate Last Night',
-            //  'width':400,
-            'height': 300
-        };
+    //     // Set chart options
+    //     var options = {
+    //         'title': 'How Much Pizza I Ate Last Night',
+    //         //  'width':400,
+    //         'height': 300
+    //     };
 
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-    }
+    //     // Instantiate and draw our chart, passing in some options.
+    //     var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+    //     chart.draw(data, options);
+    // }
     // Other Functinos
-    function displayMainPage(userID){
-        
+    function displayMainPage(userID) {
+
+    }
+
+    function savingsRound(num) {
+        var newSave = Math.ceil((num * .1));
+        var ret = Math.ceil(num) + newSave;
+        //add newSave to total amount saved in the users data
+        var bonusSaved = ret - num;
+        console.log("User has saved up " + bonusSaved + " from this bill!");
+        return ret;
     }
     //variables
     var userID;
 
-    
+
     //Pages Array
     var introWebPages = [
         // newIntroPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
-        /* page 1 */newIntroPage('how much do you make?',
-            '<form> <input type="number"> <button>Submit</button> </form>'),
+        /* page 1 */newIntroPage('<p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin!</p>', '<button id="startButton" class="x next-page-button">Get Started!</button>'),
         /* page 2 */newIntroPage('Hello Header', 'And TO World'),
         /* page 3 */newIntroPage('Hello Header', 'And TO World'),
         /* page 4 */newIntroPage('Hello Header', 'And TO World'),
@@ -80,17 +83,15 @@ $(document).ready(function () {
             content: content,
             toNext: function () {
                 var nextIndex = introWebPages.indexOf(this) + 1;
-                //clear the page
-                $("#content").empty();
-                //display next page
                 introWebPages[nextIndex].display();
             },
             toPrevious: function () {
                 var prevIndex = introWebPages.indexOf(this) - 1;
-                $("#content").empty();
                 introWebPages[prevIndex].display();
             },
             display: function () {
+                currentPage = this;
+                $("#mainStarterBox").empty();
                 var thisIndex = introWebPages.indexOf(this);
                 var prevExist, nextExist;
                 console.log("displaying page: ", thisIndex);
@@ -101,17 +102,9 @@ $(document).ready(function () {
                     nextExist = true;
                 }
 
-                var thisPage = $("#content").attr("style", 'text-align: center');
+                var thisPage = $("#mainStarterBox");
                 thisPage.append('<div>' + this.header + '</div>');
-                if (prevExist)
-                    thisPage.append('<button id="prev-page-button"><- Previous Page</button>');
-
                 thisPage.append(this.content);
-
-                if (nextExist)
-                    thisPage.append('<button id="next-page-button">Next Page -></button>');
-
-                currentPage = this;
             }
         }
         return ret_page;
@@ -137,10 +130,10 @@ $(document).ready(function () {
     //     });
     // });
 
-    $("#content").on("click", '#next-page-button', function () {
+    $("#mainStarterBox").on("click", '.next-page-button', function () {
         console.log('going to next page');
         currentPage.toNext();
-    }).on("click", '#prev-page-button', function () {
+    }).on("click", '.prev-page-button', function () {
         console.log('going to previous page');
         currentPage.toPrevious();
     }).on("click", '.calander-day', function () {
@@ -149,7 +142,7 @@ $(document).ready(function () {
         }
     });
 
-    $("personal-data-form").on("click", 'submit-personal-data', function(){
+    $("personal-data-form").on("click", 'submit-personal-data', function () {
         var name = $("name-data").val().trim();
         var salary = $("salary-data").val().trim();
         var timeFrame = $("salary-time-frame-data").val().trim();
@@ -159,25 +152,29 @@ $(document).ready(function () {
         // var name = $("name-data").val().trim();
     });
     //on startup
+
+    introWebPages[0].display();
+
+
     //check if this is the users first time
-    if (localStorage.getItem('this-user-key')) {
-        //assign user a new ID and save it to localStorage
-        userID = database.ref('users').push().key;
-        localStorage.setItem('this-user-key', userID);
-        console.log(userID);
+    // if (!localStorage.getItem('this-user-key')) {
+    //     //assign user a new ID and save it to localStorage
+    //     userID = database.ref('users').push().key;
+    //     localStorage.setItem('this-user-key', userID);
+    //     console.log(userID);
 
-        //neat slide show
-        introWebPages[0].display();
+    //     //neat slide show
+    //     introWebPages[0].display();
 
-        //afterwards set first-time to false
-        // localStorage.setItem('first-time', false);
-    } else {
-        //goto main page
-        userID = localStorage.getItem('this-user-key');
-        console.log(userID);
+    //     //afterwards set first-time to false
+    //     // localStorage.setItem('first-time', false);
+    // } else {
+    //     //goto main page
+    //     userID = localStorage.getItem('this-user-key');
+    //     console.log(userID);
 
-        // introWebPages[5].display();
-        displayMainPage(userID);
-    }
+    //     // introWebPages[5].display();
+    //     displayMainPage(userID);
+    // }
 
 });
