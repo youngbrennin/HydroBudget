@@ -1,12 +1,12 @@
 //variables
-var userID, userRef, currentPage, accountInfo;
+var userID, userRef, currentPage, accountInfo, billList = [];
 //Pages Array
 var WebPages = [
     // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
     /* page 1 */newPage('<p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin!</p>', '<button id="startButton" class="x next-page-button">Get Started!</button>'),
     /* page 2 */newPage("Let's get started!", '<p>What is your average <a id="toolTipButton" class="btn tooltipped" data-position="top" data-tooltip="I dont like to work!">net</a> income per month?</p><form><input id="userInput" type="text" placeholder="Type Here" value="" /></form><div id="startButton" class="submit-income next-page-button">Submit</div>'),
     //etc...
-    newPage("Let's add a bill!", "<button class='submit-new-bill'>hey</button>"),
+    newPage("Let's add a bill!", "<button class='submit-new-bill'>hey</button><button class='delete-bill'>delete</button>"),
 ];
 
 function newPage(header, content) {
@@ -164,10 +164,12 @@ $(document).ready(function () {
                 var bills_sum = 0;
                 var bugeted_bill_sum = 0;
                 var total_saved_sum = 0;
+                billList = [];
                 bills.forEach(function (e) {
                     bills_sum += e.amount;
                     bugeted_bill_sum += e.amount_budgeted;
                     total_saved_sum += e.amount_saved;
+                    billList.push(e.name);
                 });
             }
             accountInfo = {
@@ -221,8 +223,12 @@ $(document).ready(function () {
             amount_saved: amount_budgeted - amount,
             date: 'today'
         }
-        accountInfo.bills.push(new_bill);
-        updateBills(accountInfo.bills);
+        if (billList.indexOf(new_bill.name) >= 0) {
+            console.log('already exists');
+        } else {
+            accountInfo.bills.push(new_bill);
+            updateBills(accountInfo.bills);
+        }
     }).on("click", '.submit-income', function () {
         var income = numeral(($("#userInput").val().trim()));
         updateSalary(income.value());
@@ -230,6 +236,10 @@ $(document).ready(function () {
         // updateAccountInfo('1', income.value(), [1]);
         // console.log(accountInfo);
 
+    }).on("click", '.delete-bill', function () {
+        // var index = bills.indexOf();
+        accountInfo.bills.splice(index, 1);
+        updateBills(accountInfo.bills);
     }).on("click", '.next-page-button', function () {
         console.log('going to next page');
         currentPage.toNext();
@@ -237,6 +247,10 @@ $(document).ready(function () {
         console.log('going to previous page');
         currentPage.toPrevious();
     });
+
+
+
+
     // $("personal-data-form").on("click", 'submit-personal-data', function () {
     //     var name = $("name-data").val().trim();
     //     var salary = $("salary-data").val().trim();
