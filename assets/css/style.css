@@ -142,4 +142,25 @@ p{
 }
 
 
+#rightSide{
+    margin-top: 40px;
+    height: 500px;
+}
+
+#leftSide{
+    margin-top: 40px;
+    height: 500px;
+}
+
+#netIncome{
+    border: solid 2px #3da4ab;
+    background: #4a4e4d;
+}
+
+#netIncome2{
+    margin-top: 40px;
+    border: solid 2px #3da4ab;
+    background: #4a4e4d;
+}
+
 
