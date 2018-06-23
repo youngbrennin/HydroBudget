@@ -51,7 +51,8 @@ function savingsRound(num) {
     var ret = Math.ceil(num) + newSave;
     //add newSave to total amount saved in the users data
     var bonusSaved = ret - num;
-    console.log("User has saved up " + bonusSaved + " from this bill!");
+    // console.log("User has saved up " + bonusSaved + " from this bill!");
+    console.log(Math.ceil(num) + '+' + newSave + '=' + ret)
     return ret;
 }
 
@@ -71,8 +72,8 @@ $(document).ready(function () {
     //Firebase Updating Functions
     function updateAccountInfo(name, salary, bills) {
         console.log(name, salary, bills);
-        var bills_sum = 1;
-        if (!Array.isArray(accountInfo.bills)){
+        var bills_sum = 0;
+        if (!Array.isArray(accountInfo.bills)) {
             bills = [];
         }
 
@@ -80,7 +81,6 @@ $(document).ready(function () {
             name: name,
             salary: salary,
             bills: bills,
-            bill_total: bills_sum
         });
     }
     function updateName(name) {
@@ -135,7 +135,6 @@ $(document).ready(function () {
             name: 'N/A',
             salary: 0,
             bills: [],
-            bill_total: 0
         }).key;
         localStorage.setItem('this-user-key', userID);
         userRef = 'users/' + userID;
@@ -158,19 +157,32 @@ $(document).ready(function () {
         // console.log('updating accountInfo on ', snapshot.val());
         try {
             var bills = snapshot.val().bills;
-            if (!Array.isArray(bills)){
+            if (!Array.isArray(bills)) {
                 bills = [];
+            }
+            else {
+                var bills_sum = 0;
+                var bugeted_bill_sum = 0;
+                var total_saved_sum = 0;
+                bills.forEach(function (e) {
+                    bills_sum += e.amount;
+                    bugeted_bill_sum += e.amount_budgeted;
+                    total_saved_sum += e.amount_saved;
+                });
             }
             accountInfo = {
                 name: snapshot.val().name,
                 salary: snapshot.val().salary,
                 bills: bills,
-                bill_total: snapshot.val().bill_total
+                bill_total: bills_sum,
+                budgeted_bill_total: bugeted_bill_sum,
+                total_saved: total_saved_sum
             }
             console.log(accountInfo)
         }
         catch (e) {
             console.error("Account Was Lost or Terminated. User needs to refresh");
+            console.error(e);
             localStorage.setItem('this-user-key', '');
         }
     });
@@ -197,12 +209,16 @@ $(document).ready(function () {
     //     });
     // });
 
-    //D.O.M functions
+    //D.O.M functions// Becareful when adding .on('click')'s as 
     $("#mainStarterBox").on("click", '.submit-new-bill', function () {
         //brings up a new bill to be added on a specific day
+        var amount = 123;//capture the value of an text input 
+        var amount_budgeted = savingsRound(amount);
         var new_bill = {
             name: 'test',
-            amount: 123,
+            amount: amount,
+            amount_budgeted: amount_budgeted,
+            amount_saved: amount_budgeted - amount,
             date: 'today'
         }
         accountInfo.bills.push(new_bill);
