@@ -7,7 +7,7 @@ $(".edit-button").on("click", function () {
 
 $('.submit-button').on('click', function () {
    var moneyInformation = $('#userInput2').val().trim();
-   $(".textId").html(moneyInformation);
+   $(".textId").html("$" + moneyInformation);
 
 })
 
