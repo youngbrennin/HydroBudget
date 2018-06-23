@@ -147,7 +147,7 @@ $(document).ready(function () {
         userID = localStorage.getItem('this-user-key');
         userRef = 'users/' + userID;
         console.log('loaded: ' + userID);
-        WebPages[1].display();
+        WebPages[2].display();
     }
 
     //Firebase Data Functions
@@ -223,7 +223,7 @@ $(document).ready(function () {
             amount_saved: amount_budgeted - amount,
             date: 'today'
         }
-        if (billList.indexOf(new_bill.name) >= 0) {
+        if (billList.indexOf(new_bill.name) >= 0 || new_bill.name == '') {
             console.log('already exists');
         } else {
             accountInfo.bills.push(new_bill);
@@ -237,9 +237,17 @@ $(document).ready(function () {
         // console.log(accountInfo);
 
     }).on("click", '.delete-bill', function () {
-        // var index = bills.indexOf();
-        accountInfo.bills.splice(index, 1);
-        updateBills(accountInfo.bills);
+        var name = $('#bill-name').val().trim(), index;
+        accountInfo.bills.forEach(function (e) {
+            if (e.name === name) {
+                index = accountInfo.bills.indexOf(e);
+            }
+        });
+        console.log(index);
+        if (typeof index !== 'undefined') {
+            accountInfo.bills.splice(index, 1);
+            updateBills(accountInfo.bills);
+        }
     }).on("click", '.next-page-button', function () {
         console.log('going to next page');
         currentPage.toNext();
