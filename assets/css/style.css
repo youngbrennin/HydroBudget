@@ -153,6 +153,9 @@ p{
 }
 
 #netIncome{
+    text-align: center;
+    font-size: 30px;
+    min-height: 200px;
     border: solid 2px #3da4ab;
     background: #4a4e4d;
 }
