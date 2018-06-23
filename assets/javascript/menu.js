@@ -1,15 +1,12 @@
 //variables
-var userID, userRef, currentPage;
-var accountInfo = {
-    name: 'N/A',
-    salary: 'N/A',
-    bills: 'N/A'
-}
+var userID, userRef, currentPage, accountInfo;
 //Pages Array
 var WebPages = [
     // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
     /* page 1 */newPage('<p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin!</p>', '<button id="startButton" class="x next-page-button">Get Started!</button>'),
-    /* page 2 */newPage("Let's get started!", '<p>What is your average <a id="toolTipButton" class="btn tooltipped" data-position="top" data-tooltip="I dont like to work!">net</a> income per month?</p><form><input id="userInput" type="text" placeholder="Type Here" value="" /></form><div id="startButton" class="submit-income">Submit</div>'),
+    /* page 2 */newPage("Let's get started!", '<p>What is your average <a id="toolTipButton" class="btn tooltipped" data-position="top" data-tooltip="I dont like to work!">net</a> income per month?</p><form><input id="userInput" type="text" placeholder="Type Here" value="" /></form><div id="startButton" class="submit-income next-page-button">Submit</div>'),
+    //etc...
+    newPage("Let's add a bill!", "<button class='submit-new-bill'>hey</button>"),
 ];
 
 function newPage(header, content) {
@@ -72,13 +69,18 @@ $(document).ready(function () {
     var database = firebase.database();
 
     //Firebase Updating Functions
-    // Other Functions
     function updateAccountInfo(name, salary, bills) {
         console.log(name, salary, bills);
+        var bills_sum = 1;
+        if (!Array.isArray(accountInfo.bills)){
+            bills = [];
+        }
+
         database.ref(userRef).set({
             name: name,
             salary: salary,
-            bills: bills
+            bills: bills,
+            bill_total: bills_sum
         });
     }
     function updateName(name) {
@@ -127,12 +129,13 @@ $(document).ready(function () {
     }
 
     //Startup
-    if (!localStorage.getItem('this-user-key')) {
+    if (!localStorage.getItem('this-user-key')) {//new user
         //assign user a new ID and save it to localStorage
         userID = database.ref('users').push({
             name: 'N/A',
-            salary: 'N/A',
-            bills: 'N/A'
+            salary: 0,
+            bills: [],
+            bill_total: 0
         }).key;
         localStorage.setItem('this-user-key', userID);
         userRef = 'users/' + userID;
@@ -141,7 +144,7 @@ $(document).ready(function () {
         //neat slide show
         WebPages[0].display();
     }
-    else {
+    else {//old user
         userID = localStorage.getItem('this-user-key');
         userRef = 'users/' + userID;
         console.log('loaded: ' + userID);
@@ -153,12 +156,23 @@ $(document).ready(function () {
         // console.log(userRef, typeof userRef);
         // console.log('users/-LFhx0kykShDdCi9BHD-', typeof 'users/-LFhx0kykShDdCi9BHD-');
         // console.log('updating accountInfo on ', snapshot.val());
-        accountInfo = {
-            name: snapshot.val().name,
-            salary: snapshot.val().salary,
-            bills: snapshot.val().bills,
+        try {
+            var bills = snapshot.val().bills;
+            if (!Array.isArray(bills)){
+                bills = [];
+            }
+            accountInfo = {
+                name: snapshot.val().name,
+                salary: snapshot.val().salary,
+                bills: bills,
+                bill_total: snapshot.val().bill_total
+            }
+            console.log(accountInfo)
         }
-        console.log(accountInfo)
+        catch (e) {
+            console.error("Account Was Lost or Terminated. User needs to refresh");
+            localStorage.setItem('this-user-key', '');
+        }
     });
 
 
@@ -184,25 +198,29 @@ $(document).ready(function () {
     // });
 
     //D.O.M functions
-    $("#mainStarterBox").on("click", '.next-page-button', function () {
-        console.log('going to next page');
-        currentPage.toNext();
-    }).on("click", '.prev-page-button', function () {
-        console.log('going to previous page');
-        currentPage.toPrevious();
-    }).on("click", '.new-bill', function () {
+    $("#mainStarterBox").on("click", '.submit-new-bill', function () {
         //brings up a new bill to be added on a specific day
         var new_bill = {
+            name: 'test',
+            amount: 123,
+            date: 'today'
         }
+        accountInfo.bills.push(new_bill);
+        updateBills(accountInfo.bills);
     }).on("click", '.submit-income', function () {
         var income = numeral(($("#userInput").val().trim()));
         updateSalary(income.value());
         // console.log(accountInfo);
         // updateAccountInfo('1', income.value(), [1]);
-        console.log(accountInfo);
+        // console.log(accountInfo);
 
+    }).on("click", '.next-page-button', function () {
+        console.log('going to next page');
+        currentPage.toNext();
+    }).on("click", '.prev-page-button', function () {
+        console.log('going to previous page');
+        currentPage.toPrevious();
     });
-
     // $("personal-data-form").on("click", 'submit-personal-data', function () {
     //     var name = $("name-data").val().trim();
     //     var salary = $("salary-data").val().trim();
