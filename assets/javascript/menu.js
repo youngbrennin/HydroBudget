@@ -72,11 +72,6 @@ $(document).ready(function () {
     //Firebase Updating Functions
     function updateAccountInfo(name, salary, bills) {
         console.log(name, salary, bills);
-        var bills_sum = 0;
-        if (!Array.isArray(accountInfo.bills)) {
-            bills = [];
-        }
-
         database.ref(userRef).set({
             name: name,
             salary: salary,
@@ -214,7 +209,7 @@ $(document).ready(function () {
     //D.O.M functions// Becareful when adding .on('click')'s as 
     $("#mainStarterBox").on("click", '.submit-new-bill', function () {
         //brings up a new bill to be added on a specific day
-        var amount = 123;//capture the value of an text input 
+        var amount = 1200.45;//capture the value of an text input 
         var amount_budgeted = savingsRound(amount);
         var new_bill = {
             name: $('#bill-name').val().trim(),
@@ -238,9 +233,9 @@ $(document).ready(function () {
 
     }).on("click", '.delete-bill', function () {
         var name = $('#bill-name').val().trim(), index;
-        accountInfo.bills.forEach(function (e) {
-            if (e.name === name) {
-                index = accountInfo.bills.indexOf(e);
+        accountInfo.bills.forEach(function (bill) {
+            if (bill.name === name) {
+                index = accountInfo.bills.indexOf(bill);
             }
         });
         console.log(index);
