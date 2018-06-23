@@ -1,6 +1,64 @@
-$(document).ready(function () {
-    console.log(savingsRound(23.47));
+//variables
+var userID, userRef, currentPage;
+var accountInfo = {
+    name: 'N/A',
+    salary: 'N/A',
+    bills: 'N/A'
+}
+//Pages Array
+var WebPages = [
+    // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
+    /* page 1 */newPage('<p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin!</p>', '<button id="startButton" class="x next-page-button">Get Started!</button>'),
+    /* page 2 */newPage("Let's get started!", '<p>What is your average <a id="toolTipButton" class="btn tooltipped" data-position="top" data-tooltip="I dont like to work!">net</a> income per month?</p><form><input id="userInput" type="text" placeholder="Type Here" value="" /></form><div id="startButton" class="submit-income">Submit</div>'),
+];
 
+function newPage(header, content) {
+    var ret_page = {
+        header: header,
+        content: content,
+        toNext: function () {
+            var nextIndex = WebPages.indexOf(this) + 1;
+            WebPages[nextIndex].display();
+        },
+        toPrevious: function () {
+            var prevIndex = WebPages.indexOf(this) - 1;
+            WebPages[prevIndex].display();
+        },
+        display: function () {
+            currentPage = this;
+            $("#mainStarterBox").empty().hide();
+            var thisIndex = WebPages.indexOf(this);
+            var prevExist, nextExist;
+
+            console.log("displaying page: ", thisIndex);
+
+            if ((WebPages[thisIndex - 1])) {
+                prevExist = true;
+            }
+            if ((WebPages[thisIndex + 1])) {
+                nextExist = true;
+            }
+
+            var thisPage = $("#mainStarterBox");
+            thisPage.append('<div>' + this.header + '</div>');
+            thisPage.append(this.content);
+            thisPage.slideDown(800);//allows fast, slow, or an integer in ms
+        }
+    }
+    return ret_page;
+}
+
+
+function savingsRound(num) {
+    var newSave = Math.ceil((num * .15));
+    var ret = Math.ceil(num) + newSave;
+    //add newSave to total amount saved in the users data
+    var bonusSaved = ret - num;
+    console.log("User has saved up " + bonusSaved + " from this bill!");
+    return ret;
+}
+
+$(document).ready(function () {
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyC3NJtyc0PlFm8cKLJfrtvszKI9JWkhBos",
@@ -12,6 +70,26 @@ $(document).ready(function () {
     };
     firebase.initializeApp(config);
     var database = firebase.database();
+
+    //Firebase Updating Functions
+    // Other Functions
+    function updateAccountInfo(name, salary, bills) {
+        console.log(name, salary, bills);
+        database.ref(userRef).set({
+            name: name,
+            salary: salary,
+            bills: bills
+        });
+    }
+    function updateName(name) {
+        updateAccountInfo(name, accountInfo.salary, accountInfo.bills);
+    }
+    function updateSalary(salary) {
+        updateAccountInfo(accountInfo.name, salary, accountInfo.bills);
+    }
+    function updateBills(bills) {
+        updateAccountInfo(accountInfo.name, accountInfo.salary, bills);
+    }
 
     // Load the Visualization API and the corechart package.
     // google.charts.load('current', { 'packages': ['corechart'] });
@@ -47,94 +125,43 @@ $(document).ready(function () {
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
     }
-    // Other Functions
-    function updateAccountInfo(name, salary, bills) {
-        console.log(name, salary, bills);
-        database.ref(userRef).set({
-            name: name,
-            salary: salary,
-            bills: bills
-        });
+
+    //Startup
+    if (!localStorage.getItem('this-user-key')) {
+        //assign user a new ID and save it to localStorage
+        userID = database.ref('users').push({
+            name: 'N/A',
+            salary: 'N/A',
+            bills: 'N/A'
+        }).key;
+        localStorage.setItem('this-user-key', userID);
+        userRef = 'users/' + userID;
+        console.log('created: ' + userID);
+
+        //neat slide show
+        WebPages[0].display();
     }
-    function updateName(name) {
-        updateAccountInfo(name, accountInfo.salary, accountInfo.bills);
-    }
-    function updateSalary(salary) {
-        updateAccountInfo(accountInfo.name, salary, accountInfo.bills);
-    }
-    function updateBills(bills) {
-        updateAccountInfo(accountInfo.name, accountInfo.salary, bills);
+    else {
+        userID = localStorage.getItem('this-user-key');
+        userRef = 'users/' + userID;
+        console.log('loaded: ' + userID);
+        WebPages[1].display();
     }
 
-
-    function savingsRound(num) {
-        var newSave = Math.ceil((num * .15));
-        var ret = Math.ceil(num) + newSave;
-        //add newSave to total amount saved in the users data
-        var bonusSaved = ret - num;
-        console.log("User has saved up " + bonusSaved + " from this bill!");
-        return ret;
-    }
-    //variables
-    var userID, userRef;
-    var accountInfo = {
-        name: 'N/A',
-        salary: 'N/A',
-        bills: 'N/A'
-    }
-    //
-    database.ref('users').on("child_changed", function (snapshot) {
-        console.log('updating accountInfo on ' + userRef);
+    //Firebase Data Functions
+    database.ref(userRef).on("value", function (snapshot) {
+        // console.log(userRef, typeof userRef);
+        // console.log('users/-LFhx0kykShDdCi9BHD-', typeof 'users/-LFhx0kykShDdCi9BHD-');
+        // console.log('updating accountInfo on ', snapshot.val());
         accountInfo = {
             name: snapshot.val().name,
             salary: snapshot.val().salary,
             bills: snapshot.val().bills,
         }
+        console.log(accountInfo)
     });
-    //Pages Array
-    var WebPages = [
-        // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
-        /* page 1 */newPage('<p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin!</p>', '<button id="startButton" class="x next-page-button">Get Started!</button>'),
-        /* page 2 */newPage("Let's get started!", '<p>What is your average <a id="toolTipButton" class="btn tooltipped" data-position="top" data-tooltip="I dont like to work!">net</a> income per month?</p><form><input id="userInput" type="text" placeholder="Type Here" value="" /></form><div id="startButton" class="submit-income">Submit</div>'),
-    ];
-    var currentPage;
 
-    //Pages
-    function newPage(header, content) {
-        var ret_page = {
-            header: header,
-            content: content,
-            toNext: function () {
-                var nextIndex = WebPages.indexOf(this) + 1;
-                WebPages[nextIndex].display();
-            },
-            toPrevious: function () {
-                var prevIndex = WebPages.indexOf(this) - 1;
-                WebPages[prevIndex].display();
-            },
-            display: function () {
-                currentPage = this;
-                $("#mainStarterBox").empty().hide();
-                var thisIndex = WebPages.indexOf(this);
-                var prevExist, nextExist;
 
-                console.log("displaying page: ", thisIndex);
-
-                if ((WebPages[thisIndex - 1])) {
-                    prevExist = true;
-                }
-                if ((WebPages[thisIndex + 1])) {
-                    nextExist = true;
-                }
-
-                var thisPage = $("#mainStarterBox");
-                thisPage.append('<div>' + this.header + '</div>');
-                thisPage.append(this.content);
-                thisPage.slideDown(800);//allows fast, slow, or an integer in ms
-            }
-        }
-        return ret_page;
-    }
 
     // $("#create-account").on("click", function(){
     //     //open a div or some kind of thing to hold a form to create a new account
@@ -156,6 +183,7 @@ $(document).ready(function () {
     //     });
     // });
 
+    //D.O.M functions
     $("#mainStarterBox").on("click", '.next-page-button', function () {
         console.log('going to next page');
         currentPage.toNext();
@@ -184,28 +212,5 @@ $(document).ready(function () {
     //     // var name = $("name-data").val().trim();
     //     // var name = $("name-data").val().trim();
     // });
-
-    //on startup
-    //check if this is the users first time
-    if (!localStorage.getItem('this-user-key')) {
-        //assign user a new ID and save it to localStorage
-        userID = database.ref('users').push({
-            name: 'N/A',
-            salary: 'N/A',
-            bills: 'N/A'
-        }).key;
-        localStorage.setItem('this-user-key', userID);
-        userRef = 'users/' + userID;
-        console.log('created: ' + userID);
-
-        //neat slide show
-        WebPages[0].display();
-    }
-    else {
-        userID = localStorage.getItem('this-user-key');
-        userRef = 'users/' + userID;
-        console.log('loaded: ' + userID);
-        WebPages[1].display();
-    }
 
 });
