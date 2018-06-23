@@ -173,4 +173,10 @@ $(document).ready(function () {
     //     displayMainPage(userID);
     // }
 
-});
+    
+  });
+
+  
+      $(document).ready(function(){
+        $('.tooltipped').tooltip();
+      });
