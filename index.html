@@ -34,19 +34,21 @@
             var numberInput = $("#number").val().trim();
             var numberfy = numeral(numberInput); // turn the string into a number
             var value1 = numberfy.value();
-            totalBills += value1
-
+            totalBills += value1;
             console.log(totalBills); //THE TOTAL OF THE EXACT BILLS ARE ADDED
 
-            var liquidCash = Math.ceil((totalBills * 0.15)// eg. (50 * 0.15) = 7.5 --> Math.ciel(7.5) = 8
+            var calcBudget = Math.ceil(totalBills + liquidCash);
+            budgetAmount += calcBudget;
+            console.log(budgetAmount);
+            
+            var liquidCash = Math.ceil(totalBills * 0.15);// eg. (50 * 0.15) = 7.5 --> Math.ciel(7.5) = 8
             var added = numberfy + liquidCash;
-
+            totalSavings += liquidCash;
             console.log(liquidCash); //THE TOTAL OF LIQUID CASH
 
             var savings = added - numberfy;
             var pushSavings = Math.ceil(savings);
             totalSavings += savings;
-
             console.log(totalSavings);
         });
 

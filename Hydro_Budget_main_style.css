@@ -1,0 +1,63 @@
+/* table button{
+    display: none;
+}
+table tr:hover button{
+    display: block;
+} */
+
+table tr:hover .edit-button {
+    border: 3px solid #F6CD61;
+    background-color: #3DA4AB;
+    border: 2px solid #3DA4AB; 
+    color: white;
+    transition: all 0.5s;
+
+}
+
+table tr:hover .remove-button {
+    border: 3px solid #F6CD61;
+    background-color: #FE8A71;
+    border: 2px solid #FE8A71;
+    color: white;
+    transition: all 0.5s;
+}
+
+table, tr {
+    border: 3px solid rgba(246, 204, 97, 0);
+}
+
+.style-table1 {
+    width: 600px;
+    background-color: #4A4E4D;
+    color: white;
+    font-size: 20px;
+    border-right: 3px solid rgba(246, 204, 97, 0);
+    border-left: 3px solid rgba(246, 204, 97, 0);
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.edit-button {
+    background-color: #4A4E4D;
+    border: 2px solid #4A4E4D; 
+    color: #4A4E4D;
+    float: right;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: right;
+}
+
+.remove-button {
+    background-color: #4A4E4D;
+    border: 2px solid #4A4E4D;
+    color: #4A4E4D;
+    float: right;
+    text-align: right;
+    margin-right: 10px;
+
+}
+
+
+
+
+
