@@ -6,7 +6,7 @@ var WebPages = [
     /* page 1 */newPage('<p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin!</p>', '<button id="startButton" class="x next-page-button">Get Started!</button>'),
     /* page 2 */newPage("Let's get started!", '<p>What is your average <a id="toolTipButton" class="btn tooltipped" data-position="top" data-tooltip="I dont like to work!">net</a> income per month?</p><form><input id="userInput" type="text" placeholder="Type Here" value="" /></form><div id="startButton" class="submit-income next-page-button">Submit</div>'),
     //etc...
-    newPage("Let's add a bill!", "<button class='submit-new-bill'>hey</button><button class='delete-bill'>delete</button>"),
+    newPage("Let's add a bill!", "<input type='text' id='bill-name'><button class='submit-new-bill'>hey</button><button class='delete-bill'>delete</button>"),
 ];
 
 function newPage(header, content) {
@@ -217,7 +217,7 @@ $(document).ready(function () {
         var amount = 123;//capture the value of an text input 
         var amount_budgeted = savingsRound(amount);
         var new_bill = {
-            name: 'test',
+            name: $('#bill-name').val().trim(),
             amount: amount,
             amount_budgeted: amount_budgeted,
             amount_saved: amount_budgeted - amount,
