@@ -4,9 +4,10 @@ var userID, userRef, currentPage, accountInfo, billList = [];
 var WebPages = [
     // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
     /* page 1 */newPage('<p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin!</p>', '<button id="startButton" class="x next-page-button">Get Started!</button>'),
-    /* page 2 */newPage("Let's get started!", '<p>What is your average <a id="toolTipButton" class="btn tooltipped" data-position="top" data-tooltip="I dont like to work!">net</a> income per month?</p><form><input id="userInput" type="text" placeholder="Type Here" value="" /></form><div id="startButton" class="submit-income next-page-button">Submit</div>'),
+    /* page 2 */newPage("Let's get started!", '<div class="container" id="mainStarterBox"><p class="x">What is your average <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Net income is the amount of money an individual makes after the usual deductions from a paycheck, such as social security, 401k, taxes, etc...">net</a> income per month?</p><form><input id="userInput" type="text" placeholder="Amount" value="" /></form><div id="startButton" class="x">Submit</div></div>'),
     //etc...
-    newPage("Let's add a bill!", "<input type='text' id='bill-name'><button class='submit-new-bill'>hey</button><button class='delete-bill'>delete</button>"),
+    newPage("Let's add a bill!", "<div class='container' id='mainStarterBox2'><p>Starting off with your bills, let's begin with your expenses that are reoccuring on a monthly basis. <a id='toolTipButton' class='tooltipped x' data-position='top' data-tooltip='Don&#39;t worry, you can add/edit/remove details to this section later on'>*</a></p></div>"),
+    newPage('', '<div class="row"><div id="rightSide" class="col s6"><div id="netIncome" class="z-depth-3">Net Salary<table class=" col s12 style-table1"><tr class="a"><td class="month">Monthly:</td><th class="textId">$500</th><td><button class="edit-button">EDIT</button><button class="submit-button">SUBMIT</button></td>')
 ];
 
 function newPage(header, content) {
@@ -40,6 +41,7 @@ function newPage(header, content) {
             thisPage.append('<div>' + this.header + '</div>');
             thisPage.append(this.content);
             thisPage.slideDown(800);//allows fast, slow, or an integer in ms
+            $(".tooltipped").tooltip();
         }
     }
     return ret_page;
@@ -52,7 +54,7 @@ function savingsRound(num) {
     //add newSave to total amount saved in the users data
     var bonusSaved = ret - num;
     // console.log("User has saved up " + bonusSaved + " from this bill!");
-    console.log(Math.ceil(num) + '+' + newSave + '=' + ret)
+    console.log(Math.ceil(num) + '+' + newSave + '=' + ret);
     return ret;
 }
 
@@ -142,7 +144,7 @@ $(document).ready(function () {
         userID = localStorage.getItem('this-user-key');
         userRef = 'users/' + userID;
         console.log('loaded: ' + userID);
-        WebPages[2].display();
+        WebPages[1].display();
     }
 
     //Firebase Data Functions
@@ -243,14 +245,16 @@ $(document).ready(function () {
             accountInfo.bills.splice(index, 1);
             updateBills(accountInfo.bills);
         }
-    }).on("click", '.next-page-button', function () {
+    }).on("click", '.edit-button', function () {
+        console.log('test');
+    })
+    .on("click", '.next-page-button', function () {
         console.log('going to next page');
         currentPage.toNext();
     }).on("click", '.prev-page-button', function () {
         console.log('going to previous page');
         currentPage.toPrevious();
     });
-
 
 
 
@@ -263,5 +267,5 @@ $(document).ready(function () {
     //     // var name = $("name-data").val().trim();
     //     // var name = $("name-data").val().trim();
     // });
-
+    
 });

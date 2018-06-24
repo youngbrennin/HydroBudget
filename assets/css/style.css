@@ -15,12 +15,11 @@ colors = {
 
 */
 
-
 body{
+    background: url("../images/background.png");
     font-family: "Roboto", sans-serif;
     padding: 0;
     margin: 0;
-    background: #b1b0b048;
     color: white;   
 }
 
@@ -32,10 +31,19 @@ body{
   }
 
 #logo{
-    margin-top: 3px;
-    margin-left: 42%;
-    width: 60px;
-    height: 55px;
+    margin-left: 15px;
+    margin-top: 6px;
+    float: left;
+    width: 55px;
+    height: 50px;
+}
+
+#logo2{
+    float: left;
+    margin-top: 10px;
+    width: 160px;
+    height: 40px;
+    
 }
 
 #navBar{
@@ -45,23 +53,34 @@ body{
 
 #mainStarterBox{
     margin: 0 auto;
-    margin-top: 20px;
-    padding-bottom: 200px;
+    margin-top: 40px;
     width: 70%;
     border: solid 2px #0e9aa7 ;
-    background: #4a4e4dce;
+    background: #4a4e4da9;
+    text-align: center;
+    font-size: 40px;
+    min-height: 520px;
+}
+
+#mainStarterBox2{
+    margin: 0 auto;
+    margin-top: 40px;
+    padding-bottom: 150px;
+    width: 70%;
+    border: solid 2px #0e9aa7 ;
+    background: #4a4e4da9;
     text-align: center;
     font-size: 40px;
 }
 
 #startButton{
-        width: 500px;
+        width: 45%;
         height: 100px;
         background: #fe8a71;
         border: solid #818586 2px;
         margin: 0 auto;
         margin-top: 20px;
-        line-height: 90px;
+        line-height: 100px;
         transition: all 0.2s;
         color: rgb(255, 255, 255);
         transition: all 0.4s;
@@ -86,7 +105,7 @@ p{
 #userInput[type=text] {
     margin-top: 10px;
     margin-bottom: 40px;
-    width: 600px;
+    width: 55%;
     height: 70PX;
     box-sizing: border-box;
     border: white solid 2px;
@@ -103,21 +122,125 @@ p{
 }
 
 #userInput[type=text]:focus {
-    width: 60%;
-    border: 4px solid #fe8a71;
+    width: 61%;
+    border: 4px solid #3da4ab;
+}
+
+#userInput2[type=number] {
+    width: 70%;
+    background: white;
+    padding: 0 0 0 30px;
 }
 
 
 #toolTipButton{
-    background: rgba(255, 255, 255, 0);
-    font-size: 30px;
+    color: white;
+    font-size: 40px;
     font-family: "Roboto", sans-serif;
+    border-bottom: solid 2px #f6cd61; 
 }
 
 
 
 .tooltip-content{
    position: top; 
-   margin: 0;
+   margin: 2px;
 }
+
+
+#rightSide{
+    margin-top: 40px;
+    height: 500px;
+}
+
+#leftSide{
+    margin-top: 40px;
+    height: 500px;
+}
+
+#netIncome{
+    text-align: center;
+    font-size: 40px;
+    min-height: 180px;
+    border: solid 2px #3da4ab;
+    background: #4a4e4dd2;
+}
+
+
+/* Brennins list styling---------------------------------------------------------------------------------- */
+
+.month{
+    width: 25px;
+    font-weight: bolder;
+}
+
+
+
+.textId{
+    font-size: 30px;
+    font-weight: 100;
+}
+
+table, tr {
+    border: 3px solid rgba(246, 204, 97, 0);
+}
+
+
+.style-table1 {
+    width: 95%;
+    height: 95px;
+    background-color: #4A4E4D;
+    color: white;
+    font-size: 28px;
+    border-right: 3px solid rgba(246, 204, 97, 0);
+    border-left: 3px solid rgba(246, 204, 97, 0);
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+.edit-button {
+    background-color: #4A4E4D;
+    border: 2px solid #4A4E4D; 
+    color: #4A4E4D;
+    padding: 0 20px 2px 20px;
+    float: right;
+    margin-right: 10px;
+    text-align: right;
+    
+}
+
+.submit-button {
+    background-color: #4A4E4D;
+    border: 2px solid #4A4E4D;
+    color: #4A4E4D;
+    float: right;
+    text-align: right;
+    margin-right: 10px;
+    
+}
+
+table tr:hover .submit-button {
+    border: 3px solid #F6CD61;
+    background-color: #3DA4AB;
+    border: 2px solid #3DA4AB; 
+    color: white;
+    transition: all 0.8s;
+            
+}
+            
+table tr:hover .edit-button {
+    border: 3px solid #F6CD61;
+    background-color: #F6CD61;
+    border: 2px solid #F6CD61;
+    padding: 0 20px 2px 20px;
+    color: white;
+    transition: all 0.8s;
+}
+
+button:focus{
+    background-color: transparent;
+}
+
+
+
 
