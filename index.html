@@ -1,69 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Test Logic</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Budget App</title>
+  <link rel="stylesheet" type="text/css" href="assets\css\style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 </head>
 
 <body>
 
-    <input type="number" id="number">
-    <button id="addNumber">Submit</button>
+
+  <nav>
+    <div class="nav-wrapper" id="navBar">
+      <img src="assets\images\waterdrop.png" id="logo">
+      <a class="brand-logo center">
+        <i class="material-icons" style="color: #fe8a71;">Savings:</i>
+      </a>
+    </nav>
 
 
+      <div id="mainStarterBox">
+        <!-- <p>Welcome to Hyrdo Budget! Your best source for simply
+          saving money based on your expenses and budget. Click the
+          button below to begin!
+        </p>
+        <button id="startButton" class="x next-page-button">Get Started!</button> -->
+      </div>
 
 
+      </ul>
+    </div>
 
-
-
-
-    <script>
-        
-        var totalBills = 0;
-        var netIncome = 0;
-        var totalSavings = 0;
-        var budgetAmount = 0;
-
-        $("#addNumber").on("click", function () {
-            //THE TOTAL OF THE EXACT BILLS ARE ADDED
-            var numberInput = $("#number").val().trim();
-            var numberfy = numeral(numberInput); // turn the string into a number
-            var value1 = numberfy.value();
-            totalBills += value1;
-            console.log(totalBills); 
-            
-            //THE TOTAL OF LIQUID CASH
-            var liquidCash = Math.ceil(totalBills * 0.15);// eg. (50 * 0.15) = 7.5 --> Math.ciel(7.5) = 8
-            var added = numberfy + liquidCash;
-            totalSavings += liquidCash;
-            console.log(totalSavings); 
-
-            //TOTAL
-            var calcBudget = Math.ceil(totalBills + liquidCash);
-            budgetAmount + calcBudget;
-            console.log(budgetAmount);
-
-            // var savings = added - numberfy;
-            // var pushSavings = Math.ceil(savings);
-            // totalSavings + savings;
-            // console.log(totalSavings);
-        });
-
-
-
-
-
-
-
-
-
-    </script>
-
+  
 </body>
-
+<script type="text/javascript" src="assets\javascript\menu.js"></script>
+<script src='https://www.gstatic.com/firebasejs/5.1.0/firebase.js'></script>
 </html>

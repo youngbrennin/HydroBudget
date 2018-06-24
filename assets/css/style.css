@@ -51,12 +51,6 @@ body{
     border-bottom: solid 2px #0e9aa7;
 }
 
-#savings{
-    margin-right: 240px;
-    color: #fe8a71;
-    font-size: 30px;
-}
-
 #mainStarterBox{
     margin: 0 auto;
     margin-top: 40px;
@@ -146,6 +140,8 @@ p{
     border-bottom: solid 2px #f6cd61; 
 }
 
+
+
 .tooltip-content{
    position: top; 
    margin: 2px;
@@ -170,25 +166,6 @@ p{
     background: #4a4e4dd2;
 }
 
-#totalExpenses{
-    margin-top: 40px;
-    text-align: center;
-    font-size: 40px;
-    min-height: 180px;
-    border: solid 2px #3da4ab;
-    background: #4a4e4dd2;
-}
-
-#totalExpensesDisplayed{
-    width: 100%;
-    height: 95px;
-    text-align: center;
-    line-height: 95px;
-    background-color: #4A4E4D;
-
-}
-
-
 
 /* Brennins list styling---------------------------------------------------------------------------------- */
 
@@ -196,6 +173,8 @@ p{
     width: 25px;
     font-weight: bolder;
 }
+
+
 
 .textId{
     font-size: 30px;
