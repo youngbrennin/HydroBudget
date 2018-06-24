@@ -24,32 +24,34 @@
 
     <script>
         
-        
-        var netIncome = 0;
         var totalBills = 0;
+        var netIncome = 0;
         var totalSavings = 0;
         var budgetAmount = 0;
 
         $("#addNumber").on("click", function () {
+            //THE TOTAL OF THE EXACT BILLS ARE ADDED
             var numberInput = $("#number").val().trim();
             var numberfy = numeral(numberInput); // turn the string into a number
             var value1 = numberfy.value();
             totalBills += value1;
-            console.log(totalBills); //THE TOTAL OF THE EXACT BILLS ARE ADDED
-
-            var calcBudget = Math.ceil(totalBills + liquidCash);
-            budgetAmount += calcBudget;
-            console.log(budgetAmount);
+            console.log(totalBills); 
             
+            //THE TOTAL OF LIQUID CASH
             var liquidCash = Math.ceil(totalBills * 0.15);// eg. (50 * 0.15) = 7.5 --> Math.ciel(7.5) = 8
             var added = numberfy + liquidCash;
             totalSavings += liquidCash;
-            console.log(liquidCash); //THE TOTAL OF LIQUID CASH
+            console.log(totalSavings); 
 
-            var savings = added - numberfy;
-            var pushSavings = Math.ceil(savings);
-            totalSavings += savings;
-            console.log(totalSavings);
+            //TOTAL
+            var calcBudget = Math.ceil(totalBills + liquidCash);
+            budgetAmount + calcBudget;
+            console.log(budgetAmount);
+
+            // var savings = added - numberfy;
+            // var pushSavings = Math.ceil(savings);
+            // totalSavings + savings;
+            // console.log(totalSavings);
         });
 
 
