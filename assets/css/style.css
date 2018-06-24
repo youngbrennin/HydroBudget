@@ -189,8 +189,12 @@ p{
 }
 
 #dateStuff{
-    width: 300px;
-    background: rgba(255, 255, 255, 0.726);
+    width: 35%;
+    height: 70px;
+    text-align: center;
+    background: #f6cd61;
+    color: white;
+    font-size: 30px;
 }
 
 .datepicker-day-button{
@@ -249,7 +253,6 @@ table, tr {
 }
 
 table tr:hover .submit-button {
-    border: 3px solid #F6CD61;
     background-color: #3DA4AB;
     border: 2px solid #3DA4AB; 
     color: white;
@@ -258,7 +261,6 @@ table tr:hover .submit-button {
 }
             
 table tr:hover .edit-button {
-    border: 3px solid #F6CD61;
     background-color: #F6CD61;
     border: 2px solid #F6CD61;
     padding: 0 20px 2px 20px;
