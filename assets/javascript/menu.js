@@ -90,17 +90,17 @@ $(document).ready(function () {
         updateAccountInfo(accountInfo.name, accountInfo.salary, bills);
     }
     function displayBills() {
-        accountInfo.bills.forEach(function (e) {
-            $("#bill-div").empty();
-            //add <tr>'s to bill-div
-            console.log('display');
-            var tr = $('<tr>').attr('id', 'bill-' + e.name);
-            var td_name = $('<td>').text(e.name);
-            var td_amount = $('<td>').text(e.amount);
-            var td_date = $('<td>').text(moment(e.date, 'hh:mm a MM/DD/YYYY'));
-            tr.append(td_name, td_amount, td_date);
-            $("#bill-div").append(tr);
-        });
+        $("#bill-div").empty();
+            accountInfo.bills.forEach(function (e) {
+                //add <tr>'s to bill-div
+                console.log('display');
+                var tr = $('<tr>').attr('id', 'bill-' + e.name);
+                var td_name = $('<td>').text(e.name);
+                var td_amount = $('<td>').text(e.amount);
+                var td_date = $('<td>').text(moment(e.date,'hh:mm A MM/DD/YYYY').format('MMM. Do'));
+                tr.append(td_name, td_amount, td_date);
+                $("#bill-div").append(tr);
+            });
     }
     // Load the Visualization API and the corechart package.
     // google.charts.load('current', { 'packages': ['corechart'] });
@@ -190,6 +190,7 @@ $(document).ready(function () {
                 budgeted_bill_total: bugeted_bill_sum,
                 total_saved: total_saved_sum
             }
+            displayBills();
             console.log(accountInfo)
         }
         catch (e) {
@@ -198,7 +199,6 @@ $(document).ready(function () {
             localStorage.setItem('this-user-key', '');
         }
     });
-
 
 
     // $("#create-account").on("click", function(){
@@ -238,7 +238,7 @@ $(document).ready(function () {
         } else {
             accountInfo.bills.push(new_bill);
             updateBills(accountInfo.bills);
-            displayBills();
+            // displayBills();
         }
     }).on("click", '.submit-income', function () {
         var income = numeral(($("#userInput").val().trim()));
