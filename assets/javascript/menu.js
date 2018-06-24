@@ -11,4 +11,5 @@ $('.submit-button').on('click', function () {
 
 })
 
+$('.datepicker').datepicker();
 
