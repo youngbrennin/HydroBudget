@@ -6,7 +6,7 @@ var WebPages = [
     /* page 1 */newPage('<p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin!</p>', '<button id="startButton" class="x next-page-button">Get Started!</button>'),
     /* page 2 */newPage("Let's get started!", '<div class="container" id="mainStarterBox"><p class="x">What is your average <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Net income is the amount of money an individual makes after the usual deductions from a paycheck, such as social security, 401k, taxes, etc...">net</a> income per month?</p><form><input id="userInput" type="text" placeholder="Amount" value="" /></form><div id="startButton" class="x submit-income next-page-button">Submit</div></div>'),
     //etc...
-    newPage("Let's add a bill!", "<div class='container' id='mainStarterBox2'><p>Starting off with your bills, let's begin with your expenses that are reoccuring on a monthly basis. <a id='toolTipButton' class='tooltipped x' data-position='top' data-tooltip='Don&#39;t worry, you can add/edit/remove details to this section later on'>*</a></p></div><input type='text' id='bill-name'><button class='submit-new-bill'>add</button>"),
+    newPage("Let's add a bill!", "<div class='container' id='mainStarterBox2'><p>Starting off with your bills, let's begin with your expenses that are reoccuring on a monthly basis. <a id='toolTipButton' class='tooltipped x' data-position='top' data-tooltip='Don&#39;t worry, you can add/edit/remove details to this section later on'>*</a></p></div><input type='text' id='bill-name'><button class='submit-new-bill'>add</button><div id='bill-div'></div"),
     newPage('', '<div class="row"><div id="rightSide" class="col s6"><div id="netIncome" class="z-depth-3">Net Salary<table class=" col s12 style-table1"><tr class="a"><td class="month">Monthly:</td><th class="textId">$500</th><td><button class="edit-button">EDIT</button><button class="submit-button">SUBMIT</button></td>')
 ];
 
@@ -89,7 +89,18 @@ $(document).ready(function () {
     function updateBills(bills) {
         updateAccountInfo(accountInfo.name, accountInfo.salary, bills);
     }
-
+    function displayBills() {
+        accountInfo.bill.forEach(function (e) {
+            //add <tr>'s to bill-div
+            console.log('display');
+            var tr = $('<tr>').attr('id', 'bill-' + e.name);
+            var td_name = $('<td>').text(e.name);
+            var td_amount = $('<td>').text(e.amount);
+            var td_date = $('<td>').text(moment(e.date, 'hh:mm a MM/DD/YYYY'));
+            tr.append(td_name, td_amount, td_date);
+            $("#bill-div").append(tr);
+        });
+    }
     // Load the Visualization API and the corechart package.
     // google.charts.load('current', { 'packages': ['corechart'] });
 
@@ -246,13 +257,13 @@ $(document).ready(function () {
     }).on("click", '.edit-button', function () {
         console.log('test');
     })
-    .on("click", '.next-page-button', function () {
-        console.log('going to next page');
-        currentPage.toNext();
-    }).on("click", '.prev-page-button', function () {
-        console.log('going to previous page');
-        currentPage.toPrevious();
-    });
+        .on("click", '.next-page-button', function () {
+            console.log('going to next page');
+            currentPage.toNext();
+        }).on("click", '.prev-page-button', function () {
+            console.log('going to previous page');
+            currentPage.toPrevious();
+        });
 
 
 
@@ -265,5 +276,5 @@ $(document).ready(function () {
     //     // var name = $("name-data").val().trim();
     //     // var name = $("name-data").val().trim();
     // });
-    
+
 });
