@@ -90,7 +90,8 @@ $(document).ready(function () {
         updateAccountInfo(accountInfo.name, accountInfo.salary, bills);
     }
     function displayBills() {
-        accountInfo.bill.forEach(function (e) {
+        accountInfo.bills.forEach(function (e) {
+            $("#bill-div").empty();
             //add <tr>'s to bill-div
             console.log('display');
             var tr = $('<tr>').attr('id', 'bill-' + e.name);
@@ -237,6 +238,7 @@ $(document).ready(function () {
         } else {
             accountInfo.bills.push(new_bill);
             updateBills(accountInfo.bills);
+            displayBills();
         }
     }).on("click", '.submit-income', function () {
         var income = numeral(($("#userInput").val().trim()));
@@ -255,7 +257,10 @@ $(document).ready(function () {
             updateBills(accountInfo.bills);
         }
     }).on("click", '.edit-button', function () {
-        console.log('test');
+        $(".textId").html("");
+        $(".textId").append(
+            '<input id="userInput2" type="number" placeholder="Amount" value="" />'
+        );
     })
         .on("click", '.next-page-button', function () {
             console.log('going to next page');
@@ -276,5 +281,5 @@ $(document).ready(function () {
     //     // var name = $("name-data").val().trim();
     //     // var name = $("name-data").val().trim();
     // });
-
+    $('.datepicker').datepicker();
 });
