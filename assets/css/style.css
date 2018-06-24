@@ -188,6 +188,14 @@ p{
 
 }
 
+#dateStuff{
+    width: 300px;
+    background: rgba(255, 255, 255, 0.726);
+}
+
+.datepicker-day-button{
+    color: black;
+}
 
 
 /* Brennins list styling---------------------------------------------------------------------------------- */
