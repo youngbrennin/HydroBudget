@@ -95,10 +95,11 @@ function newPage(content) {
                 case WebPages.length - 2: {
                     updateTotalExpensesDiv();
                     updateSalaryDiv();
-                    displayBills();
+                    // displayBills();
+                    displayBillsThisMonth();
                     displayNews();
                     var graphed_bills = [];
-                    accountInfo.bills.forEach(function(e){
+                    accountInfo.bills.forEach(function (e) {
                         graphed_bills.push([e.name, e.amount_budgeted]);
                     });
                     setPieChartData(graphed_bills, 'Your Bills!', 400, 200, 'chart');
@@ -116,8 +117,7 @@ function displayBills() {
     $("#bill-list").empty();
     bubbleSortForBills(accountInfo.bills);
     accountInfo.bills.forEach(function (e) {
-        //add <tr>'s to bill-div
-        console.log('display');
+        console.log('displaying new bill');
         // var tr = $('<tr>').attr('id', 'bill-' + e.name);
         // var td_name = $('<td>').text(e.name);
         // var td_amount = $('<td>').text(e.amount);
@@ -165,6 +165,62 @@ function displayBills() {
         $("#bill-list").append(tr);
     });
 }
+
+function displayBillsThisMonth() {
+    $("#bill-list").empty();
+    bubbleSortForBills(accountInfo.bills);
+    accountInfo.bills.forEach(function (e) {
+        // console.log(moment(e.date, "MMM DD, YYYY").diff(moment(), 'days'));
+        if (moment(e.date, 'MMM DD, YYYY').format('MMM') == moment().format('MMM')) {
+            console.log('displaying new bill');
+            // var tr = $('<tr>').attr('id', 'bill-' + e.name);
+            // var td_name = $('<td>').text(e.name);
+            // var td_amount = $('<td>').text(e.amount);
+            // var td_date = $('<td>').text(moment(e.date, 'MMM. Do').format('MMM. Do'));
+
+
+            var tr = $('<div>').attr({
+                'class': 'newBill bh',
+                'id': 'bill-' + e.name
+            });
+            var td_name = $('<div>').attr({
+                'class': 'billWrapper2',
+                'id': 'name-' + e.name
+            }).append('<div id="name-' + spacesToUnderscore(e.name) + '" class="billStuff">' + e.name + '</div>');
+
+            var td_amount = $('<div>').attr({
+                'class': 'billWrapper3',
+                'id': 'amount-' + e.name
+            }).append('<div id="amount-' + spacesToUnderscore(e.name) + '"  class="billStuff">' + e.amount + '</div>');
+
+            var td_date = $('<div>').attr({
+                'class': 'billWrapper',
+                'id': 'date-' + e.name
+            }).append('<div id="date-' + spacesToUnderscore(e.name) + '"  class="billStuff">' + e.date + '</div>');
+
+            var rm = $('<button>').attr({
+                'class': 'remove-button-2 b bh remove-bill',
+                'bill-name': e.name
+            }).text('X');
+
+            var ed = $('<button>').attr({
+                'class': 'edit-button-2 b bh edit-bill',
+                'bill-name': e.name
+            }).text('✎');
+
+            var sub = $('<button>').attr({
+                'class': 'submit-button-2 b bh confirm-edit-bill',
+                'bill-name': e.name
+            }).text('✓');
+
+            // <button class="remove-button-2 b bh">REMOVE</button>
+            //     <button class="edit-button-2 b bh">EDIT</button>
+            //     <button class="submit-button-2 b bh">SUBMIT</button>
+            tr.append(td_date, td_name, td_amount, rm, ed, sub);
+            $("#bill-list").append(tr);
+        }
+    });
+}
 function bubbleSortForBills(array) {
     var swapped;
     if (Array.isArray(array)) {
@@ -187,11 +243,11 @@ function swap(data, a, b) {
 }
 function updateTotalExpensesDiv() {
     var total_expenses = numeral(accountInfo.budgeted_bill_total);
-    $('#totalExpensesDisplayed').text(total_expenses.format('$00,00'));
+    $('#totalExpensesDisplayed').text(total_expenses.format('$0,'));
 }
 function updateSalaryDiv() {
     var salary = numeral(accountInfo.salary);
-    $('.textId').text(salary.format('$00,00'));
+    $('.textId').text(salary.format('$0,'));
 }
 function savingsRound(num) {
     var newSave = Math.ceil((num * .15));
@@ -202,7 +258,7 @@ function savingsRound(num) {
     console.log(Math.ceil(num) + '+' + newSave + '=' + ret);
     return ret;
 }
-function spacesToUnderscore(str){
+function spacesToUnderscore(str) {
     var ret = str.split(' ').join('_');
     return ret;
 }
@@ -293,14 +349,14 @@ $(document).ready(function () {
                 budgeted_bill_total: bugeted_bill_sum,
                 total_saved: total_saved_sum
             }
-            if (accountInfo.bills.length > 0){
+            if (accountInfo.bills.length > 0) {
                 displayBills();
                 updateTotalExpensesDiv();
                 var graphed_bills = [];
-                    accountInfo.bills.forEach(function(e){
-                        graphed_bills.push([e.name, e.amount_budgeted]);
-                    });
-                    setPieChartData(graphed_bills, 'Your Bills!', 400, 200, 'chart');
+                accountInfo.bills.forEach(function (e) {
+                    graphed_bills.push([e.name, e.amount_budgeted]);
+                });
+                setPieChartData(graphed_bills, 'Your Bills!', 400, 200, 'chart');
                 google.charts.setOnLoadCallback(drawPieChart);
             }
             console.log(accountInfo);
@@ -361,7 +417,7 @@ $(document).ready(function () {
         }
         console.log(accountInfo.bills[index]);
         console.log(new_bill_name, new_date_name, new_amount_name);
-        if (!new_bill_name && !new_date_name && !new_amount_name){
+        if (!new_bill_name && !new_date_name && !new_amount_name) {
             displayBills();
         }
         if (!new_bill_name) {
@@ -406,7 +462,7 @@ $(document).ready(function () {
 
     }).on("click", '#salaryEdit', function () {
         console.log('editing salary');
-        $(".textId").html('<input type="number" class="userInput">');
+        $(".textId").html('<input type="text/number" class="userInput">');
     }).on("click", '#salarySubmit', function () {
         accountInfo.salary = $(".userInput").val().trim();
         var salary = numeral(accountInfo.salary);
