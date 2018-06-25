@@ -49,70 +49,64 @@ function drawPieChart() {
     var chart = new google.visualization.PieChart(document.getElementById(pieChartData.div));
     chart.draw(data, options);
 }
-//Pages Array
-// var WebPages = [
-//     // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
-//     /* page 1 */newPage('<div id="mainStarterBox"> <p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin! </p><button id="startButton" class="x next-page-button">Get Started!</button> </div>'),
-//     /* page 2 */newPage('<div class="container" id="mainStarterBox"> <p class="x">What is your average <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Net income is the amount of money an individual makes after the usual deductions from a paycheck, such as social security, 401k, taxes, etc...">net</a> income per month?</p> <form> <input id="userInput" type="text" placeholder="Amount" value="" /> </form> <div id="startButton" class="x submit-income next-page-button">Submit</div> </div> </div>'),
-//     //etc...
-//     newPage('<div class="container" id="mainStarterBox2"> <p>Starting off with your bills, let&#39s begin with your expenses that are reoccuring on a monthly basis. <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Don&#39t worry, you can add/edit/remove details to this section later on">*</a> Click on the yellow box to to enter a date, and the add button to create a new expense on the list below.</p> <input id="dateStuff" class="datepicker"> <div class="x add submit-new-bill" id="startButton">Add</div> <div class="rowWrapper1"> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div> <div id="bill-list"> </div> </div> <button class="x next-page-button">Continue...</button>'),
+// Pages Array
+var WebPages = [
+    //use &#39 for '
+    // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
+    /* page 1 */newPage('<div id="mainStarterBox"> <p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin! </p><button id="startButton" class="x next-page-button">Get Started!</button> </div>'),
+    /* page 2 */newPage('<div class="container" id="mainStarterBox"> <p class="x">What is your average <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Net income is the amount of money an individual makes after the usual deductions from a paycheck, such as social security, 401k, taxes, etc...">net</a> income per month?</p> <form> <input id="userInput" type="text" placeholder="Amount" value="" /> </form> <div id="startButton" class="x submit-income next-page-button">Submit</div> </div> </div>'),
+    //etc...
+    newPage('<div class="container" id="mainStarterBox2"> <p>Starting off with your bills, let&#39s begin with your expenses that are reoccuring on a monthly basis. <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Don&#39t worry, you can add/edit/remove details to this section later on">*</a> Click on the yellow box to to enter a date, and the add button to create a new expense on the list below.</p> <div class="rowWrapper3 z-depth-3"> <div class="topRowWrapper3"> <div class="firstItemDescription3"> DATE </div> <div class="itemDescription3"> NAME </div> <div class="itemDescription3"> AMOUNT </div> </div> <div class="newBill bh"> <input id="billDateInputTopPage" class="datepicker" placeholder="Date" value=""> <input id="billNameInputTopPage" type="number/text" placeholder="Bill Name" value=""> <input id="billAmountInputTopPage" type="number" placeholder="Amount" value=""> </div> </div> <div class="x add submit-new-bill" id="startButton2">Add</div> <div class="rowWrapper1 z-depth-3"> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div> <div id="bill-list"></div> </div> <div class="x add next-page-button" id="startButton2">Submit</div>'),
 
-//     newPage('<div class="row"> <div id="leftSide" class="col s5"> <div id="netIncome" class="z-depth-3"> Net Monthly Salary <table class=" col s12 style-table1"> <tr class="a"> <td class="month">Monthly:</td> <th class="textId"> $0 </th> <td> <button class="edit-button">✎</button> <button class="submit-button">✓</button> </td> </tr> </table> </div> <div id="totalExpenses" class="z-depth-3"> Total Expenses <div id="totalExpensesDisplayed"> $0 </div> </div> <div id="NYThead" class="z-depth-3"> Latest Money Related News <div id="NYT"> </div> </div> </div> <!-- Everything on the right side of the page--> <!-- THE GREAT PAGE DIVIDE --> <div id="rightSide" class="col s7"> <div id="allTheBills" class="z-depth-3 dateWrapper"> <div>Add A New Bill!</div> <input id="dateStuff2" class="datepicker" readonly="readonly"> <div class="x add submit-new-bill" id="startButton">Add</div> </div> <div class="rowWrapper2 z-depth-3"> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div><div id="bill-list"> </div></div>')
-// ];
+    newPage('<div class="row"> <div id="leftSide" class="col s5"> <div id="netIncome" class="z-depth-3"> Net Monthly Salary <div class="newBill bh z-depth-3"> <div class="month"> Monthly:</div> <div class="textId">$0</div> <button id="salaryEdit" class="edit-button-2 b bh monthlyEdit">✎</button> <button id="salarySubmit" class="submit-button-2 b bh monthlySubmit">✓</button> </div> </div> <div id="totalExpenses" class="z-depth-3"> Total Expenses <div id="totalExpensesDisplayed"> $0 </div> </div> <div id="NYThead" class="z-depth-3"> Latest Money Related News <div id="NYT"> </div> </div> </div> <!-- Everything on the right side of the page--> <!-- THE GREAT PAGE DIVIDE --> <div id="rightSide" class="col s7"> <div id="allTheBills" class="z-depth-3 dateWrapper"> <div>Add A New Bill!</div> <div class="rowWrapper3 z-depth-3"> <div class="topRowWrapper3"> <div class="firstItemDescription3"> DATE </div> <div class="itemDescription3"> NAME </div> <div class="itemDescription3"> AMOUNT </div> </div> <div class="newBill bh z-depth-3"> <input id="billDateInputTopPage" class="datepicker" placeholder="Date" value=""> <input id="billNameInputTopPage" type="number/text" placeholder="Bill Name" value=""> <input id="billAmountInputTopPage" type="number" placeholder="Amount" value=""> </div> </div> <div class="x add submit-new-bill" id="startButton2">Add</div> </div> <div class="rowWrapper2 z-depth-3"> <div class="billList">Bill List</div> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div> <div id="bill-list"></div> </div> </div> <!-- Everything on the left side of the page--> </div>'),
 
-// function newPage(content) {
-//     var ret_page = {
-//         content: content,
-//         toNext: function () {
-//             var nextIndex = WebPages.indexOf(this) + 1;
-//             WebPages[nextIndex].display();
-//         },
-//         toPrevious: function () {
-//             var prevIndex = WebPages.indexOf(this) - 1;
-//             WebPages[prevIndex].display();
-//         },
-//         display: function () {
-//             currentPage = this;
-//             var thisPage = $("#content");
-//             thisPage.hide().empty();
-//             var thisIndex = WebPages.indexOf(this);
-//             var prevExist, nextExist;
+    //some kinda loading page
+    newPage("<div class='container' id='mainStarterBox'>Hey! I'm loading here!</div>")
+];
 
-//             console.log("displaying page: ", thisIndex);
+function newPage(content) {
+    var ret_page = {
+        content: content,
+        toNext: function () {
+            var nextIndex = WebPages.indexOf(this) + 1;
+            WebPages[nextIndex].display();
+        },
+        toPrevious: function () {
+            var prevIndex = WebPages.indexOf(this) - 1;
+            WebPages[prevIndex].display();
+        },
+        display: function () {
+            currentPage = this;
+            var thisPage = $("#content");
+            thisPage.hide().empty();
+            var thisIndex = WebPages.indexOf(this);
 
-//             if ((WebPages[thisIndex - 1])) {
-//                 prevExist = true;
-//             }
-//             if ((WebPages[thisIndex + 1])) {
-//                 nextExist = true;
-//             }
+            console.log("displaying page: ", thisIndex);
 
-//             thisPage.html(this.content);
-//             thisPage.slideDown(800);//allows fast, slow, or an integer in ms
-//             $('.datepicker').datepicker();
-//             $(".tooltipped").tooltip();
-//             switch (thisIndex) {
-//                 case 2: {
-//                     displayBills();
-//                 };
-//                     break;
-//                 case WebPages.length - 1: {
-//                     // var total_expenses = numeral(accountInfo.budgeted_bill_total);
-//                     // var salary = numeral(accountInfo.salary);
-//                     // $('.textId').text(salary.format('$00,00'));
-//                     // $('#totalExpensesDisplayed').text(total_expenses.format('$00,00'));
-//                     // displayBills();
-//                     // setPieChartData([['test', 1]], 'title', 100, 100, 'test');
-//                     //display pie chart
-//                     // google.charts.setOnLoadCallback(drawPieChart);
-//                 };
-//                     break;
-//             }
+            thisPage.html(this.content);
+            thisPage.slideDown(800);//allows fast, slow, or an integer in ms
+            $('.datepicker').datepicker();
+            $(".tooltipped").tooltip();
+            switch (thisIndex) {
+                case 2: {
+                    displayBills();
+                };
+                    break;
+                case WebPages.length - 2: {
+                    updateTotalExpensesDiv();
+                    updateSalaryDiv();
+                    displayBills();
+                    // setPieChartData([['test', 1]], 'title', 100, 100, 'test');
+                    //display pie chart
+                    // google.charts.setOnLoadCallback(drawPieChart);
+                };
+                    break;
+            }
 
-//         }
-//     }
-//     return ret_page;
-// }
+        }
+    }
+    return ret_page;
+}
 function displayBills() {
     $("#bill-list").empty();
     bubbleSortForBills(accountInfo.bills);
@@ -145,17 +139,17 @@ function displayBills() {
         }).append('<div id="date-' + e.name + '"  class="billStuff">' + e.date + '</div>');
 
         var rm = $('<button>').attr({
-            'class': 'remove-button-2 b bh',
+            'class': 'remove-button-2 b bh remove-bill',
             'bill-name': e.name
         }).text('X');
 
         var ed = $('<button>').attr({
-            'class': 'edit-button-2 b bh',
+            'class': 'edit-button-2 b bh edit-bill',
             'bill-name': e.name
         }).text('✎');
 
         var sub = $('<button>').attr({
-            'class': 'submit-button-2 b bh',
+            'class': 'submit-button-2 b bh confirm-edit-bill',
             'bill-name': e.name
         }).text('✓');
 
@@ -172,7 +166,7 @@ function bubbleSortForBills(array) {
         do {
             swapped = false;
             for (var i = 0; i < array.length; i++) {
-                if (array[i] && array[i + 1] && moment(array[i].date, 'MMM. Do').format('X') > moment(array[i + 1].date, 'MMM. Do').format('X')) {
+                if (array[i] && array[i + 1] && moment(array[i].date, 'MMM DD, YYYY').format('X') > moment(array[i + 1].date, 'MMM DD, YYYY').format('X')) {
                     swap(array, i, i + 1);
                     swapped = true;
                 }
@@ -186,7 +180,14 @@ function swap(data, a, b) {
     data[a] = data[b];
     data[b] = placeholder;
 }
-
+function updateTotalExpensesDiv() {
+    var total_expenses = numeral(accountInfo.budgeted_bill_total);
+    $('#totalExpensesDisplayed').text(total_expenses.format('$00,00'));
+}
+function updateSalaryDiv() {
+    var salary = numeral(accountInfo.salary);
+    $('.textId').text(salary.format('$00,00'));
+}
 function savingsRound(num) {
     var newSave = Math.ceil((num * .15));
     var ret = Math.ceil(num) + newSave;
@@ -198,72 +199,7 @@ function savingsRound(num) {
 }
 
 $(document).ready(function () {
-    var WebPages = [
-        // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
-        /* page 1 */newPage('<div id="mainStarterBox"> <p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin! </p><button id="startButton" class="x next-page-button">Get Started!</button> </div>'),
-        /* page 2 */newPage('<div class="container" id="mainStarterBox"> <p class="x">What is your average <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Net income is the amount of money an individual makes after the usual deductions from a paycheck, such as social security, 401k, taxes, etc...">net</a> income per month?</p> <form> <input id="userInput" type="text" placeholder="Amount" value="" /> </form> <div id="startButton" class="x submit-income next-page-button">Submit</div> </div> </div>'),
-        //etc...
-        newPage('<div class="container" id="mainStarterBox2"> <p>Starting off with your bills, let&#39s begin with your expenses that are reoccuring on a monthly basis. <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Don&#39t worry, you can add/edit/remove details to this section later on">*</a> Click on the yellow box to to enter a date, and the add button to create a new expense on the list below.</p> <input id="dateStuff" class="datepicker"> <div class="x add submit-new-bill" id="startButton">Add</div> <div class="rowWrapper1"> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div> <div id="bill-list"> </div> </div> <button class="x next-page-button">Continue...</button>'),
 
-        newPage('<div class="row"> <div id="leftSide" class="col s5"> <div id="netIncome" class="z-depth-3"> Net Monthly Salary <table class=" col s12 style-table1"> <tr class="a"> <td class="month">Monthly:</td> <th class="textId"> $0 </th> <td> <button class="edit-button">✎</button> <button class="submit-button">✓</button> </td> </tr> </table> </div> <div id="totalExpenses" class="z-depth-3"> Total Expenses <div id="totalExpensesDisplayed"> $0 </div> </div> <div id="NYThead" class="z-depth-3"> Latest Money Related News <div id="NYT"> </div> </div> </div> <!-- Everything on the right side of the page--> <!-- THE GREAT PAGE DIVIDE --> <div id="rightSide" class="col s7"> <div id="allTheBills" class="z-depth-3 dateWrapper"> <div>Add A New Bill!</div> <input id="dateStuff2" class="datepicker" readonly="readonly"> <div class="x add submit-new-bill" id="startButton">Add</div> </div> <div class="rowWrapper2 z-depth-3"> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div><div id="bill-list"> </div></div>'),
-
-        //some kinda loading page
-        newPage("<div class='container' id='mainStarterBox'>Hey! I'm loading here!</div>")
-    ];
-
-    function newPage(content) {
-        var ret_page = {
-            content: content,
-            toNext: function () {
-                var nextIndex = WebPages.indexOf(this) + 1;
-                WebPages[nextIndex].display();
-            },
-            toPrevious: function () {
-                var prevIndex = WebPages.indexOf(this) - 1;
-                WebPages[prevIndex].display();
-            },
-            display: function () {
-                currentPage = this;
-                var thisPage = $("#content");
-                thisPage.hide().empty();
-                var thisIndex = WebPages.indexOf(this);
-                var prevExist, nextExist;
-
-                console.log("displaying page: ", thisIndex);
-
-                if ((WebPages[thisIndex - 1])) {
-                    prevExist = true;
-                }
-                if ((WebPages[thisIndex + 1])) {
-                    nextExist = true;
-                }
-
-                thisPage.html(this.content);
-                thisPage.slideDown(800);//allows fast, slow, or an integer in ms
-                $('.datepicker').datepicker();
-                $(".tooltipped").tooltip();
-                switch (thisIndex) {
-                    case 2: {
-                        displayBills();
-                    };
-                        break;
-                    case WebPages.length - 2: {
-                        var total_expenses = numeral(accountInfo.budgeted_bill_total);
-                        var salary = numeral(accountInfo.salary);
-                        $('.textId').text(salary.format('$00,00'));
-                        $('#totalExpensesDisplayed').text(total_expenses.format('$00,00'));
-                        displayBills();
-                        // setPieChartData([['test', 1]], 'title', 100, 100, 'test');
-                        //display pie chart
-                        // google.charts.setOnLoadCallback(drawPieChart);
-                    };
-                        break;
-                }
-
-            }
-        }
-        return ret_page;
-    }
     google.charts.load('current', { 'packages': ['corechart'] });
     // Initialize Firebase
     var config = {
@@ -349,11 +285,13 @@ $(document).ready(function () {
                 budgeted_bill_total: bugeted_bill_sum,
                 total_saved: total_saved_sum
             }
-            if (accountInfo.bills.length > 0)
+            if (accountInfo.bills.length > 0){
                 displayBills();
+                updateTotalExpensesDiv();
+            }
             console.log(accountInfo);
             console.log('currently on page: ' + WebPages.indexOf(currentPage))
-            if (WebPages.indexOf(currentPage) === 4){
+            if (WebPages.indexOf(currentPage) === 4) {
                 console.log('done loading');
                 currentPage.toPrevious();
             }
@@ -368,17 +306,15 @@ $(document).ready(function () {
     //D.O.M functions// Becareful when adding .on('click')'s as 
     $("body").on("click", '.submit-new-bill', function () {
         //brings up a new bill to be added on a specific day
-        var this_bill_name = testName, index;
-        var amount = 1200.45;//capture the value of an text input 
+        var this_bill_name = $("#billNameInputTopPage").val().trim(), index;
+        var amount = $("#billAmountInputTopPage").val().trim();//capture the value of an text input 
         var amount_budgeted = savingsRound(amount);
         var new_bill = {
-            // name: $('#bill-name').val().trim(),
-            name: testName,
+            name: this_bill_name,
             amount: amount,
             amount_budgeted: amount_budgeted,
             amount_saved: amount_budgeted - amount,
-            // date: moment(testDate, "MMM. Do").format("MMM. Do")
-            date: $("#dateStuff2").val().trim()
+            date: $("#billDateInputTopPage").val().trim()
         }
 
         for (var i = 0; i < accountInfo.bills.length; i++) {
@@ -386,7 +322,8 @@ $(document).ready(function () {
                 index = i;
             }
         }
-        if (index > -1) {
+        console.log(index);
+        if (typeof index !== 'undefined') {
             console.log('already exists');
         } else {
             accountInfo.bills.push(new_bill);
@@ -397,7 +334,7 @@ $(document).ready(function () {
         var income = numeral(($("#userInput").val().trim()));
         updateSalary(income.value());
 
-    }).on("click", '.submit-button-2', function () {
+    }).on("click", '.confirm-edit-bill', function () {
         var this_bill_name = $(this).attr('bill-name'), index;
 
         var new_bill_name = $("#billNameInput").val().trim();
@@ -410,7 +347,9 @@ $(document).ready(function () {
         }
         console.log(accountInfo.bills[index]);
         console.log(new_bill_name, new_date_name, new_amount_name);
-
+        if (!new_bill_name && !new_date_name && !new_amount_name){
+            displayBills();
+        }
         if (!new_bill_name) {
             new_bill_name = this_bill_name;
         }
@@ -429,14 +368,15 @@ $(document).ready(function () {
             date: new_date_name
         }
         updateBills(accountInfo.bills);
-    }).on("click", '.edit-button-2', function () {
+    }).on("click", '.edit-bill', function () {
+        console.log('editing')
         var this_bill_name = $(this).attr('bill-name');
         // <div class="billInputWrapper"><input id="billDateInput" class="datepicker" placeholder="Date" value="" ></div>
         $('#name-' + this_bill_name).attr('class', 'billInputWrapper').html('<input id="billNameInput" type="number/text" placeholder="Bill Name" value="" >');
         $('#date-' + this_bill_name).attr('class', 'billInputWrapper2').html('<input id="billDateInput" class="datepicker" placeholder="Date" value="" >');
         $('#amount-' + this_bill_name).attr('class', 'billInputWrapper3').html('<input id="billAmountInput" type="number" placeholder="Amount" value="" >');
-
-    }).on("click", '.remove-button-2', function () {
+        $('.datepicker').datepicker();
+    }).on("click", '.remove-bill', function () {
         var this_bill_name = $(this).attr('bill-name'), index;
         $("#bill-" + this_bill_name).remove();
         for (var i = 0; i < billList.length; i++) {
@@ -450,6 +390,14 @@ $(document).ready(function () {
             updateBills(accountInfo.bills);
         }
 
+    }).on("click", '#salaryEdit', function () {
+        console.log('editing salary');
+        $(".textId").html('<input type="number" class="userInput">');
+    }).on("click", '#salarySubmit', function () {
+        accountInfo.salary = $(".userInput").val().trim();
+        var salary = numeral(accountInfo.salary);
+        $('.textId').text(salary.format('$00,00'));
+        updateSalary(salary.value());
     }).on("click", '.next-page-button', function () {
         console.log('going to next page');
         currentPage.toNext();

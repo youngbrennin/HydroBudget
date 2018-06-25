@@ -23,22 +23,15 @@
 
     <div class="row">
         <div id="leftSide" class="col s5">
+
             <div id="netIncome" class="z-depth-3">
                 Net Monthly Salary
-                <table class=" col s12 style-table1">
-                    <tr class="a">
-                        <td class="month">Monthly:</td>
-                        <th class="textId">
-                            $0
-                        </th>
-
-
-                        <td>
-                            <button class="edit-button">✎</button>
-                            <button class="submit-button">✓</button>
-                        </td>
-                    </tr>
-                </table>
+                <div class="newBill bh z-depth-3">
+                        <div class="month"> Monthly:</div>
+                        <div class="textId">$0</div>
+                        <button class="edit-button-2 b bh monthlyEdit">✎</button>
+                        <button class="submit-button-2 b bh monthlySubmit">✓</button>
+                        </div>
             </div>
 
             <div id="totalExpenses" class="z-depth-3">
@@ -50,10 +43,10 @@
 
 
             <div id="NYThead" class="z-depth-3">
-                    Latest Money Related News
-                        <div id="NYT">
-                        </div>
-                    </div>
+                Latest Money Related News
+                <div id="NYT">
+                </div>
+            </div>
 
 
 
@@ -67,44 +60,47 @@
 
         <div id="rightSide" class="col s7">
 
-                <div id="allTheBills" class="z-depth-3 dateWrapper">
-                    <div>Add A New Bill!</div>
-                        <input id="dateStuff2" class="datepicker" readonly="readonly">
-                        <div class="x add" id="startButton">Add</div>
+            <div id="allTheBills" class="z-depth-3 dateWrapper">
+                <div>Add A New Bill!</div>
+                <div class="rowWrapper3 z-depth-3">
+                    <div class="topRowWrapper3">
+                        <div class="firstItemDescription3">
+                            DATE
+                        </div>
+                        <div class="itemDescription3">
+                            NAME
+                        </div>
+                        <div class="itemDescription3">
+                            AMOUNT
+                        </div>
                     </div>
 
+                    <div class="newBill bh z-depth-3">
+                        <input id="billDateInputTopPage" class="datepicker" placeholder="Date" value="">
+                        <input id="billNameInputTopPage" type="number/text" placeholder="Bill Name" value="">
+                        <input id="billAmountInputTopPage" type="number" placeholder="Amount" value="">
+                    </div>
+                </div>
+                <div class="x add" id="startButton2">Add</div>
+            </div>
 
-                    <div class="rowWrapper2 z-depth-3">
-                            <div class="topRowWrapper">
-                            <div id="descriptionDate">
-                                DATE
-                            </div>
-                            <div class="itemDescription">
-                                NAME
-                            </div>
-                            <div class="itemDescription">
-                                AMOUNT
-                            </div>
-                        </div>
-                    
-                            <div class="newBill bh">
-                                    <div class="billInputWrapper"><input id="billDateInput" class="datepicker" placeholder="Date" value="" ></div>
-                                    <div class="billInputWrapper2"><input id="billNameInput" type="number/text" placeholder="Bill Name" value="" ></div>
-                                    <div class="billInputWrapper3"><input id="billAmountInput" type="number" placeholder="Amount" value="" ></div>
-                                    <button class="remove-button-2 b bh">X</button>
-                                    <button class="edit-button-2 b bh">✎</button>
-                                    <button class="submit-button-2 b bh">✓</button>
-                            </div>
-                    
-                            <div class="newBill bh">
-                                <div class="billWrapper"><div id="billDate" class="billStuff">12/24/1995</div></div>
-                                <div class="billWrapper2"><div id="billName" class="billStuff">Snacks</div></div>    
-                                <div class="billWrapper3"><div id="billAmount" class="billStuff">$100 </div></div>
-                                    <button class="remove-button-2 b bh">X</button>
-                                    <button class="edit-button-2 b bh">✎</button>
-                                    <button class="submit-button-2 b bh">✓</button>
-                                </div>
-                        </div>
+
+            <div class="rowWrapper2 z-depth-3">
+                <div class="billList">Bill List</div>
+                <div class="topRowWrapper">
+                    <div id="descriptionDate">
+                        DATE
+                    </div>
+                    <div class="itemDescription">
+                        NAME
+                    </div>
+                    <div class="itemDescription">
+                        AMOUNT
+                    </div>
+                </div>
+
+                <div id="bill-list"></div>
+            </div>
 
 
 

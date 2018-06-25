@@ -53,6 +53,7 @@ body{
     margin-right: 240px;
     color: #fe8a71;
     font-size: 30px;
+    font-weight: bolder;
 }
 
 #mainStarterBox{
@@ -105,13 +106,14 @@ body{
 }
 
 #startButton2{
-    width: 45%;
-    height: 100px;
+    font-size: 25px;
+    width: 20%;
+    height: 60px;
     background: #fe8a71;
     border: solid #818586 2px;
     margin: 0 auto;
-    margin-top: 80px;
-    line-height: 100px;
+    margin-top: 20px;
+    line-height: 60px;
     transition: all 0.2s;
     color: rgb(255, 255, 255);
     transition: all 0.4s;
@@ -158,11 +160,10 @@ p{
     border: 4px solid #3da4ab;
 }
 
-#userInput2[type=number] {
-    width: 70%;
+#userinput2[type=number] {
+    width: 120px;
     background: white;
-    padding: 0 0 0 30px;
-    margin: 5px 0 0 0;  
+    padding: 0 0 0 30px;  
     font-size: 20px;
 }
 
@@ -213,36 +214,38 @@ p{
     min-height: 180px;
     border: solid 2px #3da4ab;
     background: #4a4e4dd2;
+    padding-bottom: 20px;
 }
 
 #totalExpensesDisplayed{
     width: 100%;
-    height: 95px;
+    margin-top: 10px;
+    height: 70px;
     text-align: center;
-    line-height: 95px;
+    line-height: 70px;
     background-color: #4A4E4D;
 
 }
 
 #dateStuff{
     margin: 0 auto;
-    width: 35%;
-    height: 70px;
+    width: 20%;
+    height: 50px;
     text-align: center;
     background: #f6cd61;
     color: white;
-    font-size: 30px;
+    font-size: 20px;
 }
 
 #dateStuff2{
     margin: 0 auto;
     margin-top: 30px;
-    width: 300px;
-    height: 70px;
+    width: 20%;
+    height: 50px;
     text-align: center;
     background: #f6cd61;
     color: white;
-    font-size: 30px;
+    font-size: 20px;
 }
 
 
@@ -250,17 +253,26 @@ p{
     color: black;
 }
 
+.datepicker-date-display{
+    background: #0e9aa7;
+}
+
 
 /* Brennins list styling for main hub rightside---------------------------------------------------------------------------------- */
 
 .month{
-    width: 25px;
+    float: left;
+    width: 140px;
     font-weight: bolder;
+    margin-top: 10px;
 }
 
 .textId{
+    float: left;
+    width: 50px;
     font-size: 30px;
     font-weight: 100;
+    margin-top: 15px;
 }
 
 table, tr {
@@ -270,7 +282,7 @@ table, tr {
 
 .style-table1 {
     width: 95%;
-    height: 95px;
+    height: 90px;
     background-color: #4A4E4D;
     color: white;
     font-size: 28px;
@@ -284,10 +296,11 @@ table, tr {
     background-color: #4A4E4D;
     border: 2px solid #4A4E4D; 
     color: #4A4E4D;
-    padding: 0 20px 2px 20px;
+    width: 23%;
     float: right;
     margin-right: 10px;
     text-align: right;
+    text-align: center;
     
 }
 
@@ -295,26 +308,31 @@ table, tr {
     background-color: #4A4E4D;
     border: 2px solid #4A4E4D;
     color: #4A4E4D;
+    width: 23%;
     float: right;
     text-align: right;
     margin-right: 10px;
+    text-align: center;
     
 }
 
 table tr:hover .submit-button {
     background-color: #3DA4AB;
     border: 2px solid #3DA4AB; 
+    width: 23%;
     color: white;
     transition: all 0.8s;
+    text-align: center;
             
 }
             
 table tr:hover .edit-button {
     background-color: #F6CD61;
     border: 2px solid #F6CD61;
-    padding: 0 20px 2px 20px;
+    width: 23%;
     color: white;
     transition: all 0.8s;
+    text-align: center;
 }
 
 button:focus{
@@ -330,9 +348,26 @@ button:focus{
     background-color: #4a4e4d;
     border: #3da4ab solid 3px;
     line-height: 50px;
+    min-height: 400px;
 }
 
 .rowWrapper2{
+    margin: 0 auto;
+    max-width: 100%;
+    background-color: #4a4e4ddc;
+    border: #3da4ab solid 3px;
+    line-height: 50px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    min-height: 380px;
+}
+
+.billList{
+    text-align: center;
+    font-size: 40px;
+}
+
+.rowWrapper3{
     margin: 0 auto;
     max-width: 100%;
     background-color: #4a4e4d;
@@ -341,24 +376,53 @@ button:focus{
 }
 
 .topRowWrapper{
-    border-bottom: #3da4ab solid 5px;
+    border-top: #3da4ab solid 4px;
+    border-bottom: #3da4ab solid 4px;
+    background-color: #4a4e4d;
+    height: 55px;
+}
+
+.topRowWrapper3{
+    border-bottom: #3da4ab solid 4px;
     height: 50px;
 }
 
 #descriptionDate{
-    margin-left: 85px;
+    margin-left: 10%;
     float: left;
     color: white;
     font-family: "Roboto";
     font-size: 20px;
     font-weight: bolder;
     display: block;
-    
 }
+
 
 .itemDescription{
     float: left;
-    margin-left: 110px;
+    margin-left: 13.7%;
+    color: white;
+    font-family: "Roboto";
+    font-size: 20px;
+    font-weight: bolder;
+    display: block;
+}
+
+.itemDescription3{
+    float: left;
+    margin-left: 5%;
+    width: 25%;
+    color: white;
+    font-family: "Roboto";
+    font-size: 20px;
+    font-weight: bolder;
+    display: block;
+}
+
+.firstItemDescription3{
+    float: left;
+    margin-left: 7%;
+    width: 25%;
     color: white;
     font-family: "Roboto";
     font-size: 20px;
@@ -380,27 +444,26 @@ button:focus{
 
 .billWrapper{
     margin-top: 10px;
-    width: 145px;
+    width: 20%;
     position: relative;
     float: left;
-    left: 10px;
+    left: 1.5%;
 }
 
 .billWrapper2{
     margin-top: 10px;
-    width: 165px;
+    width: 18%;
     position: relative;
     float: left;
-    left: 25px;
-
+    left: 2.5%;
 }
 
 .billWrapper3{
     margin-top: 10px;
-    width: 165px;
+    width: 20%;
     position: relative;
     float: left;
-    left: 35px;
+    left: 5%;
 
 }
 
@@ -436,8 +499,9 @@ button:focus{
 #billDateInput{
     background-color: white;
     float: left;
-    width: 140px;
-    margin-left: 10px;
+    height: 46px;
+    width: 19%;
+    margin-left: 1.5%;
     text-align: center;
     margin-top: 15px;
 
@@ -447,9 +511,9 @@ button:focus{
     background-color: white;
     float: left;
     height: 46px;
-    width: 160px;
+    width: 19%;
     font-size: 15px;
-    margin-left: 20px;
+    margin-left: 1.5%;
     text-align: center;
     margin-top: 15px;
 
@@ -458,8 +522,41 @@ button:focus{
 #billAmountInput{
     background-color: white;
     float: left;
-    width: 140px;
-    margin-left: 25px;
+    height: 46px;
+    width: 19%;
+    margin-left: 2%;
+    text-align: center;
+    margin-top: 15px;
+
+}
+
+#billDateInputTopPage{
+    background-color: white;
+    float: left;
+    width: 25%;
+    margin-left: 5%;
+    text-align: center;
+    margin-top: 15px;
+
+}
+
+#billNameInputTopPage{
+    background-color: white;
+    float: left;
+    height: 46px;
+    width: 25%;
+    font-size: 15px;
+    margin-left: 7%;
+    text-align: center;
+    margin-top: 15px;
+
+}
+
+#billAmountInputTopPage{
+    background-color: white;
+    float: left;
+    width: 25%;
+    margin-left: 7%;
     text-align: center;
     margin-top: 15px;
 
@@ -493,10 +590,10 @@ button:focus{
     border: 2px solid  #2f3131;
     color: #2f3131;
     margin-top: 17px;
-    width: 50px;
+    width: 10%;
     height: 40px;
     font-size: 20px;
-    margin-right: 10px;
+    margin-right: 1%;
     transition: all 0.7s ease;
 
 }
@@ -504,6 +601,8 @@ button:focus{
 .b:focus{
     background-color: transparent;
 }
+
+/* NY Times api stuff ----------------------------------------------------------------------------------------------------------------- */
 
 #NYThead {
     margin-top: 40px;
