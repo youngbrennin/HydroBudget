@@ -1,28 +1,67 @@
 //variables
 var userID, userRef, currentPage, accountInfo, billList = [];
-//tester variables
-var testDate = "Dec. 31st";
+var pieChartData = {
+    items: [['test', 1], ['test2', 2], ['test2', 2], ['test2', 2], ['test2', 2], ['test2', 2], ['test2', 2], ['test2', 2], ['test2', 2]],
+    title: 'test title please ignore',
+    width: '',
+    height: '',
+    div: 'test'
+};
+//setters
 function settestDate(input) {
     testDate = input;
+}
+function setPieChartData(items, title, width, height, div) {
+    pieChartData = {
+        items: items,
+        title: title,
+        width: width,
+        height: height,
+        div: div
+    };
+}
+//tester variables
+var testDate = "Dec. 31st";
+
+// Load the Visualization API and the corechart package.
+google.charts.load('current', { 'packages': ['corechart'] });
+//function to actually display the chart on the webpage
+function drawPieChart() {
+
+    // Create the data table.
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Topping');//dont think these columns  are used in a pie chart
+    data.addColumn('number', 'Slices');
+    data.addRows(pieChartData.items);
+
+    // Set chart options
+    var options = {
+        'title': pieChartData.title,
+        'width': pieChartData.width,
+        'height': pieChartData.height
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById(pieChartData.div));
+    chart.draw(data, options);
 }
 //Pages Array
 var WebPages = [
     // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
-    /* page 1 */newPage('','<div id="mainStarterBox"> <p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin! </p><button id="startButton" class="x next-page-button">Get Started!</button> </div>'),
-    /* page 2 */newPage("Let's get started!", '<div class="container" id="mainStarterBox"> <p class="x">What is your average <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Net income is the amount of money an individual makes after the usual deductions from a paycheck, such as social security, 401k, taxes, etc...">net</a> income per month?</p> <form> <input id="userInput" type="text" placeholder="Amount" value="" /> </form> <div id="startButton" class="x submit-income next-page-button">Submit</div> </div> </div>'),
+    /* page 1 */newPage('<div id="mainStarterBox"> <p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin! </p><button id="startButton" class="x next-page-button">Get Started!</button> </div>'),
+    /* page 2 */newPage('<div class="container" id="mainStarterBox"> <p class="x">What is your average <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Net income is the amount of money an individual makes after the usual deductions from a paycheck, such as social security, 401k, taxes, etc...">net</a> income per month?</p> <form> <input id="userInput" type="text" placeholder="Amount" value="" /> </form> <div id="startButton" class="x submit-income next-page-button">Submit</div> </div> </div>'),
     //etc...
-    newPage("Let's add a bill!", '<div class="container" id="mainStarterBox2"> <p>Starting off with your bills, let&#39;s begin with your expenses that are reoccuring on a monthly basis. <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Don&#39;t worry, you can add/edit/remove details to this section later on">*</a> Click on the yellow box to to enter a date, and the add button to create a new expense on the list below.</p> <input id="dateStuff" class="datepicker"> <div class="x add" id="startButton">Add</div> </div>'),
+    newPage('<div class="container" id="mainStarterBox2"> <p>Starting off with your bills, let&#39;s begin with your expenses that are reoccuring on a monthly basis. <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Don&#39;t worry, you can add/edit/remove details to this section later on">*</a> Click on the yellow box to to enter a date, and the add button to create a new expense on the list below.</p> <input id="dateStuff" class="datepicker"> <div class="x add submit-new-bill" id="startButton">Add</div> </div>'),
 
-    newPage('', '<div class="row"> <div id="rightSide" class="col s6"> <div id="netIncome" class="z-depth-3"> Net Monthly Salary <table class=" col s12 style-table1"> <tr class="a"> <td class="month">Monthly:</td> <th class="textId"> $0 </th> <td> <button class="edit-button">EDIT</button> <button class="submit-button">SUBMIT</button> </td> </tr> </table> </div> <div id="totalExpenses" class="z-depth-3"> Total Expenses <div id="totalExpensesDisplayed"> $0 </div> </div> </div> <!-- Everything on the right side of the page--> <!-- THE GREAT PAGE DIVIDE --> <div id="leftSide" class="col s6"> </div> <!-- Everything on the left side of the page--> </div>')
+    newPage('<div class="row"> <div id="rightSide" class="col s6"> <div id="netIncome" class="z-depth-3"> Net Monthly Salary <table class=" col s12 style-table1"> <tr class="a"> <td class="month">Monthly:</td> <th class="textId"> $0 </th> <td> <button class="edit-button">EDIT</button> <button class="submit-button">SUBMIT</button> </td> </tr> </table> </div> <div id="totalExpenses" class="z-depth-3"> Total Expenses <div id="totalExpensesDisplayed"> $0 </div> </div> </div> <!-- Everything on the right side of the page--> <!-- THE GREAT PAGE DIVIDE --> <div id="leftSide" class="col s6"> </div> <!-- Everything on the left side of the page--> </div><div id="test"></div>')
 ];
 function swap(data, a, b) {
     var placeholder = data[a];
     data[a] = data[b];
     data[b] = placeholder;
 }
-function newPage(header, content) {
+function newPage(content) {
     var ret_page = {
-        header: header,
         content: content,
         toNext: function () {
             var nextIndex = WebPages.indexOf(this) + 1;
@@ -48,10 +87,16 @@ function newPage(header, content) {
                 nextExist = true;
             }
 
-            thisPage.append('<div>' + this.header + '</div>');
-            thisPage.append(this.content);
+            thisPage.html(this.content);
             thisPage.slideDown(800);//allows fast, slow, or an integer in ms
+            $('.datepicker').datepicker();
             $(".tooltipped").tooltip();
+            if (WebPages.indexOf(currentPage) === WebPages.length - 1) {
+                // set pie chart data
+                setPieChartData([['test', 1]], 'title', 100, 100, 'test');
+                //display pie chart
+                google.charts.setOnLoadCallback(drawPieChart);
+            }
         }
     }
     return ret_page;
@@ -69,6 +114,7 @@ function savingsRound(num) {
 }
 
 $(document).ready(function () {
+    google.charts.load('current', { 'packages': ['corechart'] });
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyC3NJtyc0PlFm8cKLJfrtvszKI9JWkhBos",
@@ -128,40 +174,7 @@ $(document).ready(function () {
             return array;
         }
     }
-    // Load the Visualization API and the corechart package.
-    // google.charts.load('current', { 'packages': ['corechart'] });
 
-    // Set a callback to run when the Google Visualization API is loaded.
-    // google.charts.setOnLoadCallback(drawChart);
-
-    // Callback that creates and populates a data table,
-    // instantiates the pie chart, passes in the data and
-    // draws it.
-    function drawChart() {
-
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-            ['Mushrooms', 3],
-            ['Onions', 1],
-            ['Olives', 1],
-            ['Zucchini', 1],
-            ['Pepperoni', 2]
-        ]);
-
-        // Set chart options
-        var options = {
-            'title': 'How Much Pizza I Ate Last Night',
-            //  'width':400,
-            'height': 300
-        };
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-    }
 
     //Startup
     if (!localStorage.getItem('this-user-key')) {//new user
@@ -275,7 +288,7 @@ $(document).ready(function () {
     }).on("click", '.prev-page-button', function () {
         console.log('going to previous page');
         currentPage.toPrevious();
-    }).on("click", '#testsort', displayBills);
+    });
 
 
 
