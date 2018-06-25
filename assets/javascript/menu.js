@@ -13,3 +13,11 @@ $('.submit-button').on('click', function () {
 
 $('.datepicker').datepicker();
 
+{/* <input id="billDateInput" class="datepicker" placeholder="Date" value="" >
+<input id="billNameInput" type="number/text" placeholder="Bill Name" value="" >
+<input id="billAmountInput" type="number" placeholder="Amount" value="" > */}
+
+
+
+
+
