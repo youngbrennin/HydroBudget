@@ -120,38 +120,44 @@ function displayBills() {
     accountInfo.bills.forEach(function (e) {
         //add <tr>'s to bill-div
         console.log('display');
-        var tr = $('<tr>').attr('id', 'bill-' + e.name);
-        var td_name = $('<td>').text(e.name);
-        var td_amount = $('<td>').text(e.amount);
-        var td_date = $('<td>').text(moment(e.date, 'MMM. Do').format('MMM. Do'));
+        // var tr = $('<tr>').attr('id', 'bill-' + e.name);
+        // var td_name = $('<td>').text(e.name);
+        // var td_amount = $('<td>').text(e.amount);
+        // var td_date = $('<td>').text(moment(e.date, 'MMM. Do').format('MMM. Do'));
 
 
-        // var tr = $('<div>').attr('class', 'newBill bh');
-        // var td_name = $('<div>').attr({
-        //     'id': 'billName',
-        //     'class': 'billStuff'
-        // }).text(e.name);
+        var tr = $('<div>').attr({
+            'class': 'newBill bh',
+            'id': 'bill-' + e.name
+        });
+        var td_name = $('<div>').attr({
+            'id': 'billName-' + e.name,
+            'class': 'billStuff'
+        }).html(e.name);
 
-        // var td_amount = $('<div>').attr({
-        //     'id': 'billAmount',
-        //     'class': 'billStuff'
-        // }).text(e.amount);
+        var td_amount = $('<div>').attr({
+            'id': 'billAmount-' + e.name,
+            'class': 'billStuff'
+        }).html(e.amount);
 
-        // var td_date = $('<div>').attr({
-        //     'id': 'billDate',
-        //     'class': 'billStuff'
-        // }).text(e.date);
+        var td_date = $('<div>').attr({
+            'id': 'billDate-' + e.name,
+            'class': 'billStuff'
+        }).html(e.date);
 
         var rm = $('<button>').attr({
-            'class': 'remove-button-2 b bh'
+            'class': 'remove-button-2 b bh',
+            'bill-name': e.name
         }).text('REMOVE');
 
         var ed = $('<button>').attr({
-            'class': 'edit-button-2 b bh'
+            'class': 'edit-button-2 b bh',
+            'bill-name': e.name
         }).text('EDIT');
 
         var sub = $('<button>').attr({
-            'class': 'submit-button-2 b bh'
+            'class': 'submit-button-2 b bh',
+            'bill-name': e.name
         }).text('SUBMIT');
 
         // <button class="remove-button-2 b bh">REMOVE</button>
@@ -272,7 +278,7 @@ $(document).ready(function () {
                 budgeted_bill_total: bugeted_bill_sum,
                 total_saved: total_saved_sum
             }
-            if (accountInfo.bills.length > 1)
+            if (accountInfo.bills.length > 0)
                 displayBills();
             console.log(accountInfo);
         }
@@ -308,12 +314,15 @@ $(document).ready(function () {
         var income = numeral(($("#userInput").val().trim()));
         updateSalary(income.value());
 
-    }).on("click", '.delete-bill', function () {
-        var name = $(this).attr('bill-name'), index;
-        // var name = $('.bill-name').val().trim(), index;
-        // accountInfo.bills.forEach(function (bill) 
-        for (var i = 0; i < index.length || typeof index !== 'undefined'; i++) {
-            if (accountInfo.bills[i].name === name) {
+    }).on("click", '.edit-button', function () {
+        $(".textId").html("");
+        $(".textId").append(
+            '<input id="userInput2" type="number" placeholder="Amount" value="" />');
+    }).on("click", '.remove-button-2', function () {
+        var this_bill_name = $(this).attr('bill-name'), index;
+        $("#bill-" + this_bill_name).remove();
+        for (var i = 0; i < billList.length; i++) {
+            if (accountInfo.bills[i].name === this_bill_name) {
                 index = i;
             }
         }
@@ -322,10 +331,7 @@ $(document).ready(function () {
             accountInfo.bills.splice(index, 1);
             updateBills(accountInfo.bills);
         }
-    }).on("click", '.edit-button', function () {
-        $(".textId").html("");
-        $(".textId").append(
-            '<input id="userInput2" type="number" placeholder="Amount" value="" />');
+
     }).on("click", '.next-page-button', function () {
         console.log('going to next page');
         currentPage.toNext();

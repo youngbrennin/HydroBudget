@@ -429,3 +429,8 @@ button:focus{
 .b:focus{
     background-color: transparent;
 }
+.clearfix::after {
+   content: '';
+   clear: both;
+   display: table;
+}
