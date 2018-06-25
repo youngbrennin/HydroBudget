@@ -50,75 +50,69 @@ function drawPieChart() {
     chart.draw(data, options);
 }
 //Pages Array
-var WebPages = [
-    // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
-    /* page 1 */newPage('<div id="mainStarterBox"> <p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin! </p><button id="startButton" class="x next-page-button">Get Started!</button> </div>'),
-    /* page 2 */newPage('<div class="container" id="mainStarterBox"> <p class="x">What is your average <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Net income is the amount of money an individual makes after the usual deductions from a paycheck, such as social security, 401k, taxes, etc...">net</a> income per month?</p> <form> <input id="userInput" type="text" placeholder="Amount" value="" /> </form> <div id="startButton" class="x submit-income next-page-button">Submit</div> </div> </div>'),
-    //etc...
-    newPage('<div class="container" id="mainStarterBox2"> <p>Starting off with your bills, let&#39s begin with your expenses that are reoccuring on a monthly basis. <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Don&#39t worry, you can add/edit/remove details to this section later on">*</a> Click on the yellow box to to enter a date, and the add button to create a new expense on the list below.</p> <input id="dateStuff" class="datepicker"> <div class="x add submit-new-bill" id="startButton">Add</div> <div class="rowWrapper1"> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div> <div id="bill-list"> </div> </div> <button class="x next-page-button">Continue...</button>'),
+// var WebPages = [
+//     // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
+//     /* page 1 */newPage('<div id="mainStarterBox"> <p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin! </p><button id="startButton" class="x next-page-button">Get Started!</button> </div>'),
+//     /* page 2 */newPage('<div class="container" id="mainStarterBox"> <p class="x">What is your average <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Net income is the amount of money an individual makes after the usual deductions from a paycheck, such as social security, 401k, taxes, etc...">net</a> income per month?</p> <form> <input id="userInput" type="text" placeholder="Amount" value="" /> </form> <div id="startButton" class="x submit-income next-page-button">Submit</div> </div> </div>'),
+//     //etc...
+//     newPage('<div class="container" id="mainStarterBox2"> <p>Starting off with your bills, let&#39s begin with your expenses that are reoccuring on a monthly basis. <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Don&#39t worry, you can add/edit/remove details to this section later on">*</a> Click on the yellow box to to enter a date, and the add button to create a new expense on the list below.</p> <input id="dateStuff" class="datepicker"> <div class="x add submit-new-bill" id="startButton">Add</div> <div class="rowWrapper1"> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div> <div id="bill-list"> </div> </div> <button class="x next-page-button">Continue...</button>'),
 
-    newPage('<div class="row"> <div id="leftSide" class="col s5"> <div id="netIncome" class="z-depth-3"> Net Monthly Salary <table class=" col s12 style-table1"> <tr class="a"> <td class="month">Monthly:</td> <th class="textId"> $0 </th> <td> <button class="edit-button">✎</button> <button class="submit-button">✓</button> </td> </tr> </table> </div> <div id="totalExpenses" class="z-depth-3"> Total Expenses <div id="totalExpensesDisplayed"> $0 </div> </div> <div id="NYThead" class="z-depth-3"> Latest Money Related News <div id="NYT"> </div> </div> </div> <!-- Everything on the right side of the page--> <!-- THE GREAT PAGE DIVIDE --> <div id="rightSide" class="col s7"> <div id="allTheBills" class="z-depth-3 dateWrapper"> <div>Add A New Bill!</div> <input id="dateStuff2" class="datepicker" readonly="readonly"> <div class="x add submit-new-bill" id="startButton">Add</div> </div> <div class="rowWrapper2 z-depth-3"> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div><div id="bill-list"> </div></div>')
-];
+//     newPage('<div class="row"> <div id="leftSide" class="col s5"> <div id="netIncome" class="z-depth-3"> Net Monthly Salary <table class=" col s12 style-table1"> <tr class="a"> <td class="month">Monthly:</td> <th class="textId"> $0 </th> <td> <button class="edit-button">✎</button> <button class="submit-button">✓</button> </td> </tr> </table> </div> <div id="totalExpenses" class="z-depth-3"> Total Expenses <div id="totalExpensesDisplayed"> $0 </div> </div> <div id="NYThead" class="z-depth-3"> Latest Money Related News <div id="NYT"> </div> </div> </div> <!-- Everything on the right side of the page--> <!-- THE GREAT PAGE DIVIDE --> <div id="rightSide" class="col s7"> <div id="allTheBills" class="z-depth-3 dateWrapper"> <div>Add A New Bill!</div> <input id="dateStuff2" class="datepicker" readonly="readonly"> <div class="x add submit-new-bill" id="startButton">Add</div> </div> <div class="rowWrapper2 z-depth-3"> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div><div id="bill-list"> </div></div>')
+// ];
 
+// function newPage(content) {
+//     var ret_page = {
+//         content: content,
+//         toNext: function () {
+//             var nextIndex = WebPages.indexOf(this) + 1;
+//             WebPages[nextIndex].display();
+//         },
+//         toPrevious: function () {
+//             var prevIndex = WebPages.indexOf(this) - 1;
+//             WebPages[prevIndex].display();
+//         },
+//         display: function () {
+//             currentPage = this;
+//             var thisPage = $("#content");
+//             thisPage.hide().empty();
+//             var thisIndex = WebPages.indexOf(this);
+//             var prevExist, nextExist;
 
-function swap(data, a, b) {
-    var placeholder = data[a];
-    data[a] = data[b];
-    data[b] = placeholder;
-}
-function newPage(content) {
-    var ret_page = {
-        content: content,
-        toNext: function () {
-            var nextIndex = WebPages.indexOf(this) + 1;
-            WebPages[nextIndex].display();
-        },
-        toPrevious: function () {
-            var prevIndex = WebPages.indexOf(this) - 1;
-            WebPages[prevIndex].display();
-        },
-        display: function () {
-            currentPage = this;
-            var thisPage = $("#content");
-            thisPage.hide().empty();
-            var thisIndex = WebPages.indexOf(this);
-            var prevExist, nextExist;
+//             console.log("displaying page: ", thisIndex);
 
-            console.log("displaying page: ", thisIndex);
+//             if ((WebPages[thisIndex - 1])) {
+//                 prevExist = true;
+//             }
+//             if ((WebPages[thisIndex + 1])) {
+//                 nextExist = true;
+//             }
 
-            if ((WebPages[thisIndex - 1])) {
-                prevExist = true;
-            }
-            if ((WebPages[thisIndex + 1])) {
-                nextExist = true;
-            }
+//             thisPage.html(this.content);
+//             thisPage.slideDown(800);//allows fast, slow, or an integer in ms
+//             $('.datepicker').datepicker();
+//             $(".tooltipped").tooltip();
+//             switch (thisIndex) {
+//                 case 2: {
+//                     displayBills();
+//                 };
+//                     break;
+//                 case WebPages.length - 1: {
+//                     // var total_expenses = numeral(accountInfo.budgeted_bill_total);
+//                     // var salary = numeral(accountInfo.salary);
+//                     // $('.textId').text(salary.format('$00,00'));
+//                     // $('#totalExpensesDisplayed').text(total_expenses.format('$00,00'));
+//                     // displayBills();
+//                     // setPieChartData([['test', 1]], 'title', 100, 100, 'test');
+//                     //display pie chart
+//                     // google.charts.setOnLoadCallback(drawPieChart);
+//                 };
+//                     break;
+//             }
 
-            thisPage.html(this.content);
-            thisPage.slideDown(800);//allows fast, slow, or an integer in ms
-            $('.datepicker').datepicker();
-            $(".tooltipped").tooltip();
-            switch (thisIndex) {
-                case 2: {
-                    displayBills();
-                };
-                    break;
-                case WebPages.length - 1: {
-                    var total_expenses = numeral(accountInfo.budgeted_bill_total);
-                    var salary = numeral(accountInfo.salary);
-                    $('.textId').text(salary.format('$00,00'));
-                    $('#totalExpensesDisplayed').text(total_expenses.format('$00,00'));
-                    displayBills();
-                    setPieChartData([['test', 1]], 'title', 100, 100, 'test');
-                    //display pie chart
-                    // google.charts.setOnLoadCallback(drawPieChart);
-                };
-                    break;
-            }
-
-        }
-    }
-    return ret_page;
-}
+//         }
+//     }
+//     return ret_page;
+// }
 function displayBills() {
     $("#bill-list").empty();
     bubbleSortForBills(accountInfo.bills);
@@ -187,6 +181,11 @@ function bubbleSortForBills(array) {
         return array;
     }
 }
+function swap(data, a, b) {
+    var placeholder = data[a];
+    data[a] = data[b];
+    data[b] = placeholder;
+}
 
 function savingsRound(num) {
     var newSave = Math.ceil((num * .15));
@@ -199,6 +198,72 @@ function savingsRound(num) {
 }
 
 $(document).ready(function () {
+    var WebPages = [
+        // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
+        /* page 1 */newPage('<div id="mainStarterBox"> <p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin! </p><button id="startButton" class="x next-page-button">Get Started!</button> </div>'),
+        /* page 2 */newPage('<div class="container" id="mainStarterBox"> <p class="x">What is your average <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Net income is the amount of money an individual makes after the usual deductions from a paycheck, such as social security, 401k, taxes, etc...">net</a> income per month?</p> <form> <input id="userInput" type="text" placeholder="Amount" value="" /> </form> <div id="startButton" class="x submit-income next-page-button">Submit</div> </div> </div>'),
+        //etc...
+        newPage('<div class="container" id="mainStarterBox2"> <p>Starting off with your bills, let&#39s begin with your expenses that are reoccuring on a monthly basis. <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Don&#39t worry, you can add/edit/remove details to this section later on">*</a> Click on the yellow box to to enter a date, and the add button to create a new expense on the list below.</p> <input id="dateStuff" class="datepicker"> <div class="x add submit-new-bill" id="startButton">Add</div> <div class="rowWrapper1"> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div> <div id="bill-list"> </div> </div> <button class="x next-page-button">Continue...</button>'),
+
+        newPage('<div class="row"> <div id="leftSide" class="col s5"> <div id="netIncome" class="z-depth-3"> Net Monthly Salary <table class=" col s12 style-table1"> <tr class="a"> <td class="month">Monthly:</td> <th class="textId"> $0 </th> <td> <button class="edit-button">✎</button> <button class="submit-button">✓</button> </td> </tr> </table> </div> <div id="totalExpenses" class="z-depth-3"> Total Expenses <div id="totalExpensesDisplayed"> $0 </div> </div> <div id="NYThead" class="z-depth-3"> Latest Money Related News <div id="NYT"> </div> </div> </div> <!-- Everything on the right side of the page--> <!-- THE GREAT PAGE DIVIDE --> <div id="rightSide" class="col s7"> <div id="allTheBills" class="z-depth-3 dateWrapper"> <div>Add A New Bill!</div> <input id="dateStuff2" class="datepicker" readonly="readonly"> <div class="x add submit-new-bill" id="startButton">Add</div> </div> <div class="rowWrapper2 z-depth-3"> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div><div id="bill-list"> </div></div>'),
+
+        //some kinda loading page
+        newPage("<div class='container' id='mainStarterBox'>Hey! I'm loading here!</div>")
+    ];
+
+    function newPage(content) {
+        var ret_page = {
+            content: content,
+            toNext: function () {
+                var nextIndex = WebPages.indexOf(this) + 1;
+                WebPages[nextIndex].display();
+            },
+            toPrevious: function () {
+                var prevIndex = WebPages.indexOf(this) - 1;
+                WebPages[prevIndex].display();
+            },
+            display: function () {
+                currentPage = this;
+                var thisPage = $("#content");
+                thisPage.hide().empty();
+                var thisIndex = WebPages.indexOf(this);
+                var prevExist, nextExist;
+
+                console.log("displaying page: ", thisIndex);
+
+                if ((WebPages[thisIndex - 1])) {
+                    prevExist = true;
+                }
+                if ((WebPages[thisIndex + 1])) {
+                    nextExist = true;
+                }
+
+                thisPage.html(this.content);
+                thisPage.slideDown(800);//allows fast, slow, or an integer in ms
+                $('.datepicker').datepicker();
+                $(".tooltipped").tooltip();
+                switch (thisIndex) {
+                    case 2: {
+                        displayBills();
+                    };
+                        break;
+                    case WebPages.length - 2: {
+                        var total_expenses = numeral(accountInfo.budgeted_bill_total);
+                        var salary = numeral(accountInfo.salary);
+                        $('.textId').text(salary.format('$00,00'));
+                        $('#totalExpensesDisplayed').text(total_expenses.format('$00,00'));
+                        displayBills();
+                        // setPieChartData([['test', 1]], 'title', 100, 100, 'test');
+                        //display pie chart
+                        // google.charts.setOnLoadCallback(drawPieChart);
+                    };
+                        break;
+                }
+
+            }
+        }
+        return ret_page;
+    }
     google.charts.load('current', { 'packages': ['corechart'] });
     // Initialize Firebase
     var config = {
@@ -249,8 +314,8 @@ $(document).ready(function () {
         userID = localStorage.getItem('this-user-key');
         userRef = 'users/' + userID;
         console.log('loaded: ' + userID);
-        // WebPages[0].display();
-        WebPages[WebPages.indexOf(WebPages.length - 1)].display();
+        // WebPages[3].display();
+        WebPages[WebPages.length - 1].display();
 
     }
 
@@ -287,6 +352,11 @@ $(document).ready(function () {
             if (accountInfo.bills.length > 0)
                 displayBills();
             console.log(accountInfo);
+            console.log('currently on page: ' + WebPages.indexOf(currentPage))
+            if (WebPages.indexOf(currentPage) === 4){
+                console.log('done loading');
+                currentPage.toPrevious();
+            }
         }
         catch (e) {
             console.error("Account Was Lost or Terminated. User needs to refresh");
@@ -327,7 +397,7 @@ $(document).ready(function () {
         var income = numeral(($("#userInput").val().trim()));
         updateSalary(income.value());
 
-    }).on("click", '.submit-button-2', function() {
+    }).on("click", '.submit-button-2', function () {
         var this_bill_name = $(this).attr('bill-name'), index;
 
         var new_bill_name = $("#billNameInput").val().trim();
@@ -341,13 +411,13 @@ $(document).ready(function () {
         console.log(accountInfo.bills[index]);
         console.log(new_bill_name, new_date_name, new_amount_name);
 
-        if (!new_bill_name){
+        if (!new_bill_name) {
             new_bill_name = this_bill_name;
         }
-        if (!new_date_name){
+        if (!new_date_name) {
             new_date_name = accountInfo.bills[index].date;
         }
-        if (!new_amount_name){
+        if (!new_amount_name) {
             new_amount_name = accountInfo.bills[index].amount;
         }
 
