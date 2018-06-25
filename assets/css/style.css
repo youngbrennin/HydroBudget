@@ -87,11 +87,13 @@ body{
         border: solid #818586 2px;
         margin: 0 auto;
         margin-top: 20px;
+        margin-bottom: 20px;
         line-height: 100px;
         transition: all 0.2s;
         color: rgb(255, 255, 255);
         transition: all 0.4s;
 }
+
 #startButton:hover{
     background: #f6cd61;
     border: solid 2px #ffffff;
@@ -99,6 +101,31 @@ body{
 }
 
 #startButton:active{
+    background: #0e9aa7;
+    border: solid 2px #ffffff;
+    color: #00323f;
+}
+
+#startButton2{
+    width: 45%;
+    height: 100px;
+    background: #fe8a71;
+    border: solid #818586 2px;
+    margin: 0 auto;
+    margin-top: 80px;
+    line-height: 100px;
+    transition: all 0.2s;
+    color: rgb(255, 255, 255);
+    transition: all 0.4s;
+}
+
+#startButton2:hover{
+    background: #f6cd61;
+    border: solid 2px #ffffff;
+    color: #00323f;
+}
+
+#startButton2:active{
     background: #0e9aa7;
     border: solid 2px #ffffff;
     color: #00323f;
@@ -180,6 +207,14 @@ p{
     background: #4a4e4dd2;
 }
 
+#allTheBills{
+    text-align: center;
+    font-size: 40px;
+    min-height: 180px;
+    border: solid 2px #3da4ab;
+    background: #4a4e4dd2;
+}
+
 #totalExpensesDisplayed{
     width: 100%;
     height: 95px;
@@ -190,6 +225,7 @@ p{
 }
 
 #dateStuff{
+    margin: 0 auto;
     width: 35%;
     height: 70px;
     text-align: center;
@@ -197,6 +233,18 @@ p{
     color: white;
     font-size: 30px;
 }
+
+#dateStuff2{
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 300px;
+    height: 70px;
+    text-align: center;
+    background: #f6cd61;
+    color: white;
+    font-size: 30px;
+}
+
 
 .datepicker-day-button{
     color: black;
@@ -275,12 +323,20 @@ button:focus{
 
 /* Table that spawns bills leftside------------------------------------------------------------------------------------------------------------*/
 
-.rowWrapper{
+.rowWrapper1{
     margin: 0 auto;
     margin-top: 100px;
+    max-width: 800px;
     background-color: #4a4e4d;
     border: #3da4ab solid 3px;
-    width: 900px;
+    line-height: 50px;
+}
+
+.rowWrapper2{
+    margin: 0 auto;
+    max-width: 800px;
+    background-color: #4a4e4d;
+    border: #3da4ab solid 3px;
     line-height: 50px;
 }
 
@@ -392,38 +448,37 @@ button:focus{
 .bh:hover .remove-button-2{
     background-color: #fe8a71;
     border: 2px solid #fe8a71;
-    padding: 0 20px 2px 20px;
     color: white;
-    float: right;
-    margin-right: 10px;
+    
 }
 
 .bh:hover .submit-button-2{
     background-color: #0e9aa7;
     border: 2px solid #0e9aa7;
-    padding: 0 20px 2px 20px;
     color: white;
-    float: right;
-    margin-right: 10px;
+
 }
 
 .bh:hover .edit-button-2{
     background-color: #f6cd61;
     border: 2px solid #f6cd61;
-    padding: 0 20px 2px 20px;
     color: white;
-    float: right;
-    margin-right: 10px;
+    
 
 }
 
 .b{
+    float: right;
     background-color: #2f3131;
     border: 2px solid  #2f3131;
     color: #2f3131;
     margin-top: 20px;
+    width: 55px;
     height: 35px;
-    font-size: 17px;
+    font-size: 11px;
+    margin-right: 10px;
+    transition: all 0.7s ease;
+
 }
 
 .b:focus{
