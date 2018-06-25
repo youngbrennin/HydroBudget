@@ -6,10 +6,14 @@ var WebPages = [
     /* page 1 */newPage('<p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin!</p>', '<button id="startButton" class="x next-page-button">Get Started!</button>'),
     /* page 2 */newPage("Let's get started!", '<div class="container" id="mainStarterBox"><p class="x">What is your average <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Net income is the amount of money an individual makes after the usual deductions from a paycheck, such as social security, 401k, taxes, etc...">net</a> income per month?</p><form><input id="userInput" type="text" placeholder="Amount" value="" /></form><div id="startButton" class="x submit-income next-page-button">Submit</div></div>'),
     //etc...
-    newPage("Let's add a bill!", "<div class='container' id='mainStarterBox2'><p>Starting off with your bills, let's begin with your expenses that are reoccuring on a monthly basis. <a id='toolTipButton' class='tooltipped x' data-position='top' data-tooltip='Don&#39;t worry, you can add/edit/remove details to this section later on'>*</a></p></div><input type='text' id='bill-name'><button class='submit-new-bill'>add</button><div id='bill-div'></div"),
+    newPage("Let's add a bill!", "<div class='container' id='mainStarterBox2'><p>Starting off with your bills, let's begin with your expenses that are reoccuring on a monthly basis. <a id='toolTipButton' class='tooltipped x' data-position='top' data-tooltip='Don&#39;t worry, you can add/edit/remove details to this section later on'>*</a></p></div><input type='text' id='bill-name'><button class='submit-new-bill'>add</button><button id='testsort'>sorttest</button><div id='bill-div'></div>"),
     newPage('', '<div class="row"><div id="rightSide" class="col s6"><div id="netIncome" class="z-depth-3">Net Salary<table class=" col s12 style-table1"><tr class="a"><td class="month">Monthly:</td><th class="textId">$500</th><td><button class="edit-button">EDIT</button><button class="submit-button">SUBMIT</button></td>')
 ];
-
+function swap(data, a, b) {
+    var placeholder = data[a];
+    data[a] = data[b];
+    data[b] = placeholder;
+}
 function newPage(header, content) {
     var ret_page = {
         header: header,
@@ -91,16 +95,35 @@ $(document).ready(function () {
     }
     function displayBills() {
         $("#bill-div").empty();
-            accountInfo.bills.forEach(function (e) {
-                //add <tr>'s to bill-div
-                console.log('display');
-                var tr = $('<tr>').attr('id', 'bill-' + e.name);
-                var td_name = $('<td>').text(e.name);
-                var td_amount = $('<td>').text(e.amount);
-                var td_date = $('<td>').text(moment(e.date,'hh:mm A MM/DD/YYYY').format('MMM. Do'));
-                tr.append(td_name, td_amount, td_date);
-                $("#bill-div").append(tr);
-            });
+        accountInfo.bills.forEach(function (e) {
+            //add <tr>'s to bill-div
+            console.log('display');
+            var tr = $('<tr>').attr('id', 'bill-' + e.name);
+            var td_name = $('<td>').text(e.name);
+            var td_amount = $('<td>').text(e.amount);
+            var td_date = $('<td>').text(moment(e.date, 'MMM. Do').format('MMM. Do'));
+            tr.append(td_name, td_amount, td_date);
+            $("#bill-div").append(tr);
+        });
+    }
+    function sortBillsByDate() {
+        var data = accountInfo.bills;
+        bubbleSortForBills(data);
+        console.log(accountInfo.bills);
+    }
+
+    function bubbleSortForBills(array) {
+        var swapped;
+        do {
+            swapped = false;
+            for (var i = 0; i < array.length; i++) {
+                if (array[i] && array[i + 1] && moment(array[i].date, 'MMM. Do').format('X') > moment(array[i + 1].date, 'MMM. Do').format('X')) {
+                    swap(array, i, i + 1);
+                    swapped = true;
+                }
+            }
+        } while (swapped);
+        return array;
     }
     // Load the Visualization API and the corechart package.
     // google.charts.load('current', { 'packages': ['corechart'] });
@@ -157,7 +180,7 @@ $(document).ready(function () {
         userRef = 'users/' + userID;
         console.log('loaded: ' + userID);
         WebPages[0].display();
-        console.log(moment());
+
     }
 
     //Firebase Data Functions
@@ -191,12 +214,13 @@ $(document).ready(function () {
                 total_saved: total_saved_sum
             }
             displayBills();
-            console.log(accountInfo)
+            console.log(accountInfo);
         }
         catch (e) {
             console.error("Account Was Lost or Terminated. User needs to refresh");
             console.error(e);
             localStorage.setItem('this-user-key', '');
+
         }
     });
 
@@ -231,7 +255,7 @@ $(document).ready(function () {
             amount: amount,
             amount_budgeted: amount_budgeted,
             amount_saved: amount_budgeted - amount,
-            date: moment().format("hh:mm A MM/DD/YYYY")
+            date: moment('Jan. 24th', "MMM. Do").format("MMM. Do")
         }
         if (billList.indexOf(new_bill.name) >= 0 || new_bill.name == '') {
             console.log('already exists');
@@ -259,16 +283,14 @@ $(document).ready(function () {
     }).on("click", '.edit-button', function () {
         $(".textId").html("");
         $(".textId").append(
-            '<input id="userInput2" type="number" placeholder="Amount" value="" />'
-        );
-    })
-        .on("click", '.next-page-button', function () {
+            '<input id="userInput2" type="number" placeholder="Amount" value="" />');
+    }).on("click", '.next-page-button', function () {
             console.log('going to next page');
             currentPage.toNext();
-        }).on("click", '.prev-page-button', function () {
+    }).on("click", '.prev-page-button', function () {
             console.log('going to previous page');
             currentPage.toPrevious();
-        });
+    }).on("click", '#testsort', sortBillsByDate);
 
 
 
