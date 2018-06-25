@@ -58,9 +58,15 @@ $.ajax({
   
       // Log section, and append to document if exists
       var section = article.abstract;
+      var titleName = article.title;
+      var linkName = article.url;
       console.log(article.abstract);
+      console.log(article.title);
+      console.log(article.url);
       if (section) {
-        $articleListItem.append("<h5>" + section + "</h5>");
+        $articleListItem.append("<h5>" + titleName + "</h5>");
+        $articleListItem.append("<h6>" + section + "</h6>");
+        $articleListItem.append("<h6><a href>" + linkName + "</a></h6>");
       }
   
       // Log published date, and append to document if exists

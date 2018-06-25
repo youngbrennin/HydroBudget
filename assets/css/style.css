@@ -51,6 +51,12 @@ body{
     border-bottom: solid 2px #0e9aa7;
 }
 
+#savings{
+    margin-right: 240px;
+    color: #fe8a71;
+    font-size: 30px;
+}
+
 #mainStarterBox{
     margin: 0 auto;
     margin-top: 40px;
@@ -65,6 +71,7 @@ body{
 #mainStarterBox2{
     margin: 0 auto;
     margin-top: 40px;
+    margin-bottom: 100px;
     padding-bottom: 150px;
     width: 70%;
     border: solid 2px #0e9aa7 ;
@@ -140,8 +147,6 @@ p{
     border-bottom: solid 2px #f6cd61; 
 }
 
-
-
 .tooltip-content{
    position: top; 
    margin: 2px;
@@ -166,15 +171,72 @@ p{
     background: #4a4e4dd2;
 }
 
+#totalExpenses{
+    margin-top: 40px;
+    text-align: center;
+    font-size: 40px;
+    min-height: 180px;
+    border: solid 2px #3da4ab;
+    background: #4a4e4dd2;
+}
 
-/* Brennins list styling---------------------------------------------------------------------------------- */
+#totalExpensesDisplayed{
+    width: 100%;
+    height: 95px;
+    text-align: center;
+    line-height: 95px;
+    background-color: #4A4E4D;
+
+}
+/* Brennins list styling for main hub API FOR NYT---------------------------------------------------------------------------------- */
+
+#NYThead {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 40px;
+    min-height: 180px;
+    border: solid 2px #3da4ab;
+    background: #4a4e4dd2; 
+}
+
+#NYT{
+    width: 100%;
+    height: 20%;
+    text-align: left;
+    background-color: #4A4E4D;
+    margin-bottom: 20px;
+    color: #73CBEA;
+    font-size: 10px;
+    padding: .5px;
+}
+
+#NYT a{
+    color: #fe8a71;
+}
+
+/* Brennins list styling for main hub API FOR NYT---------------------------------------------------------------------------------- */
+
+
+#dateStuff{
+    width: 35%;
+    height: 70px;
+    text-align: center;
+    background: #f6cd61;
+    color: white;
+    font-size: 30px;
+}
+
+.datepicker-day-button{
+    color: black;
+}
+
+
+/* Brennins list styling for main hub rightside---------------------------------------------------------------------------------- */
 
 .month{
     width: 25px;
     font-weight: bolder;
 }
-
-
 
 .textId{
     font-size: 30px;
@@ -220,7 +282,6 @@ table, tr {
 }
 
 table tr:hover .submit-button {
-    border: 3px solid #F6CD61;
     background-color: #3DA4AB;
     border: 2px solid #3DA4AB; 
     color: white;
@@ -229,7 +290,6 @@ table tr:hover .submit-button {
 }
             
 table tr:hover .edit-button {
-    border: 3px solid #F6CD61;
     background-color: #F6CD61;
     border: 2px solid #F6CD61;
     padding: 0 20px 2px 20px;
@@ -241,6 +301,156 @@ button:focus{
     background-color: transparent;
 }
 
+/* Table that spawns bills leftside------------------------------------------------------------------------------------------------------------*/
 
+.rowWrapper{
+    margin-top: 100px;
+    background-color: #4a4e4d;
+    border: #3da4ab solid 3px;
+    width: 900px;
+    line-height: 50px;
+}
 
+.topRowWrapper{
+    border-bottom: #3da4ab solid 5px;
+    height: 50px;
+}
 
+#descriptionDate{
+    margin-left: 75px;
+    float: left;
+    color: white;
+    font-family: "Roboto";
+    font-size: 20px;
+    font-weight: bolder;
+    display: block;
+    
+}
+
+.itemDescription{
+    float: left;
+    margin-left: 120px;
+    color: white;
+    font-family: "Roboto";
+    font-size: 20px;
+    font-weight: bolder;
+    display: block;
+
+}
+
+.newBill{
+    margin: 0 auto;
+    margin-top: 10px;
+    border: solid 2px #3da4ab;
+    width: 95%;
+    height: 80px;
+    background: #4a4e4d;
+}
+
+.billStuff{
+    float: left;
+    color: white;
+    font-family: "Roboto";
+    font-size: 20px;
+    font-weight: bolder;
+    display: block;
+    
+}
+
+.billStuff{
+    float: left;
+    color: white;
+    font-family: "Roboto";
+    font-size: 20px;
+    font-weight: bolder;
+    display: block;
+    margin-top: 12px;
+    
+}
+
+#billName{
+    margin-left: 75px;
+
+}
+
+#billDate{
+    margin-left: 20px;
+
+}
+
+#billAmount{
+    margin-left: 120px;
+
+}
+
+#billDateInput{
+    background-color: white;
+    float: left;
+    width: 140px;
+    margin-left: 10px;
+    text-align: center;
+    margin-top: 15px;
+
+}
+
+#billNameInput{
+    background-color: white;
+    float: left;
+    height: 46px;
+    width: 160px;
+    margin-left: 20px;
+    text-align: center;
+    margin-top: 15px;
+
+}
+
+#billAmountInput{
+    background-color: white;
+    float: left;
+    width: 140px;
+    margin-left: 20px;
+    text-align: center;
+    margin-top: 15px;
+
+}
+
+.bh:hover .remove-button-2{
+    background-color: #fe8a71;
+    border: 2px solid #fe8a71;
+    padding: 0 20px 2px 20px;
+    color: white;
+    float: right;
+    margin-right: 10px;
+}
+
+.bh:hover .submit-button-2{
+    background-color: #0e9aa7;
+    border: 2px solid #0e9aa7;
+    padding: 0 20px 2px 20px;
+    color: white;
+    float: right;
+    margin-right: 10px;
+}
+
+.bh:hover .edit-button-2{
+    background-color: #f6cd61;
+    border: 2px solid #f6cd61;
+    padding: 0 20px 2px 20px;
+    color: white;
+    float: right;
+    margin-right: 10px;
+
+}
+
+.b{
+    background-color: #4a4e4dd2;
+    border: 2px solid  #4a4e4dd2;
+    color: #4a4e4dd2;
+    margin-top: 20px;
+    height: 35px;
+    font-size: 17px;
+}
+
+.b:focus{
+    background-color: transparent;
+}
