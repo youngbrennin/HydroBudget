@@ -1,5 +1,10 @@
 //variables
 var userID, userRef, currentPage, accountInfo, billList = [];
+//tester variables
+var testDate = "Dec. 31st";
+function settestDate(input){
+    testDate = input;
+}
 //Pages Array
 var WebPages = [
     // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
@@ -95,6 +100,7 @@ $(document).ready(function () {
     }
     function displayBills() {
         $("#bill-div").empty();
+        bubbleSortForBills(accountInfo.bills);
         accountInfo.bills.forEach(function (e) {
             //add <tr>'s to bill-div
             console.log('display');
@@ -106,24 +112,20 @@ $(document).ready(function () {
             $("#bill-div").append(tr);
         });
     }
-    function sortBillsByDate() {
-        var data = accountInfo.bills;
-        bubbleSortForBills(data);
-        console.log(accountInfo.bills);
-    }
-
     function bubbleSortForBills(array) {
         var swapped;
-        do {
-            swapped = false;
-            for (var i = 0; i < array.length; i++) {
-                if (array[i] && array[i + 1] && moment(array[i].date, 'MMM. Do').format('X') > moment(array[i + 1].date, 'MMM. Do').format('X')) {
-                    swap(array, i, i + 1);
-                    swapped = true;
+        if (Array.isArray(array)) {
+            do {
+                swapped = false;
+                for (var i = 0; i < array.length; i++) {
+                    if (array[i] && array[i + 1] && moment(array[i].date, 'MMM. Do').format('X') > moment(array[i + 1].date, 'MMM. Do').format('X')) {
+                        swap(array, i, i + 1);
+                        swapped = true;
+                    }
                 }
-            }
-        } while (swapped);
-        return array;
+            } while (swapped);
+            return array;
+        }
     }
     // Load the Visualization API and the corechart package.
     // google.charts.load('current', { 'packages': ['corechart'] });
@@ -213,7 +215,8 @@ $(document).ready(function () {
                 budgeted_bill_total: bugeted_bill_sum,
                 total_saved: total_saved_sum
             }
-            displayBills();
+            if (accountInfo.bills.length > 1)
+                displayBills();
             console.log(accountInfo);
         }
         catch (e) {
@@ -255,7 +258,7 @@ $(document).ready(function () {
             amount: amount,
             amount_budgeted: amount_budgeted,
             amount_saved: amount_budgeted - amount,
-            date: moment('Jan. 24th', "MMM. Do").format("MMM. Do")
+            date: moment(testDate, "MMM. Do").format("MMM. Do")
         }
         if (billList.indexOf(new_bill.name) >= 0 || new_bill.name == '') {
             console.log('already exists');
@@ -285,12 +288,12 @@ $(document).ready(function () {
         $(".textId").append(
             '<input id="userInput2" type="number" placeholder="Amount" value="" />');
     }).on("click", '.next-page-button', function () {
-            console.log('going to next page');
-            currentPage.toNext();
+        console.log('going to next page');
+        currentPage.toNext();
     }).on("click", '.prev-page-button', function () {
-            console.log('going to previous page');
-            currentPage.toPrevious();
-    }).on("click", '#testsort', sortBillsByDate);
+        console.log('going to previous page');
+        currentPage.toPrevious();
+    }).on("click", '#testsort', displayBills);
 
 
 
