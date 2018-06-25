@@ -377,40 +377,60 @@ button:focus{
     background: #2f3131;
 }
 
-.billStuff{
+
+.billWrapper{
+    margin-top: 10px;
+    width: 145px;
+    position: relative;
     float: left;
-    color: white;
-    font-family: "Roboto";
-    font-size: 20px;
-    font-weight: bolder;
-    display: block;
+    left: 10px;
+}
+
+.billWrapper2{
+    margin-top: 10px;
+    width: 165px;
+    position: relative;
+    float: left;
+    left: 25px;
+
+}
+
+.billWrapper3{
+    margin-top: 10px;
+    width: 165px;
+    position: relative;
+    float: left;
+    left: 35px;
+
+}
+
+.billInputWrapper{
+    position: relative;
+    left: 5px;
+
+
+}
+
+.billInputWrapper2{
+    position: relative;
+    left: 5px;
+    
+}
+
+.billInputWrapper3{
+    position: relative;
+    left: 5px;
     
 }
 
 .billStuff{
-    float: left;
+    text-align: center;
     color: white;
     font-family: "Roboto";
     font-size: 20px;
     font-weight: bolder;
-    display: block;
-    margin-top: 12px;
+
     
-}
-
-#billName{
-    margin-left: 85px;
-
-}
-
-#billDate{
-    margin-left: 20px;
-
-}
-
-#billAmount{
-    margin-left: 120px;
-
 }
 
 #billDateInput{
