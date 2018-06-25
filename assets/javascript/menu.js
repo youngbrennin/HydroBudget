@@ -8,11 +8,12 @@ function settestDate(input) {
 //Pages Array
 var WebPages = [
     // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
-    /* page 1 */newPage('<p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin!</p>', '<button id="startButton" class="x next-page-button">Get Started!</button>'),
-    /* page 2 */newPage("Let's get started!", '<div class="container" id="mainStarterBox"><p class="x">What is your average <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Net income is the amount of money an individual makes after the usual deductions from a paycheck, such as social security, 401k, taxes, etc...">net</a> income per month?</p><form><input id="userInput" type="text" placeholder="Amount" value="" /></form><div id="startButton" class="x submit-income next-page-button">Submit</div></div>'),
+    /* page 1 */newPage('','<div id="mainStarterBox"> <p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin! </p><button id="startButton" class="x next-page-button">Get Started!</button> </div>'),
+    /* page 2 */newPage("Let's get started!", '<div class="container" id="mainStarterBox"> <p class="x">What is your average <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Net income is the amount of money an individual makes after the usual deductions from a paycheck, such as social security, 401k, taxes, etc...">net</a> income per month?</p> <form> <input id="userInput" type="text" placeholder="Amount" value="" /> </form> <div id="startButton" class="x submit-income next-page-button">Submit</div> </div> </div>'),
     //etc...
-    newPage("Let's add a bill!", "<div class='container' id='mainStarterBox2'><p>Starting off with your bills, let's begin with your expenses that are reoccuring on a monthly basis. <a id='toolTipButton' class='tooltipped x' data-position='top' data-tooltip='Don&#39;t worry, you can add/edit/remove details to this section later on'>*</a></p></div><input type='text' id='bill-name'><button class='submit-new-bill'>add</button><div id='bill-div'></div>"),
-    newPage('', '<div class="row"><div id="rightSide" class="col s6"><div id="netIncome" class="z-depth-3">Net Salary<table class=" col s12 style-table1"><tr class="a"><td class="month">Monthly:</td><th class="textId">$500</th><td><button class="edit-button">EDIT</button><button class="submit-button">SUBMIT</button></td>')
+    newPage("Let's add a bill!", '<div class="container" id="mainStarterBox2"> <p>Starting off with your bills, let&#39;s begin with your expenses that are reoccuring on a monthly basis. <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Don&#39;t worry, you can add/edit/remove details to this section later on">*</a> Click on the yellow box to to enter a date, and the add button to create a new expense on the list below.</p> <input id="dateStuff" class="datepicker"> <div class="x add" id="startButton">Add</div> </div>'),
+
+    newPage('', '<div class="row"> <div id="rightSide" class="col s6"> <div id="netIncome" class="z-depth-3"> Net Monthly Salary <table class=" col s12 style-table1"> <tr class="a"> <td class="month">Monthly:</td> <th class="textId"> $0 </th> <td> <button class="edit-button">EDIT</button> <button class="submit-button">SUBMIT</button> </td> </tr> </table> </div> <div id="totalExpenses" class="z-depth-3"> Total Expenses <div id="totalExpensesDisplayed"> $0 </div> </div> </div> <!-- Everything on the right side of the page--> <!-- THE GREAT PAGE DIVIDE --> <div id="leftSide" class="col s6"> </div> <!-- Everything on the left side of the page--> </div>')
 ];
 function swap(data, a, b) {
     var placeholder = data[a];
@@ -33,7 +34,8 @@ function newPage(header, content) {
         },
         display: function () {
             currentPage = this;
-            $("#mainStarterBox").empty().hide();
+            var thisPage = $("#content");
+            thisPage.hide().empty();
             var thisIndex = WebPages.indexOf(this);
             var prevExist, nextExist;
 
@@ -46,7 +48,6 @@ function newPage(header, content) {
                 nextExist = true;
             }
 
-            var thisPage = $("#mainStarterBox");
             thisPage.append('<div>' + this.header + '</div>');
             thisPage.append(this.content);
             thisPage.slideDown(800);//allows fast, slow, or an integer in ms
@@ -227,7 +228,7 @@ $(document).ready(function () {
     });
 
     //D.O.M functions// Becareful when adding .on('click')'s as 
-    $("#mainStarterBox").on("click", '.submit-new-bill', function () {
+    $("body").on("click", '.submit-new-bill', function () {
         //brings up a new bill to be added on a specific day
         var amount = 1200.45;//capture the value of an text input 
         var amount_budgeted = savingsRound(amount);
@@ -246,6 +247,7 @@ $(document).ready(function () {
             // displayBills();
         }
     }).on("click", '.submit-income', function () {
+        console.log('test');
         var income = numeral(($("#userInput").val().trim()));
         updateSalary(income.value());
 
