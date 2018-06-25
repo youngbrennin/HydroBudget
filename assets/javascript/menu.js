@@ -55,7 +55,7 @@ var WebPages = [
     /* page 1 */newPage('<div id="mainStarterBox"> <p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin! </p><button id="startButton" class="x next-page-button">Get Started!</button> </div>'),
     /* page 2 */newPage('<div class="container" id="mainStarterBox"> <p class="x">What is your average <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Net income is the amount of money an individual makes after the usual deductions from a paycheck, such as social security, 401k, taxes, etc...">net</a> income per month?</p> <form> <input id="userInput" type="text" placeholder="Amount" value="" /> </form> <div id="startButton" class="x submit-income next-page-button">Submit</div> </div> </div>'),
     //etc...
-    newPage('<div class="container" id="mainStarterBox2"> <p>Starting off with your bills, let&#39s begin with your expenses that are reoccuring on a monthly basis. <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Don&#39t worry, you can add/edit/remove details to this section later on">*</a> Click on the yellow box to to enter a date, and the add button to create a new expense on the list below.</p> <input id="dateStuff" class="datepicker"> <div class="x add submit-new-bill" id="startButton">Add</div> <div class="rowWrapper"> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div> <div id="bill-list"> </div> </div>'),
+    newPage('<div class="container" id="mainStarterBox2"> <p>Starting off with your bills, let&#39s begin with your expenses that are reoccuring on a monthly basis. <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Don&#39t worry, you can add/edit/remove details to this section later on">*</a> Click on the yellow box to to enter a date, and the add button to create a new expense on the list below.</p> <input id="dateStuff" class="datepicker"> <div class="x add submit-new-bill" id="startButton">Add</div> <div class="rowWrapper1"> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div> <div id="bill-list"> </div> </div>'),
 
     newPage('<div class="row"> <div id="rightSide" class="col s6"> <div id="netIncome" class="z-depth-3"> Net Monthly Salary <table class=" col s12 style-table1"> <tr class="a"> <td class="month">Monthly:</td> <th class="textId"> $0 </th> <td> <button class="edit-button">EDIT</button> <button class="submit-button">SUBMIT</button> </td> </tr> </table> </div> <div id="totalExpenses" class="z-depth-3"> Total Expenses <div id="totalExpensesDisplayed"> $0 </div> </div> </div> <!-- Everything on the right side of the page--> <!-- THE GREAT PAGE DIVIDE --> <div id="leftSide" class="col s6"> </div> <!-- Everything on the left side of the page--> </div><div id="test"></div>')
 ];
@@ -130,20 +130,14 @@ function displayBills() {
             'class': 'newBill bh',
             'id': 'bill-' + e.name
         });
-        var td_name = $('<div>').attr({
-            'id': 'billName-' + e.name,
-            'class': 'billStuff'
-        }).html(e.name);
+        var td_name = $('<div>').attr('class', 'billWrapper2')
+            .append('<div id="billName" class="billStuff bill-name-' + e.name + '">' + e.name + '</div>');
 
-        var td_amount = $('<div>').attr({
-            'id': 'billAmount-' + e.name,
-            'class': 'billStuff'
-        }).html(e.amount);
+        var td_amount = $('<div>').attr('class', 'billWrapper3')
+            .append('<div id="billAmount" class="billStuff bill-name-' + e.name + '">'  + e.amount + '</div>');
 
-        var td_date = $('<div>').attr({
-            'id': 'billDate-' + e.name,
-            'class': 'billStuff'
-        }).html(e.date);
+        var td_date = $('<div>').attr('class', 'billWrapper')
+            .append('<div id="billDate" class="billStuff bill-name-' + e.name + '">'  + e.date + '</div>');
 
         var rm = $('<button>').attr({
             'class': 'remove-button-2 b bh',
