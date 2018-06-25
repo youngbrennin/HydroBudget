@@ -5,28 +5,73 @@
   <!--Import Google Icon Font-->
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-
+<!-- </head>
 <body>
-
   <div class="container">
     <input type="date" class="datepicker" id="myDate" />
   </div>
   <i class="material-icons">event</i>
   <p>Select the due date of your bill from the calendar above and hit submit.</p>
-
 <button onclick="myFunction()">Submit Date</button>
-
 <p id="demo"><span></span></p>
-
 <script>
 function myFunction() {
     var x = document.getElementById("myDate").value;
     document.getElementById("demo").innerHTML = x;
 }
 </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Budget App</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="assets\css\datepicker.css">
+</head>
+
+<body>
 
 
+  <nav>
+    <div class="nav-wrapper" id="navBar">
+      <img src="assets\images\waterdrop.png" id="logo">
+      <img src="assets\images\hydro.png" id="logo2">
+      <a class="brand-logo center">
+        <i class="material-icons" style="color: #fe8a71;"></i>
+      </a>
+    </nav>
+
+      
+      <div class="container" id="mainStarterBox2">
+       <p>Starting off with your bills, let's begin with your expenses that are reoccuring on a monthly basis. <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Don't worry, you can add/edit/remove details to this section later on">*</a></p>
+      </div>
+
+      <div class="container">
+        <input class="datepicker black-text" id="myDate" />
+      </div>
+      <i class="material-icons">event</i>
+      <p>Select the due date of your bill from the calendar above and hit submit.</p>
+    <button onclick="myFunction()">Submit Date</button>
+    <p id="demo"><span></span></p>
+    <script>
+    function myFunction() {
+        var x = document.getElementById("myDate").value;
+        document.getElementById("demo").innerHTML = x;
+    }
+    </script>
+
+      </ul>
+    </div>
+
+
+
+  <script type="text/javascript" src="assets\javascript\datepicker.js"></script>
 </body>
 
 </html>
