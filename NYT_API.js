@@ -66,7 +66,7 @@ $.ajax({
       if (section) {
         $articleListItem.append("<h5>" + titleName + "</h5>");
         $articleListItem.append("<h6>" + section + "</h6>");
-        $articleListItem.append("<h6><a href>" + linkName + "</a></h6>");
+        $articleListItem.append("<h6><a href='https://www.nytimes.com/2018/06/22/your-money/fiduciary-rule-dies.html'>" + linkName + "</a></h6>");
       }
   
       // Log published date, and append to document if exists
