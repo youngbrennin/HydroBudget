@@ -131,13 +131,13 @@ function displayBills() {
             'id': 'bill-' + e.name
         });
         var td_name = $('<div>').attr('class', 'billWrapper2')
-            .append('<div id="billName" class="billStuff bill-name-' + e.name + '">' + e.name + '</div>');
+            .append('<div id="name-' + e.name + '" class="billStuff">' + e.name + '</div>');
 
         var td_amount = $('<div>').attr('class', 'billWrapper3')
-            .append('<div id="billAmount" class="billStuff bill-name-' + e.name + '">'  + e.amount + '</div>');
+            .append('<div id="amount-' + e.name + '"  class="billStuff">' + e.amount + '</div>');
 
         var td_date = $('<div>').attr('class', 'billWrapper')
-            .append('<div id="billDate" class="billStuff bill-name-' + e.name + '">'  + e.date + '</div>');
+            .append('<div id="date-' + e.name + '"  class="billStuff">' + e.date + '</div>');
 
         var rm = $('<button>').attr({
             'class': 'remove-button-2 b bh',
@@ -238,7 +238,7 @@ $(document).ready(function () {
         userID = localStorage.getItem('this-user-key');
         userRef = 'users/' + userID;
         console.log('loaded: ' + userID);
-        WebPages[0].display();
+        WebPages[1].display();
 
     }
 
@@ -308,10 +308,12 @@ $(document).ready(function () {
         var income = numeral(($("#userInput").val().trim()));
         updateSalary(income.value());
 
-    }).on("click", '.edit-button', function () {
-        $(".textId").html("");
-        $(".textId").append(
-            '<input id="userInput2" type="number" placeholder="Amount" value="" />');
+    }).on("click", '.edit-button-2', function () {
+        var this_bill_name = $(this).attr('bill-name');
+        $('#name-'+this_bill_name).html('<input type="text">');
+        $('#date-'+this_bill_name).text('<input type="text">');
+        $('#amount-'+this_bill_name).text('<input type="text">');
+
     }).on("click", '.remove-button-2', function () {
         var this_bill_name = $(this).attr('bill-name'), index;
         $("#bill-" + this_bill_name).remove();
