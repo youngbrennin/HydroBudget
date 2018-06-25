@@ -11,6 +11,9 @@ var pieChartData = {
 function settestDate(input) {
     testDate = input;
 }
+function settestName(input) {
+    testName = input;
+}
 function setPieChartData(items, title, width, height, div) {
     pieChartData = {
         items: items,
@@ -22,6 +25,7 @@ function setPieChartData(items, title, width, height, div) {
 }
 //tester variables
 var testDate = "Dec. 31st";
+var testName = 'test';
 
 // Load the Visualization API and the corechart package.
 google.charts.load('current', { 'packages': ['corechart'] });
@@ -51,10 +55,12 @@ var WebPages = [
     /* page 1 */newPage('<div id="mainStarterBox"> <p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin! </p><button id="startButton" class="x next-page-button">Get Started!</button> </div>'),
     /* page 2 */newPage('<div class="container" id="mainStarterBox"> <p class="x">What is your average <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Net income is the amount of money an individual makes after the usual deductions from a paycheck, such as social security, 401k, taxes, etc...">net</a> income per month?</p> <form> <input id="userInput" type="text" placeholder="Amount" value="" /> </form> <div id="startButton" class="x submit-income next-page-button">Submit</div> </div> </div>'),
     //etc...
-    newPage('<div class="container" id="mainStarterBox2"> <p>Starting off with your bills, let&#39;s begin with your expenses that are reoccuring on a monthly basis. <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Don&#39;t worry, you can add/edit/remove details to this section later on">*</a> Click on the yellow box to to enter a date, and the add button to create a new expense on the list below.</p> <input id="dateStuff" class="datepicker"> <div class="x add submit-new-bill" id="startButton">Add</div> </div>'),
+    newPage('<div class="container" id="mainStarterBox2"> <p>Starting off with your bills, let&#39s begin with your expenses that are reoccuring on a monthly basis. <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Don&#39t worry, you can add/edit/remove details to this section later on">*</a> Click on the yellow box to to enter a date, and the add button to create a new expense on the list below.</p> <input id="dateStuff" class="datepicker"> <div class="x add submit-new-bill" id="startButton">Add</div> <div class="rowWrapper"> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div> <div id="bill-list"> </div> </div>'),
 
     newPage('<div class="row"> <div id="rightSide" class="col s6"> <div id="netIncome" class="z-depth-3"> Net Monthly Salary <table class=" col s12 style-table1"> <tr class="a"> <td class="month">Monthly:</td> <th class="textId"> $0 </th> <td> <button class="edit-button">EDIT</button> <button class="submit-button">SUBMIT</button> </td> </tr> </table> </div> <div id="totalExpenses" class="z-depth-3"> Total Expenses <div id="totalExpensesDisplayed"> $0 </div> </div> </div> <!-- Everything on the right side of the page--> <!-- THE GREAT PAGE DIVIDE --> <div id="leftSide" class="col s6"> </div> <!-- Everything on the left side of the page--> </div><div id="test"></div>')
 ];
+
+
 function swap(data, a, b) {
     var placeholder = data[a];
     data[a] = data[b];
@@ -91,17 +97,85 @@ function newPage(content) {
             thisPage.slideDown(800);//allows fast, slow, or an integer in ms
             $('.datepicker').datepicker();
             $(".tooltipped").tooltip();
-            if (WebPages.indexOf(currentPage) === WebPages.length - 1) {
-                // set pie chart data
-                setPieChartData([['test', 1]], 'title', 100, 100, 'test');
-                //display pie chart
-                google.charts.setOnLoadCallback(drawPieChart);
+            switch (thisIndex) {
+                case 2: {
+                    displayBills();
+                };
+                    break;
+                case WebPages.length - 1: {// set pie chart data
+                    setPieChartData([['test', 1]], 'title', 100, 100, 'test');
+                    //display pie chart
+                    google.charts.setOnLoadCallback(drawPieChart);
+                };
+                    break;
             }
+
         }
     }
     return ret_page;
 }
+function displayBills() {
+    $("#bill-list").empty();
+    bubbleSortForBills(accountInfo.bills);
+    accountInfo.bills.forEach(function (e) {
+        //add <tr>'s to bill-div
+        console.log('display');
+        var tr = $('<tr>').attr('id', 'bill-' + e.name);
+        var td_name = $('<td>').text(e.name);
+        var td_amount = $('<td>').text(e.amount);
+        var td_date = $('<td>').text(moment(e.date, 'MMM. Do').format('MMM. Do'));
 
+
+        // var tr = $('<div>').attr('class', 'newBill bh');
+        // var td_name = $('<div>').attr({
+        //     'id': 'billName',
+        //     'class': 'billStuff'
+        // }).text(e.name);
+
+        // var td_amount = $('<div>').attr({
+        //     'id': 'billAmount',
+        //     'class': 'billStuff'
+        // }).text(e.amount);
+
+        // var td_date = $('<div>').attr({
+        //     'id': 'billDate',
+        //     'class': 'billStuff'
+        // }).text(e.date);
+
+        var rm = $('<button>').attr({
+            'class': 'remove-button-2 b bh'
+        }).text('REMOVE');
+
+        var ed = $('<button>').attr({
+            'class': 'edit-button-2 b bh'
+        }).text('EDIT');
+
+        var sub = $('<button>').attr({
+            'class': 'submit-button-2 b bh'
+        }).text('SUBMIT');
+
+        // <button class="remove-button-2 b bh">REMOVE</button>
+        //     <button class="edit-button-2 b bh">EDIT</button>
+        //     <button class="submit-button-2 b bh">SUBMIT</button>
+        tr.append(td_date, td_name, td_amount, rm, ed, sub);
+        $("#bill-list").append(tr);
+    });
+}
+function bubbleSortForBills(array) {
+    var swapped;
+    if (Array.isArray(array)) {
+        do {
+            swapped = false;
+            for (var i = 0; i < array.length; i++) {
+                if (array[i] && array[i + 1] && moment(array[i].date, 'MMM. Do').format('X') > moment(array[i + 1].date, 'MMM. Do').format('X')) {
+                    swap(array, i, i + 1);
+                    swapped = true;
+                }
+            }
+        } while (swapped);
+        return array;
+    }
+}
 
 function savingsRound(num) {
     var newSave = Math.ceil((num * .15));
@@ -145,37 +219,6 @@ $(document).ready(function () {
     function updateBills(bills) {
         updateAccountInfo(accountInfo.name, accountInfo.salary, bills);
     }
-    function displayBills() {
-        $("#bill-div").empty();
-        bubbleSortForBills(accountInfo.bills);
-        accountInfo.bills.forEach(function (e) {
-            //add <tr>'s to bill-div
-            console.log('display');
-            var tr = $('<tr>').attr('id', 'bill-' + e.name);
-            var td_name = $('<td>').text(e.name);
-            var td_amount = $('<td>').text(e.amount);
-            var td_date = $('<td>').text(moment(e.date, 'MMM. Do').format('MMM. Do'));
-            tr.append(td_name, td_amount, td_date);
-            $("#bill-div").append(tr);
-        });
-    }
-    function bubbleSortForBills(array) {
-        var swapped;
-        if (Array.isArray(array)) {
-            do {
-                swapped = false;
-                for (var i = 0; i < array.length; i++) {
-                    if (array[i] && array[i + 1] && moment(array[i].date, 'MMM. Do').format('X') > moment(array[i + 1].date, 'MMM. Do').format('X')) {
-                        swap(array, i, i + 1);
-                        swapped = true;
-                    }
-                }
-            } while (swapped);
-            return array;
-        }
-    }
-
-
     //Startup
     if (!localStorage.getItem('this-user-key')) {//new user
         //assign user a new ID and save it to localStorage
@@ -246,18 +289,19 @@ $(document).ready(function () {
         var amount = 1200.45;//capture the value of an text input 
         var amount_budgeted = savingsRound(amount);
         var new_bill = {
-            name: $('#bill-name').val().trim(),
+            // name: $('#bill-name').val().trim(),
+            name: testName,
             amount: amount,
             amount_budgeted: amount_budgeted,
             amount_saved: amount_budgeted - amount,
-            date: moment(testDate, "MMM. Do").format("MMM. Do")
+            // date: moment(testDate, "MMM. Do").format("MMM. Do")
+            date: 'today'
         }
         if (billList.indexOf(new_bill.name) >= 0 || new_bill.name == '') {
             console.log('already exists');
         } else {
             accountInfo.bills.push(new_bill);
             updateBills(accountInfo.bills);
-            // displayBills();
         }
     }).on("click", '.submit-income', function () {
         console.log('test');
