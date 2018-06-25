@@ -11,8 +11,6 @@ colors = {
 
 }
 
-
-
 */
 
 body{
@@ -164,6 +162,8 @@ p{
     width: 70%;
     background: white;
     padding: 0 0 0 30px;
+    margin: 5px 0 0 0;  
+    font-size: 20px;
 }
 
 
@@ -192,14 +192,14 @@ p{
 
 #netIncome{
     text-align: center;
-    font-size: 40px;
+    font-size: 35px;
     min-height: 180px;
     border: solid 2px #3da4ab;
     background: #4a4e4dd2;
 }
 
 #totalExpenses{
-    margin-top: 40px;
+    margin-top: 35px;
     text-align: center;
     font-size: 40px;
     min-height: 180px;
@@ -209,7 +209,7 @@ p{
 
 #allTheBills{
     text-align: center;
-    font-size: 40px;
+    font-size: 35px;
     min-height: 180px;
     border: solid 2px #3da4ab;
     background: #4a4e4dd2;
@@ -326,7 +326,7 @@ button:focus{
 .rowWrapper1{
     margin: 0 auto;
     margin-top: 100px;
-    max-width: 800px;
+    max-width: 90%;
     background-color: #4a4e4d;
     border: #3da4ab solid 3px;
     line-height: 50px;
@@ -334,7 +334,7 @@ button:focus{
 
 .rowWrapper2{
     margin: 0 auto;
-    max-width: 800px;
+    max-width: 100%;
     background-color: #4a4e4d;
     border: #3da4ab solid 3px;
     line-height: 50px;
@@ -492,10 +492,10 @@ button:focus{
     background-color: #2f3131;
     border: 2px solid  #2f3131;
     color: #2f3131;
-    margin-top: 20px;
-    width: 55px;
-    height: 35px;
-    font-size: 11px;
+    margin-top: 17px;
+    width: 50px;
+    height: 40px;
+    font-size: 20px;
     margin-right: 10px;
     transition: all 0.7s ease;
 
@@ -503,4 +503,29 @@ button:focus{
 
 .b:focus{
     background-color: transparent;
+}
+
+#NYThead {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 40px;
+    min-height: 180px;
+    border: solid 2px #3da4ab;
+    background: #4a4e4dd2; 
+    margin-bottom: 20px;
+}
+
+#NYT{
+    width: 100%;
+    height: 20%;
+    text-align: left;
+    background-color: #4A4E4D;
+    margin-bottom: 20px;
+    color: #73CBEA;
+    font-size: 10px;
+    padding: .5px;
+}
+
+#NYT a{
+    color: #fe8a71;
 }
