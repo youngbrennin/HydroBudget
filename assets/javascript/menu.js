@@ -97,7 +97,11 @@ function newPage(content) {
                     updateSalaryDiv();
                     displayBills();
                     displayNews();
-                    setPieChartData([['test', 1]], 'title', 400, 200, 'chart');
+                    var graphed_bills = [];
+                    accountInfo.bills.forEach(function(e){
+                        graphed_bills.push([e.name, e.amount_budgeted]);
+                    });
+                    setPieChartData(graphed_bills, 'Your Bills!', 400, 200, 'chart');
                     //display pie chart
                     google.charts.setOnLoadCallback(drawPieChart);
                 };
@@ -127,17 +131,17 @@ function displayBills() {
         var td_name = $('<div>').attr({
             'class': 'billWrapper2',
             'id': 'name-' + e.name
-        }).append('<div id="name-' + e.name + '" class="billStuff">' + e.name + '</div>');
+        }).append('<div id="name-' + spacesToUnderscore(e.name) + '" class="billStuff">' + e.name + '</div>');
 
         var td_amount = $('<div>').attr({
             'class': 'billWrapper3',
             'id': 'amount-' + e.name
-        }).append('<div id="amount-' + e.name + '"  class="billStuff">' + e.amount + '</div>');
+        }).append('<div id="amount-' + spacesToUnderscore(e.name) + '"  class="billStuff">' + e.amount + '</div>');
 
         var td_date = $('<div>').attr({
             'class': 'billWrapper',
             'id': 'date-' + e.name
-        }).append('<div id="date-' + e.name + '"  class="billStuff">' + e.date + '</div>');
+        }).append('<div id="date-' + spacesToUnderscore(e.name) + '"  class="billStuff">' + e.date + '</div>');
 
         var rm = $('<button>').attr({
             'class': 'remove-button-2 b bh remove-bill',
@@ -198,7 +202,10 @@ function savingsRound(num) {
     console.log(Math.ceil(num) + '+' + newSave + '=' + ret);
     return ret;
 }
-
+function spacesToUnderscore(str){
+    var ret = str.split(' ').join('_');
+    return ret;
+}
 $(document).ready(function () {
 
     google.charts.load('current', { 'packages': ['corechart'] });
@@ -289,6 +296,12 @@ $(document).ready(function () {
             if (accountInfo.bills.length > 0){
                 displayBills();
                 updateTotalExpensesDiv();
+                var graphed_bills = [];
+                    accountInfo.bills.forEach(function(e){
+                        graphed_bills.push([e.name, e.amount_budgeted]);
+                    });
+                    setPieChartData(graphed_bills, 'Your Bills!', 400, 200, 'chart');
+                google.charts.setOnLoadCallback(drawPieChart);
             }
             console.log(accountInfo);
             console.log('currently on page: ' + WebPages.indexOf(currentPage))
@@ -304,7 +317,7 @@ $(document).ready(function () {
         }
     });
 
-    //D.O.M functions// Becareful when adding .on('click')'s as 
+    //D.O.M functions//
     $("body").on("click", '.submit-new-bill', function () {
         //brings up a new bill to be added on a specific day
         var this_bill_name = $("#billNameInputTopPage").val().trim(), index;
@@ -371,7 +384,7 @@ $(document).ready(function () {
         updateBills(accountInfo.bills);
     }).on("click", '.edit-bill', function () {
         console.log('editing')
-        var this_bill_name = $(this).attr('bill-name');
+        var this_bill_name = spacesToUnderscore($(this).attr('bill-name'));
         // <div class="billInputWrapper"><input id="billDateInput" class="datepicker" placeholder="Date" value="" ></div>
         $('#name-' + this_bill_name).attr('class', 'billInputWrapper').html('<input id="billNameInput" type="number/text" placeholder="Bill Name" value="" >');
         $('#date-' + this_bill_name).attr('class', 'billInputWrapper2').html('<input id="billDateInput" class="datepicker" placeholder="Date" value="" >');
