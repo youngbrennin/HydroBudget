@@ -96,6 +96,7 @@ function newPage(content) {
                     updateTotalExpensesDiv();
                     updateSalaryDiv();
                     displayBills();
+                    displayNews();
                     // setPieChartData([['test', 1]], 'title', 100, 100, 'test');
                     //display pie chart
                     // google.charts.setOnLoadCallback(drawPieChart);
