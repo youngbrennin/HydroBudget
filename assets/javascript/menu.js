@@ -57,7 +57,7 @@ var WebPages = [
     //etc...
     newPage('<div class="container" id="mainStarterBox2"> <p>Starting off with your bills, let&#39s begin with your expenses that are reoccuring on a monthly basis. <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Don&#39t worry, you can add/edit/remove details to this section later on">*</a> Click on the yellow box to to enter a date, and the add button to create a new expense on the list below.</p> <input id="dateStuff" class="datepicker"> <div class="x add submit-new-bill" id="startButton">Add</div> <div class="rowWrapper1"> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div> <div id="bill-list"> </div> </div>'),
 
-    newPage('<div class="row"> <div id="rightSide" class="col s6"> <div id="netIncome" class="z-depth-3"> Net Monthly Salary <table class=" col s12 style-table1"> <tr class="a"> <td class="month">Monthly:</td> <th class="textId"> $0 </th> <td> <button class="edit-button">EDIT</button> <button class="submit-button">SUBMIT</button> </td> </tr> </table> </div> <div id="totalExpenses" class="z-depth-3"> Total Expenses <div id="totalExpensesDisplayed"> $0 </div> </div> </div> <!-- Everything on the right side of the page--> <!-- THE GREAT PAGE DIVIDE --> <div id="leftSide" class="col s6"> </div> <!-- Everything on the left side of the page--> </div><div id="test"></div>')
+    newPage('<div class="row"> <div id="leftSide" class="col s5"> <div id="netIncome" class="z-depth-3"> Net Monthly Salary <table class=" col s12 style-table1"> <tr class="a"> <td class="month">Monthly:</td> <th class="textId"> $0 </th> <td> <button class="edit-button">✎</button> <button class="submit-button">✓</button> </td> </tr> </table> </div> <div id="totalExpenses" class="z-depth-3"> Total Expenses <div id="totalExpensesDisplayed"> $0 </div> </div> <div id="NYThead" class="z-depth-3"> Latest Money Related News <div id="NYT"> </div> </div> </div> <!-- Everything on the right side of the page--> <!-- THE GREAT PAGE DIVIDE --> <div id="rightSide" class="col s7"> <div id="allTheBills" class="z-depth-3 dateWrapper"> <div>Add A New Bill!</div> <input id="dateStuff2" class="datepicker" readonly="readonly"> <div class="x add submit-new-bill" id="startButton">Add</div> </div> <div class="rowWrapper2 z-depth-3"> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div><div id="bill-list"> </div></div>')
 ];
 
 
@@ -102,10 +102,15 @@ function newPage(content) {
                     displayBills();
                 };
                     break;
-                case WebPages.length - 1: {// set pie chart data
+                case WebPages.length - 1: {
+                    var total_expenses = numeral(accountInfo.budgeted_bill_total);
+                    var salary = numeral(accountInfo.salary);
+                    $('.textId').text(salary.format('$00,00'));
+                    $('#totalExpensesDisplayed').text(total_expenses.format('$00,00'));
+                    displayBills();
                     setPieChartData([['test', 1]], 'title', 100, 100, 'test');
                     //display pie chart
-                    google.charts.setOnLoadCallback(drawPieChart);
+                    // google.charts.setOnLoadCallback(drawPieChart);
                 };
                     break;
             }
@@ -130,14 +135,20 @@ function displayBills() {
             'class': 'newBill bh',
             'id': 'bill-' + e.name
         });
-        var td_name = $('<div>').attr('class', 'billWrapper2')
-            .append('<div id="name-' + e.name + '" class="billStuff">' + e.name + '</div>');
+        var td_name = $('<div>').attr({
+            'class': 'billWrapper2',
+            'id': 'name-' + e.name
+        }).append('<div id="name-' + e.name + '" class="billStuff">' + e.name + '</div>');
 
-        var td_amount = $('<div>').attr('class', 'billWrapper3')
-            .append('<div id="amount-' + e.name + '"  class="billStuff">' + e.amount + '</div>');
+        var td_amount = $('<div>').attr({
+            'class': 'billWrapper3',
+            'id': 'amount-' + e.name
+        }).append('<div id="amount-' + e.name + '"  class="billStuff">' + e.amount + '</div>');
 
-        var td_date = $('<div>').attr('class', 'billWrapper')
-            .append('<div id="date-' + e.name + '"  class="billStuff">' + e.date + '</div>');
+        var td_date = $('<div>').attr({
+            'class': 'billWrapper',
+            'id': 'date-' + e.name
+        }).append('<div id="date-' + e.name + '"  class="billStuff">' + e.date + '</div>');
 
         var rm = $('<button>').attr({
             'class': 'remove-button-2 b bh',
@@ -258,7 +269,7 @@ $(document).ready(function () {
                 var total_saved_sum = 0;
                 billList = [];
                 bills.forEach(function (e) {
-                    bills_sum += e.amount;
+                    bills_sum += parseInt(e.amount);
                     bugeted_bill_sum += e.amount_budgeted;
                     total_saved_sum += e.amount_saved;
                     billList.push(e.name);
@@ -286,6 +297,7 @@ $(document).ready(function () {
     //D.O.M functions// Becareful when adding .on('click')'s as 
     $("body").on("click", '.submit-new-bill', function () {
         //brings up a new bill to be added on a specific day
+        var this_bill_name = testName, index;
         var amount = 1200.45;//capture the value of an text input 
         var amount_budgeted = savingsRound(amount);
         var new_bill = {
@@ -295,9 +307,15 @@ $(document).ready(function () {
             amount_budgeted: amount_budgeted,
             amount_saved: amount_budgeted - amount,
             // date: moment(testDate, "MMM. Do").format("MMM. Do")
-            date: 'today'
+            date: $("#dateStuff2").val().trim()
         }
-        if (billList.indexOf(new_bill.name) >= 0 || new_bill.name == '') {
+
+        for (var i = 0; i < accountInfo.bills.length; i++) {
+            if (accountInfo.bills[i].name === this_bill_name) {
+                index = i;
+            }
+        }
+        if (index > -1) {
             console.log('already exists');
         } else {
             accountInfo.bills.push(new_bill);
@@ -308,11 +326,41 @@ $(document).ready(function () {
         var income = numeral(($("#userInput").val().trim()));
         updateSalary(income.value());
 
+    }).on("click", '.submit-button-2', function() {
+        var this_bill_name = $(this).attr('bill-name'), index;
+
+        var new_bill_name = $("#billNameInput").val().trim();
+        var new_date_name = $("#billDateInput").val().trim();
+        var new_amount_name = $("#billAmountInput").val().trim();
+        for (var i = 0; i < billList.length; i++) {
+            if (accountInfo.bills[i].name === this_bill_name) {
+                index = i;
+            }
+        }
+        console.log(accountInfo.bills[index]);
+        console.log(new_bill_name, new_date_name, new_amount_name);
+
+        if (!new_bill_name){
+            new_bill_name = this_bill_name;
+        }
+        if (!new_date_name){
+            new_date_name = accountInfo.bills[index].date;
+        }
+
+        accountInfo.bills[index] = {
+            name: new_bill_name,
+            amount: new_amount_name,
+            amount_budgeted: savingsRound(new_amount_name),
+            amount_saved: savingsRound(new_amount_name) - new_amount_name,
+            date: new_date_name
+        }
+        updateBills(accountInfo.bills);
     }).on("click", '.edit-button-2', function () {
         var this_bill_name = $(this).attr('bill-name');
-        $('#name-'+this_bill_name).html('<input type="text">');
-        $('#date-'+this_bill_name).text('<input type="text">');
-        $('#amount-'+this_bill_name).text('<input type="text">');
+        // <div class="billInputWrapper"><input id="billDateInput" class="datepicker" placeholder="Date" value="" ></div>
+        $('#name-' + this_bill_name).attr('class', 'billInputWrapper').html('<input id="billNameInput" type="number/text" placeholder="Bill Name" value="" >');
+        $('#date-' + this_bill_name).attr('class', 'billInputWrapper2').html('<input id="billDateInput" class="datepicker" placeholder="Date" value="" >');
+        $('#amount-' + this_bill_name).attr('class', 'billInputWrapper3').html('<input id="billAmountInput" type="number" placeholder="Amount" value="" >');
 
     }).on("click", '.remove-button-2', function () {
         var this_bill_name = $(this).attr('bill-name'), index;
