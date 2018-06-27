@@ -1,7 +1,24 @@
-function displayNews() {
-  var url = "https://api.nytimes.com/svc/mostpopular/v2/mostviewed/Your Money/1.json";
+var arr1 = ['investments', '"wealth investment"', '"trust fund"', 'money'];
+var arr2 = ['"trust fund"', 'alcohol', 'money'];
+var arr3 = ['kale chips', '"trust fund"', 'drugs', 'poverty', 'alcohol', 'money'];
+var searchTerm;
+
+function displayNews(salBudDiff) {
+  if (salBudDiff > 500){
+    searchTerm = arr1[Math.floor(Math.random() * arr1.length)];
+  } else if (salBudDiff > 200){
+    searchTerm = arr2[Math.floor(Math.random() * arr2length)];
+  } else {
+    searchTerm = arr3[Math.floor(Math.random() * arr3.length)];
+  }
+
+console.log(searchTerm);
+
+
+  var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
   url += '?' + $.param({
-    'api-key': "8a14b3804439479bb94920652a67585a"
+    'api-key': "8a14b3804439479bb94920652a67585a",
+    'q': searchTerm
   });
   $.ajax({
     url: url,
@@ -13,10 +30,11 @@ function displayNews() {
 function updatePage(NYTData) {
 
   var numArticles = 1;
+  articleCount =0;
   console.log(NYTData);
   console.log("------------------------------------");
-
-  var article = NYTData.results[0];
+  
+  var article = NYTData.response.docs[Math.floor(Math.random() * NYTData.response.docs.length)];
 
   var $articleList = $("<p>");
   $articleList.addClass("list-group");
@@ -29,33 +47,14 @@ function updatePage(NYTData) {
   if (headline && headline.main) {
     console.log(headline.main);
     $articleListItem.append(
-      "<span class='label label-primary'>" +
-      articleCount +
-      "</span>" +
-      "<strong> " +
+      "<h5 class='label label-primary' style='text-align: center'>" +
+      "<strong> <a href='" + article.web_url + "'>" +
       headline.main +
-      "</strong>"
+      "</a> </strong> </h5>"
     );
   }
 
-  var byline = article.byline;
-
-  if (byline && byline.original) {
-    console.log(byline.original);
-    $articleListItem.append("<h5>" + byline.original + "</h5>");
-  }
-
-  var section = article.abstract;
-  var titleName = article.title;
-  var linkName = article.url;
-  console.log(article.abstract);
-  console.log(article.title);
-  console.log(article.url);
-  if (section) {
-    $articleListItem.append("<h5>" + titleName + "</h5>");
-    $articleListItem.append("<h6>" + section + "</h6>");
-    $articleListItem.append("<h6><a href='https://www.nytimes.com/2018/06/22/your-money/fiduciary-rule-dies.html' target=_blank>" + linkName + "</a></h6>");
-  }
+    $articleListItem.append("<h5>" + article.snippet + "</h5>");
 
   $articleList.append($articleListItem);
 
