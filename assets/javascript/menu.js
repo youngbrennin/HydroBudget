@@ -43,6 +43,10 @@ function drawPieChart() {
         'title': pieChartData.title,
         'width': pieChartData.width,
         'height': pieChartData.height,
+        'colors': ['#3da4ab', '#f6cd61', '#fe8a71', '#4a4e4d', '#1ccedf', '#f85b37', '#79807e', '#fadb8c', '#00e7fc', '#ffb700', '#6f8e96'],
+        'backgroundColor' : '#818586',
+        'titleTextStyle' : { color: 'white', bold: true},
+        'legend' : {textStyle: {color: 'white'}},
     };
 
     // Instantiate and draw our chart, passing in some options.
@@ -102,7 +106,7 @@ function newPage(content) {
                     accountInfo.bills.forEach(function (e) {
                         graphed_bills.push([e.name, e.amount_budgeted]);
                     });
-                    setPieChartData(graphed_bills, 'Your Bills!', 400, 200, 'chart');
+                    setPieChartData(graphed_bills, 'Your Bills!', 610, 250, 'chart');
                     //display pie chart
                     google.charts.setOnLoadCallback(drawPieChart);
                 };
@@ -307,7 +311,7 @@ $(document).ready(function () {
                 accountInfo.bills.forEach(function (e) {
                     graphed_bills.push([e.name, e.amount_budgeted]);
                 });
-                setPieChartData(graphed_bills, 'Your Bills!', 400, 200, 'chart');
+                setPieChartData(graphed_bills, 'Your Bills!', 610, 250, 'chart');
                 google.charts.setOnLoadCallback(drawPieChart);
             }
             console.log(accountInfo);
