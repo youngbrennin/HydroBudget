@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Budget App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets\css\style.css">
+</head>
+
+<body>
+
+
+    <nav>
+        <div class="nav-wrapper" id="navBar">
+            <img src="assets\images\waterdrop.png" id="logo">
+            <img src="assets\images\hydro.png" id="logo2">
+            <div class="center" id="savings">Savings: $0
+            </div>
+    </nav>
+
+    <div class="row">
+        <div id="leftSide" class="col s5">
+
+            <div id="netIncome" class="z-depth-3">
+                Net Monthly Salary
+                <div class="newBill bh z-depth-3">
+                        <div class="month"> Monthly:</div>
+                        <div class="textId">$0</div>
+                        <button class="edit-button-2 b bh monthlyEdit">✎</button>
+                        <button class="submit-button-2 b bh monthlySubmit">✓</button>
+                        </div>
+            </div>
+
+            <div id="totalExpenses" class="z-depth-3">
+                Total Expenses
+                <div id="totalExpensesDisplayed">
+                    $0
+                </div>
+            </div>
+
+
+            <div id="NYThead" class="z-depth-3">
+                Latest Money Related News
+                <div id="NYT">
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <!-- Everything on the right side of the page-->
+
+        <!-- THE GREAT PAGE DIVIDE -->
+
+
+        <div id="rightSide" class="col s7">
+
+            <div id="allTheBills" class="z-depth-3 dateWrapper">
+                <div>Add A New Bill!</div>
+                <div class="rowWrapper3 z-depth-3">
+                    <div class="topRowWrapper3">
+                        <div class="firstItemDescription3">
+                            DATE
+                        </div>
+                        <div class="itemDescription3">
+                            NAME
+                        </div>
+                        <div class="itemDescription3">
+                            AMOUNT
+                        </div>
+                    </div>
+
+                    <div class="newBill bh z-depth-3">
+                        <input id="billDateInputTopPage" class="datepicker" placeholder="Date" value="">
+                        <input id="billNameInputTopPage" type="number/text" placeholder="Bill Name" value="">
+                        <input id="billAmountInputTopPage" type="number" placeholder="Amount" value="">
+                    </div>
+                </div>
+                <div class="x add" id="startButton2">Add</div>
+            </div>
+
+
+            <div class="rowWrapper2 z-depth-3">
+                <div class="billList">Bill List</div>
+                <div class="topRowWrapper">
+                    <div id="descriptionDate">
+                        DATE
+                    </div>
+                    <div class="itemDescription">
+                        NAME
+                    </div>
+                    <div class="itemDescription">
+                        AMOUNT
+                    </div>
+                </div>
+
+                <div id="bill-list"></div>
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+        <!-- Everything on the left side of the page-->
+
+    </div>
+
+    <script type="text/javascript" src="assets\javascript\menu.js"></script>
+</body>
+
+</html>

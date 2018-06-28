@@ -4,16 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Budget App</title>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
-  <script src='https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js'></script>
   <link rel="stylesheet" type="text/css" href="assets\css\style.css">
 </head>
 
 <body>
+
+
   <nav>
     <div class="nav-wrapper" id="navBar">
       <img src="assets\images\waterdrop.png" id="logo">
@@ -21,14 +20,26 @@
       <a class="brand-logo center">
         <i class="material-icons" style="color: #fe8a71;"></i>
       </a>
-  </nav>
+    </nav>
 
-  <div id="content"></div>
+      
+      <div class="container" id="mainStarterBox">
+       
+        <p class="x">What is your average <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Net income is the amount of money an individual makes after the usual deductions from a paycheck, such as social security, 401k, taxes, etc...">net</a> income per month?</p>
+        <form>
+          <input id="userInput" type="text" placeholder="Amount" value="" />
+        </form>
+        <div id="startButton" class="x">Submit</div>
+      </div>
 
 
+
+      </ul>
+    </div>
+
+
+
+  <script type="text/javascript" src="assets\javascript\menu.js"></script>
 </body>
-<script type="text/javascript" src="assets\javascript\menu.js"></script>
-<script type="text/javascript" src="assets\javascript\NYT_API.js"></script>
-<script src='https://www.gstatic.com/firebasejs/5.1.0/firebase.js'></script>
 
 </html>
