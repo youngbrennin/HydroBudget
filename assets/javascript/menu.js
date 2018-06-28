@@ -43,6 +43,10 @@ function drawPieChart() {
         'title': pieChartData.title,
         'width': pieChartData.width,
         'height': pieChartData.height,
+        'colors': ['#3da4ab', '#f6cd61', '#fe8a71', '#4a4e4d', '#1ccedf', '#f85b37', '#79807e', '#fadb8c', '#00e7fc', '#ffb700', '#6f8e96'],
+        'backgroundColor' : '#818586',
+        'titleTextStyle' : { color: 'white', bold: true},
+        'legend' : {textStyle: {color: 'white'}},
     };
 
     // Instantiate and draw our chart, passing in some options.
@@ -53,12 +57,12 @@ function drawPieChart() {
 var WebPages = [
     //use &#39 for '
     // newPage('Welcome to Hydro...???', 'This is your first time here so we will guide you through this'),
-    /* page 1 */newPage('<div id="mainStarterBox"> <p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin! </p><button id="startButton" class="x next-page-button">Get Started!</button> </div>'),
-    /* page 2 */newPage('<div class="container" id="mainStarterBox"> <p class="x">What is your average <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Net income is the amount of money an individual makes after the usual deductions from a paycheck, such as social security, 401k, taxes, etc...">net</a> income per month?</p> <form> <input id="userInput" type="text" placeholder="Amount" value="" /> </form> <div id="startButton" class="x submit-income next-page-button">Submit</div> </div> </div>'),
+    /* page 1 */newPage('<nav> <div class="nav-wrapper" id="navBar"> <img src="assets&#92images&#92waterdrop.png" id="logo"> <img src="assets&#92images&#92hydro.png" id="logo2"> <a class="brand-logo center"> <i class="material-icons" style="color: #fe8a71;"></i> </a> </nav><div id="mainStarterBox"> <p>Welcome to Hyrdo Budget! Your best source for simply saving money based on your expenses and budget. Click the button below to begin! </p><button id="startButton" class="x next-page-button">Get Started!</button> </div>'),
+    /* page 2 */newPage('<nav> <div class="nav-wrapper" id="navBar"> <img src="assets&#92images&#92waterdrop.png" id="logo"> <img src="assets&#92images&#92hydro.png" id="logo2"> <a class="brand-logo center"> <i class="material-icons" style="color: #fe8a71;"></i> </a> </nav><div class="container" id="mainStarterBox"> <p class="x">What is your average <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Net income is the amount of money an individual makes after the usual deductions from a paycheck, such as social security, 401k, taxes, etc...">net</a> income per month?</p> <form> <input id="userInput" type="text" placeholder="Amount" value="" /> </form> <div id="startButton" class="x submit-income next-page-button">Submit</div> </div> </div>'),
     //etc...
-    newPage('<div class="container" id="mainStarterBox2"> <p>Starting off with your bills, let&#39s begin with your expenses that are reoccuring on a monthly basis. <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Don&#39t worry, you can add/edit/remove details to this section later on">*</a> Click on the yellow box to to enter a date, and the add button to create a new expense on the list below.</p> <div class="rowWrapper3 z-depth-3"> <div class="topRowWrapper3"> <div class="firstItemDescription3"> DATE </div> <div class="itemDescription3"> NAME </div> <div class="itemDescription3"> AMOUNT </div> </div> <div class="newBill bh"> <input id="billDateInputTopPage" class="datepicker" placeholder="Date" value=""> <input id="billNameInputTopPage" type="number/text" placeholder="Bill Name" value=""> <input id="billAmountInputTopPage" type="number" placeholder="Amount" value=""> </div> </div> <div class="x add submit-new-bill" id="startButton2">Add</div> <div class="rowWrapper1 z-depth-3"> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div> <div id="bill-list"></div> </div> <div class="x add next-page-button" id="startButton2">Submit</div>'),
+    newPage('<nav> <div class="nav-wrapper" id="navBar"> <img src="assets&#92images&#92waterdrop.png" id="logo"> <img src="assets&#92images&#92hydro.png" id="logo2"> <a class="brand-logo center"> <i class="material-icons" style="color: #fe8a71;"></i> </a> </nav><div class="container" id="mainStarterBox2"> <p>Starting off with your bills, let&#39s begin with your expenses that are reoccuring on a monthly basis. <a id="toolTipButton" class="tooltipped x" data-position="top" data-tooltip="Don&#39t worry, you can add/edit/remove details to this section later on">*</a> Click on the yellow box to to enter a date, and the add button to create a new expense on the list below.</p> <div class="rowWrapper3 z-depth-3"> <div class="topRowWrapper3"> <div class="firstItemDescription3"> DATE </div> <div class="itemDescription3"> NAME </div> <div class="itemDescription3"> AMOUNT </div> </div> <div class="newBill bh"> <input id="billDateInputTopPage" class="datepicker" placeholder="Date" value=""> <input id="billNameInputTopPage" type="number/text" placeholder="Bill Name" value=""> <input id="billAmountInputTopPage" type="number" placeholder="Amount" value=""> </div> </div> <div class="x add submit-new-bill" id="startButton2">Add</div> <div class="rowWrapper1 z-depth-3"> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div> <div id="bill-list"></div> </div> <div class="x add next-page-button" id="startButton2">Submit</div>'),
 
-    newPage('<div class="row"> <div id="leftSide" class="col s5"> <div id="netIncome" class="z-depth-3"> Net Monthly Salary <div class="newBill bh z-depth-3"> <div class="month"> Monthly:</div> <div class="textId">$0</div> <button id="salaryEdit" class="edit-button-2 b bh monthlyEdit">✎</button> <button id="salarySubmit" class="submit-button-2 b bh monthlySubmit">✓</button> </div> </div> <div id="totalExpenses" class="z-depth-3"> Total Expenses <div id="totalExpensesDisplayed"> $0 </div> </div> <div id="NYThead" class="z-depth-3"> Latest Money Related News <div id="NYT"> </div> </div><div id="chart"> </div></div> <!-- Everything on the right side of the page--> <!-- THE GREAT PAGE DIVIDE --> <div id="rightSide" class="col s7"> <div id="allTheBills" class="z-depth-3 dateWrapper"> <div>Add A New Bill!</div> <div class="rowWrapper3 z-depth-3"> <div class="topRowWrapper3"> <div class="firstItemDescription3"> DATE </div> <div class="itemDescription3"> NAME </div> <div class="itemDescription3"> AMOUNT </div> </div> <div class="newBill bh z-depth-3"> <input id="billDateInputTopPage" class="datepicker" placeholder="Date" value=""> <input id="billNameInputTopPage" type="number/text" placeholder="Bill Name" value=""> <input id="billAmountInputTopPage" type="number" placeholder="Amount" value=""> </div> </div> <div class="x add submit-new-bill" id="startButton2">Add</div> </div> <div class="rowWrapper2 z-depth-3"> <div class="billList">Bill List</div> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div> <div id="bill-list"></div> </div> </div> <!-- Everything on the left side of the page--> </div>'),
+    newPage('<nav> <div class="nav-wrapper" id="navBar"> <img src="assets&#92images&#92waterdrop.png" id="logo"> <img src="assets&#92images&#92hydro.png" id="logo2"> <div class="center" id="savings">Savings: $0 </div> </nav><div class="row"> <div id="leftSide" class="col s5"> <div id="netIncome" class="z-depth-3"> Net Monthly Salary <div class="newBill bh z-depth-3"> <div class="month"> Monthly:</div> <div class="textId">$0</div> <button id="salaryEdit" class="edit-button-2 b bh monthlyEdit">✎</button> <button id="salarySubmit" class="submit-button-2 b bh monthlySubmit">✓</button> </div> </div> <div id="totalExpenses" class="z-depth-3"> Budget <div id="totalExpensesDisplayed"> $0 </div></div> <div id="NYThead" class="z-depth-3"> Suggested Article<div id="NYT"> </div> </div> <div id="chart"></div></div> <!-- Everything on the right side of the page--> <!-- THE GREAT PAGE DIVIDE --> <div id="rightSide" class="col s7"> <div id="allTheBills" class="z-depth-3 dateWrapper"> <div>Add A New Bill!</div> <div class="rowWrapper3 z-depth-3"> <div class="topRowWrapper3"> <div class="firstItemDescription3"> DATE </div> <div class="itemDescription3"> NAME </div> <div class="itemDescription3"> AMOUNT </div> </div> <div class="newBill bh z-depth-3"> <input id="billDateInputTopPage" class="datepicker" placeholder="Date" value=""> <input id="billNameInputTopPage" type="number/text" placeholder="Bill Name" value=""> <input id="billAmountInputTopPage" type="number" placeholder="Amount" value=""> </div> </div> <div class="x add submit-new-bill" id="startButton2">Add</div> </div> <div class="rowWrapper2 z-depth-3"> <div class="billList">Bill List</div> <div class="topRowWrapper"> <div id="descriptionDate"> DATE </div> <div class="itemDescription"> NAME </div> <div class="itemDescription"> AMOUNT </div> </div> <div id="bill-list"></div> </div> </div> <!-- Everything on the left side of the page--> </div>'),
 
     //some kinda loading page
     newPage("<div class='container' id='mainStarterBox'>Hey! I'm loading here!</div>")
@@ -77,7 +81,7 @@ function newPage(content) {
         },
         display: function () {
             currentPage = this;
-            var thisPage = $("#content");
+            var thisPage = $("body");
             thisPage.hide().empty();
             var thisIndex = WebPages.indexOf(this);
 
@@ -95,13 +99,14 @@ function newPage(content) {
                 case WebPages.length - 2: {
                     updateTotalExpensesDiv();
                     updateSalaryDiv();
+                    updateSavingsDiv()
                     displayBills();
                     displayNews(accountInfo.salary - accountInfo.bill_total);
                     var graphed_bills = [];
                     accountInfo.bills.forEach(function (e) {
                         graphed_bills.push([e.name, e.amount_budgeted]);
                     });
-                    setPieChartData(graphed_bills, 'Your Bills!', 400, 200, 'chart');
+                    setPieChartData(graphed_bills, 'Your Bills!', 610, 250, 'chart');
                     //display pie chart
                     google.charts.setOnLoadCallback(drawPieChart);
                 };
@@ -165,68 +170,14 @@ function displayBills() {
     });
 }
 
-function displayBillsThisMonth() {
-    $("#bill-list").empty();
-    bubbleSortForBills(accountInfo.bills);
-    accountInfo.bills.forEach(function (e) {
-        // console.log(moment(e.date, "MMM DD, YYYY").diff(moment(), 'days'));
-        if (moment(e.date, 'MMM DD, YYYY').format('MMM') == moment().format('MMM')) {
-            console.log('displaying new bill');
-            // var tr = $('<tr>').attr('id', 'bill-' + e.name);
-            // var td_name = $('<td>').text(e.name);
-            // var td_amount = $('<td>').text(e.amount);
-            // var td_date = $('<td>').text(moment(e.date, 'MMM. Do').format('MMM. Do'));
-
-
-            var tr = $('<div>').attr({
-                'class': 'newBill bh',
-                'id': 'bill-' + e.name
-            });
-            var td_name = $('<div>').attr({
-                'class': 'billWrapper2',
-                'id': 'name-' + e.name
-            }).append('<div id="name-' + spacesToUnderscore(e.name) + '" class="billStuff">' + e.name + '</div>');
-
-            var td_amount = $('<div>').attr({
-                'class': 'billWrapper3',
-                'id': 'amount-' + e.name
-            }).append('<div id="amount-' + spacesToUnderscore(e.name) + '"  class="billStuff">' + e.amount + '</div>');
-
-            var td_date = $('<div>').attr({
-                'class': 'billWrapper',
-                'id': 'date-' + e.name
-            }).append('<div id="date-' + spacesToUnderscore(e.name) + '"  class="billStuff">' + e.date + '</div>');
-
-            var rm = $('<button>').attr({
-                'class': 'remove-button-2 b bh remove-bill',
-                'bill-name': e.name
-            }).text('X');
-
-            var ed = $('<button>').attr({
-                'class': 'edit-button-2 b bh edit-bill',
-                'bill-name': e.name
-            }).text('✎');
-
-            var sub = $('<button>').attr({
-                'class': 'submit-button-2 b bh confirm-edit-bill',
-                'bill-name': e.name
-            }).text('✓');
-
-            // <button class="remove-button-2 b bh">REMOVE</button>
-            //     <button class="edit-button-2 b bh">EDIT</button>
-            //     <button class="submit-button-2 b bh">SUBMIT</button>
-            tr.append(td_date, td_name, td_amount, rm, ed, sub);
-            $("#bill-list").append(tr);
-        }
-    });
-}
+//Bill Sort Feature
 function bubbleSortForBills(array) {
     var swapped;
     if (Array.isArray(array)) {
         do {
             swapped = false;
             for (var i = 0; i < array.length; i++) {
-                if (array[i] && array[i + 1] && moment(array[i].date, 'MMM DD, YYYY').format('X') > moment(array[i + 1].date, 'MMM DD, YYYY').format('X')) {
+                if (array[i] && array[i + 1] && moment(array[i].date, 'Do').format('X') > moment(array[i + 1].date, 'Do').format('X')) {
                     swap(array, i, i + 1);
                     swapped = true;
                 }
@@ -247,6 +198,10 @@ function updateTotalExpensesDiv() {
 function updateSalaryDiv() {
     var salary = numeral(accountInfo.salary);
     $('.textId').text(salary.format('$0,.00'));
+}
+function updateSavingsDiv() {
+    var savings = numeral(accountInfo.total_saved);
+    $('#savings').text('Savings: ' + savings.format('$,.00'));
 }
 function savingsRound(num) {
     var newSave = Math.ceil((num * .15));
@@ -351,11 +306,12 @@ $(document).ready(function () {
             if (accountInfo.bills.length > 0) {
                 displayBills();
                 updateTotalExpensesDiv();
+                updateSavingsDiv();
                 var graphed_bills = [];
                 accountInfo.bills.forEach(function (e) {
                     graphed_bills.push([e.name, e.amount_budgeted]);
                 });
-                setPieChartData(graphed_bills, 'Your Bills!', 400, 200, 'chart');
+                setPieChartData(graphed_bills, 'Your Bills!', 610, 250, 'chart');
                 google.charts.setOnLoadCallback(drawPieChart);
             }
             console.log(accountInfo);
@@ -407,7 +363,7 @@ $(document).ready(function () {
         var this_bill_name = $(this).attr('bill-name'), index;
 
         var new_bill_name = $("#billNameInput").val().trim();
-        var new_date_name = $("#billDateInput").val().trim();
+        var new_date_name = moment($("#billDateInput").val().trim(), 'MMM DD, YYY').format('Do');
         var new_amount_name = $("#billAmountInput").val().trim();
         for (var i = 0; i < billList.length; i++) {
             if (accountInfo.bills[i].name === this_bill_name) {
@@ -437,6 +393,7 @@ $(document).ready(function () {
             date: new_date_name
         }
         updateBills(accountInfo.bills);
+
     }).on("click", '.edit-bill', function () {
         console.log('editing')
         var this_bill_name = spacesToUnderscore($(this).attr('bill-name'));
